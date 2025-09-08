@@ -1127,6 +1127,138 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Tab System Styles */
+        .tab-container {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.08);
+        }
+
+        .tab-navigation {
+            display: flex;
+            gap: 0;
+            justify-content: center;
+            padding: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: none;
+            color: #4a5568;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            margin: 0 0.25rem;
+            font-family: inherit;
+        }
+
+        .tab-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 16px;
+        }
+
+        .tab-button:hover::before {
+            opacity: 1;
+        }
+
+        .tab-button:hover {
+            color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .tab-button.active {
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .tab-button.active::before {
+            opacity: 0;
+        }
+
+        .tab-content-container {
+            position: relative;
+            min-height: calc(100vh - 200px);
+        }
+
+        .tab-content {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .tab-content.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .tab-content.fade-in {
+            animation: tabFadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes tabFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Tab Styles */
+        @media (max-width: 768px) {
+            .tab-navigation {
+                padding: 0.75rem 1rem;
+                gap: 0.5rem;
+            }
+
+            .tab-button {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+                margin: 0.25rem;
+                flex: 1;
+                min-width: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tab-navigation {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 1rem;
+            }
+
+            .tab-button {
+                padding: 0.875rem 1rem;
+                margin: 0;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1158,119 +1290,162 @@
         </div>
     </header>
 
-    <!-- Premium Hero Section -->
-    <section class="hero">
+    <!-- Tab Navigation -->
+    <div class="tab-container">
         <div class="container">
-            <div class="hero-content">
-                <h1 class="floating">CFD Handbook</h1>
-                <p class="subtitle">Premium CFD Analysis Guide for Engineering Excellence</p>
-                <p>Your comprehensive companion for computational fluid dynamics analysis of industrial applications. Experience advanced turbulence models, solver methods, and analysis setup with professional-grade guidance and precision.</p>
-                
-                <div class="cta-buttons">
-                    <a href="turbulence-models.html" class="cta-button cta-primary">
-                        Explore Models
-                    </a>
-                </div>
+            <div class="tab-navigation">
+                <button class="tab-button active" data-tab="home">Home</button>
+                <button class="tab-button" data-tab="tab2">Tab 2</button>
+                <button class="tab-button" data-tab="tab3">Tab 3</button>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Premium Features Section -->
-    <section class="features reveal">
-        <div class="container">
-            <div class="features-header">
-                <h2>Premium Features</h2>
-                <p>Everything you need for professional-grade CFD analysis with unmatched precision and reliability</p>
-            </div>
-            
-            <div class="features-grid">
-                <div class="feature-card reveal">
-                    <div class="feature-icon">IG</div>
-                    <h3 class="feature-title">Industrial-Grade Guidance</h3>
-                    <p class="feature-description">Advanced CFD settings optimized for complex industrial applications. Get professional recommendations based on cutting-edge flow physics and validated industry standards.</p>
+    <!-- Tab Content -->
+    <div class="tab-content-container">
+        <!-- Home Tab Content -->
+        <div class="tab-content active" id="home">
+            <!-- Premium Hero Section -->
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1 class="floating">CFD Handbook</h1>
+                        <p class="subtitle">Premium CFD Analysis Guide for Engineering Excellence</p>
+                        <p>Your comprehensive companion for computational fluid dynamics analysis of industrial applications. Experience advanced turbulence models, solver methods, and analysis setup with professional-grade guidance and precision.</p>
+                        
+                        <div class="cta-buttons">
+                            <a href="turbulence-models.html" class="cta-button cta-primary">
+                                Explore Models
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="feature-card reveal">
-                    <div class="feature-icon">AI</div>
-                    <h3 class="feature-title">AI-Powered Intelligence</h3>
-                    <p class="feature-description">Smart turbulence model selection and solver optimization powered by machine learning algorithms and decades of engineering expertise.</p>
-                </div>
-                
-                <div class="feature-card reveal">
-                    <div class="feature-icon">DB</div>
-                    <h3 class="feature-title">Comprehensive Database</h3>
-                    <p class="feature-description">Extensive library of 15+ turbulence models and 12+ solver methods with detailed mathematical formulations and practical applications.</p>
-                </div>
-                
-                <div class="feature-card reveal">
-                    <div class="feature-icon">RC</div>
-                    <h3 class="feature-title">Rapid Configuration</h3>
-                    <p class="feature-description">Accelerate your CFD setup from days to minutes with pre-validated configurations and automated parameter optimization.</p>
-                </div>
-                
-                <div class="feature-card reveal">
-                    <div class="feature-icon">PE</div>
-                    <h3 class="feature-title">Precision Engineering</h3>
-                    <p class="feature-description">Designed specifically for engineering applications with real-world validation data and industry-tested methodologies.</p>
-                </div>
-                
-                <div class="feature-card reveal">
-                    <div class="feature-icon">SE</div>
-                    <h3 class="feature-title">Scientific Excellence</h3>
-                    <p class="feature-description">Built on rigorous CFD principles with peer-reviewed mathematical foundations and advanced numerical methods.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <!-- Premium Navigation Guide -->
-    <section class="navigation-guide reveal">
-        <div class="container">
-            <div class="navigation-header">
-                <h2>Expert Navigation</h2>
-                <p>Your guided path to CFD mastery with structured learning and professional methodologies</p>
-            </div>
-            
-            <div class="navigation-grid">
-                <div class="navigation-card green reveal">
-                    <h3>1. Time Dependency Analysis</h3>
-                    <p>Master steady-state vs. transient analysis with advanced time-stepping methodologies and convergence strategies for optimal simulation efficiency.</p>
+            <!-- Premium Features Section -->
+            <section class="features reveal">
+                <div class="container">
+                    <div class="features-header">
+                        <h2>Premium Features</h2>
+                        <p>Everything you need for professional-grade CFD analysis with unmatched precision and reliability</p>
+                    </div>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card reveal">
+                            <div class="feature-icon">IG</div>
+                            <h3 class="feature-title">Industrial-Grade Guidance</h3>
+                            <p class="feature-description">Advanced CFD settings optimized for complex industrial applications. Get professional recommendations based on cutting-edge flow physics and validated industry standards.</p>
+                        </div>
+                        
+                        <div class="feature-card reveal">
+                            <div class="feature-icon">AI</div>
+                            <h3 class="feature-title">AI-Powered Intelligence</h3>
+                            <p class="feature-description">Smart turbulence model selection and solver optimization powered by machine learning algorithms and decades of engineering expertise.</p>
+                        </div>
+                        
+                        <div class="feature-card reveal">
+                            <div class="feature-icon">DB</div>
+                            <h3 class="feature-title">Comprehensive Database</h3>
+                            <p class="feature-description">Extensive library of 15+ turbulence models and 12+ solver methods with detailed mathematical formulations and practical applications.</p>
+                        </div>
+                        
+                        <div class="feature-card reveal">
+                            <div class="feature-icon">RC</div>
+                            <h3 class="feature-title">Rapid Configuration</h3>
+                            <p class="feature-description">Accelerate your CFD setup from days to minutes with pre-validated configurations and automated parameter optimization.</p>
+                        </div>
+                        
+                        <div class="feature-card reveal">
+                            <div class="feature-icon">PE</div>
+                            <h3 class="feature-title">Precision Engineering</h3>
+                            <p class="feature-description">Designed specifically for engineering applications with real-world validation data and industry-tested methodologies.</p>
+                        </div>
+                        
+                        <div class="feature-card reveal">
+                            <div class="feature-icon">SE</div>
+                            <h3 class="feature-title">Scientific Excellence</h3>
+                            <p class="feature-description">Built on rigorous CFD principles with peer-reviewed mathematical foundations and advanced numerical methods.</p>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="navigation-card purple reveal">
-                    <h3>2. Turbulence Model Selection</h3>
-                    <p>Navigate through 15+ turbulence models with expert guidance, mathematical insights, and application-specific recommendations for superior accuracy.</p>
-                </div>
-                
-                <div class="navigation-card orange reveal">
-                    <h3>3. Numerical Methods</h3>
-                    <p>Advanced discretization schemes, gradient calculations, and pressure-velocity coupling methods for robust and accurate solutions.</p>
-                </div>
-                
-                <div class="navigation-card blue reveal">
-                    <h3>4. Application Guide</h3>
-                    <p>Industry-specific CFD configurations with validated settings for diverse engineering applications and complex flow phenomena.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <!-- Premium About Section -->
-    <section class="about reveal">
-        <div class="container">
-            <div class="about-content">
-                <h2>About This Platform</h2>
-                <p>The CFD Handbook represents the pinnacle of computational fluid dynamics guidance, designed to elevate engineering analysis to new heights. Combining advanced mathematical principles with practical engineering wisdom, it serves as your comprehensive guide to mastering CFD analysis with professional precision and reliability.</p>
-                
-                <div class="developer-card">
-                    <div class="developer-avatar">👨‍💻</div>
-                    <h3 class="developer-name">Mert Küplülü</h3>
-                    <p class="developer-title">Lead Fluid Dynamics R&D Engineer and Platform Architect</p>
-                    <p class="developer-description">Specialized in advanced computational fluid dynamics with extensive expertise in turbulence modeling, numerical methods, and industrial CFD applications. Dedicated to advancing engineering excellence through innovative computational solutions.</p>
+            <!-- Premium Navigation Guide -->
+            <section class="navigation-guide reveal">
+                <div class="container">
+                    <div class="navigation-header">
+                        <h2>Expert Navigation</h2>
+                        <p>Your guided path to CFD mastery with structured learning and professional methodologies</p>
+                    </div>
+                    
+                    <div class="navigation-grid">
+                        <div class="navigation-card green reveal">
+                            <h3>1. Time Dependency Analysis</h3>
+                            <p>Master steady-state vs. transient analysis with advanced time-stepping methodologies and convergence strategies for optimal simulation efficiency.</p>
+                        </div>
+                        
+                        <div class="navigation-card purple reveal">
+                            <h3>2. Turbulence Model Selection</h3>
+                            <p>Navigate through 15+ turbulence models with expert guidance, mathematical insights, and application-specific recommendations for superior accuracy.</p>
+                        </div>
+                        
+                        <div class="navigation-card orange reveal">
+                            <h3>3. Numerical Methods</h3>
+                            <p>Advanced discretization schemes, gradient calculations, and pressure-velocity coupling methods for robust and accurate solutions.</p>
+                        </div>
+                        
+                        <div class="navigation-card blue reveal">
+                            <h3>4. Application Guide</h3>
+                            <p>Industry-specific CFD configurations with validated settings for diverse engineering applications and complex flow phenomena.</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </section>
+
+            <!-- Premium About Section -->
+            <section class="about reveal">
+                <div class="container">
+                    <div class="about-content">
+                        <h2>About This Platform</h2>
+                        <p>The CFD Handbook represents the pinnacle of computational fluid dynamics guidance, designed to elevate engineering analysis to new heights. Combining advanced mathematical principles with practical engineering wisdom, it serves as your comprehensive guide to mastering CFD analysis with professional precision and reliability.</p>
+                        
+                        <div class="developer-card">
+                            <div class="developer-avatar">👨‍💻</div>
+                            <h3 class="developer-name">Mert Küplülü</h3>
+                            <p class="developer-title">Lead Fluid Dynamics R&D Engineer and Platform Architect</p>
+                            <p class="developer-description">Specialized in advanced computational fluid dynamics with extensive expertise in turbulence modeling, numerical methods, and industrial CFD applications. Dedicated to advancing engineering excellence through innovative computational solutions.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-    </section>
+
+        <!-- Tab 2 Content -->
+        <div class="tab-content" id="tab2">
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>Tab 2 Content</h1>
+                        <p class="subtitle">This is where your second tab content will go</p>
+                        <p>You can add any content here - forms, data, charts, or any other functionality you need.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Tab 3 Content -->
+        <div class="tab-content" id="tab3">
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>Tab 3 Content</h1>
+                        <p class="subtitle">This is where your third tab content will go</p>
+                        <p>You can add any content here - forms, data, charts, or any other functionality you need.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
 
     <!-- Premium Footer -->
     <footer class="footer">
@@ -1404,7 +1579,62 @@
             });
         }
 
-        console.log('CFD Handbook - Premium Homepage loaded with mobile-optimized interactions');
+        // Tab System Functionality
+        function initTabSystem() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            function switchTab(targetTabId) {
+                // Remove active class from all buttons and contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    content.classList.remove('fade-in');
+                });
+
+                // Add active class to clicked button
+                const activeButton = document.querySelector(`[data-tab="${targetTabId}"]`);
+                if (activeButton) {
+                    activeButton.classList.add('active');
+                }
+
+                // Show target content with animation
+                const targetContent = document.getElementById(targetTabId);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                    // Small delay to ensure display:block is applied before animation
+                    setTimeout(() => {
+                        targetContent.classList.add('fade-in');
+                    }, 10);
+
+                    // Re-trigger reveal animations for the new tab content
+                    setTimeout(() => {
+                        reveal();
+                    }, 100);
+                }
+            }
+
+            // Add click event listeners to tab buttons
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab');
+                    switchTab(targetTab);
+                });
+            });
+
+            // Initialize with first tab active
+            if (tabButtons.length > 0 && tabContents.length > 0) {
+                const firstTab = tabButtons[0].getAttribute('data-tab');
+                switchTab(firstTab);
+            }
+        }
+
+        // Initialize tab system when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initTabSystem();
+        });
+
+        console.log('CFD Handbook - Premium Homepage with Tab System loaded successfully');
     </script>
 </body>
 </html>
