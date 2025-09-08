@@ -1133,18 +1133,24 @@
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(102, 126, 234, 0.1);
-            position: sticky;
-            top: 0;
+            position: relative;
             z-index: 999;
             box-shadow: 0 4px 20px rgba(102, 126, 234, 0.08);
+            width: 100%;
+            display: block !important;
+            visibility: visible !important;
+            margin: 0;
+            padding: 0;
         }
 
         .tab-navigation {
-            display: flex;
+            display: flex !important;
             gap: 0;
             justify-content: center;
             padding: 1rem 0;
             flex-wrap: wrap;
+            visibility: visible !important;
+            width: 100%;
         }
 
         .tab-button {
@@ -1161,6 +1167,8 @@
             overflow: hidden;
             margin: 0 0.25rem;
             font-family: inherit;
+            display: inline-block !important;
+            visibility: visible !important;
         }
 
         .tab-button::before {
@@ -1210,9 +1218,9 @@
         }
 
         .tab-content.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
+            display: block !important;
+            opacity: 1 !important;
+            transform: translateY(0) !important;
         }
 
         .tab-content.fade-in {
@@ -1622,10 +1630,18 @@
                 });
             });
 
-            // Initialize with first tab active
-            if (tabButtons.length > 0 && tabContents.length > 0) {
-                const firstTab = tabButtons[0].getAttribute('data-tab');
-                switchTab(firstTab);
+            // Initialize - ensure the active tab is properly displayed
+            const activeTab = document.querySelector('.tab-content.active');
+            if (activeTab) {
+                activeTab.style.display = 'block';
+                activeTab.style.opacity = '1';
+                activeTab.style.transform = 'translateY(0)';
+            }
+            
+            // Ensure active button is properly styled
+            const activeButton = document.querySelector('.tab-button.active');
+            if (!activeButton && tabButtons.length > 0) {
+                tabButtons[0].classList.add('active');
             }
         }
 
