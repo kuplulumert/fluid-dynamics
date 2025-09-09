@@ -368,6 +368,49 @@
             font-weight: bold;
         }
 
+        /* Previously Visited Cards */
+        .course-card.previously-visited {
+            border: 2px solid var(--course-color-start);
+            box-shadow: 0 15px 50px rgba(102, 126, 234, 0.15);
+        }
+
+        .course-card.previously-visited::after {
+            content: '✓ Visited';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--course-color-start);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 3;
+            opacity: 0.9;
+        }
+
+        .course-card.previously-visited .course-icon {
+            box-shadow: 0 12px 40px var(--course-color-start);
+        }
+
+        /* Return Indicator Animation */
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .return-indicator {
+            animation: slideInFromRight 0.3s ease-out;
+        }
+
         /* Footer */
         .footer {
             background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
@@ -654,6 +697,205 @@
     </footer>
 
     <script>
+        // Navigation History and State Management
+        class NavigationHistory {
+            constructor() {
+                this.storageKey = 'engineeringHub_navigationState';
+                this.init();
+            }
+
+            init() {
+                // Restore state on page load
+                this.restoreState();
+                
+                // Save state when navigating away
+                window.addEventListener('beforeunload', () => {
+                    this.saveState();
+                });
+
+                // Handle browser back/forward navigation
+                window.addEventListener('popstate', (e) => {
+                    if (e.state && e.state.hubState) {
+                        this.restoreFromState(e.state.hubState);
+                    }
+                });
+
+                // Track user interactions
+                this.trackInteractions();
+            }
+
+            saveState() {
+                const state = {
+                    scrollPosition: window.pageYOffset,
+                    timestamp: Date.now(),
+                    focusedElement: document.activeElement ? document.activeElement.className : null,
+                    hoveredCard: this.getHoveredCard(),
+                    visitedCards: this.getVisitedCards(),
+                    userAgent: navigator.userAgent,
+                    viewportWidth: window.innerWidth,
+                    viewportHeight: window.innerHeight
+                };
+
+                try {
+                    sessionStorage.setItem(this.storageKey, JSON.stringify(state));
+                    // Also push to history state
+                    history.replaceState({ hubState: state }, '', window.location.href);
+                } catch (e) {
+                    console.warn('Could not save navigation state:', e);
+                }
+            }
+
+            restoreState() {
+                try {
+                    const savedState = sessionStorage.getItem(this.storageKey);
+                    if (savedState) {
+                        const state = JSON.parse(savedState);
+                        this.restoreFromState(state);
+                    }
+                } catch (e) {
+                    console.warn('Could not restore navigation state:', e);
+                }
+            }
+
+            restoreFromState(state) {
+                if (!state) return;
+
+                // Restore scroll position with smooth scrolling
+                if (state.scrollPosition) {
+                    // Wait for page to load completely
+                    setTimeout(() => {
+                        window.scrollTo({
+                            top: state.scrollPosition,
+                            behavior: 'smooth'
+                        });
+                    }, 100);
+                }
+
+                // Restore focus state
+                if (state.focusedElement) {
+                    setTimeout(() => {
+                        const element = document.querySelector(`.${state.focusedElement}`);
+                        if (element && element.focus) {
+                            element.focus();
+                        }
+                    }, 200);
+                }
+
+                // Restore visited cards visual state
+                if (state.visitedCards) {
+                    setTimeout(() => {
+                        state.visitedCards.forEach(cardClass => {
+                            const card = document.querySelector(`.${cardClass}`);
+                            if (card) {
+                                card.classList.add('previously-visited');
+                            }
+                        });
+                    }, 300);
+                }
+
+                // Add visual indicator for returning user
+                this.showReturnIndicator();
+            }
+
+            getHoveredCard() {
+                const hoveredCards = document.querySelectorAll('.course-card:hover');
+                return hoveredCards.length > 0 ? hoveredCards[0].className : null;
+            }
+
+            getVisitedCards() {
+                const visitedCards = [];
+                document.querySelectorAll('.course-card.previously-visited').forEach(card => {
+                    visitedCards.push(card.className.replace(' previously-visited', ''));
+                });
+                return visitedCards;
+            }
+
+            trackInteractions() {
+                // Track course card interactions
+                document.querySelectorAll('.course-card').forEach(card => {
+                    card.addEventListener('mouseenter', () => {
+                        card.setAttribute('data-last-hover', Date.now());
+                    });
+
+                    card.addEventListener('focus', () => {
+                        card.setAttribute('data-last-focus', Date.now());
+                    });
+
+                    card.addEventListener('click', () => {
+                        card.classList.add('previously-visited');
+                        this.saveState();
+                    });
+                });
+
+                // Save state on scroll (throttled)
+                let scrollTimeout;
+                window.addEventListener('scroll', () => {
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(() => {
+                        this.saveState();
+                    }, 250);
+                });
+            }
+
+            showReturnIndicator() {
+                // Create a subtle indicator that the user has returned
+                const indicator = document.createElement('div');
+                indicator.className = 'return-indicator';
+                indicator.innerHTML = '↩️ Welcome back';
+                indicator.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: linear-gradient(135deg, #10b981, #059669);
+                    color: white;
+                    padding: 0.5rem 1rem;
+                    border-radius: 20px;
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+                    z-index: 10000;
+                    opacity: 0;
+                    transform: translateX(100px);
+                    transition: all 0.3s ease;
+                    pointer-events: none;
+                `;
+
+                document.body.appendChild(indicator);
+
+                // Animate in
+                setTimeout(() => {
+                    indicator.style.opacity = '1';
+                    indicator.style.transform = 'translateX(0)';
+                }, 100);
+
+                // Animate out
+                setTimeout(() => {
+                    indicator.style.opacity = '0';
+                    indicator.style.transform = 'translateX(100px)';
+                    setTimeout(() => {
+                        if (indicator.parentNode) {
+                            indicator.parentNode.removeChild(indicator);
+                        }
+                    }, 300);
+                }, 3000);
+            }
+
+            // Clear history (useful for testing or reset)
+            clearHistory() {
+                try {
+                    sessionStorage.removeItem(this.storageKey);
+                    document.querySelectorAll('.course-card').forEach(card => {
+                        card.classList.remove('previously-visited');
+                    });
+                } catch (e) {
+                    console.warn('Could not clear navigation history:', e);
+                }
+            }
+        }
+
+        // Initialize navigation history
+        const navHistory = new NavigationHistory();
+
         // Header scroll effect
         window.addEventListener('scroll', function() {
             const header = document.getElementById('header');
@@ -682,8 +924,17 @@
         window.addEventListener('scroll', reveal);
         reveal(); // Check on load
 
-        // Course navigation
+        // Enhanced course navigation with history tracking
         function navigateToCourse(url) {
+            // Save current state before navigating
+            navHistory.saveState();
+            
+            // Mark the clicked card as visited
+            const clickedCard = event.currentTarget;
+            if (clickedCard) {
+                clickedCard.classList.add('previously-visited');
+            }
+
             // Smooth transition effect
             document.body.style.opacity = '0';
             document.body.style.transform = 'translateY(-30px)';
@@ -717,7 +968,25 @@
             });
         });
 
-        console.log('Engineering Course Hub loaded successfully');
+        console.log('Engineering Course Hub loaded with Navigation History');
+        
+        // Debug functions (accessible via browser console)
+        window.debugNavHistory = {
+            showState: () => {
+                const state = sessionStorage.getItem('engineeringHub_navigationState');
+                console.log('Current Navigation State:', state ? JSON.parse(state) : 'No saved state');
+            },
+            clearHistory: () => {
+                navHistory.clearHistory();
+                console.log('Navigation history cleared');
+            },
+            testReturn: () => {
+                navHistory.showReturnIndicator();
+                console.log('Return indicator shown');
+            }
+        };
+        
+        console.log('Debug functions available: window.debugNavHistory.showState(), .clearHistory(), .testReturn()');
     </script>
 </body>
 </html>
