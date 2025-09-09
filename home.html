@@ -21,7 +21,7 @@
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
             color: #2d3748;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #ffffff;
             min-height: 100vh;
             opacity: 0;
             animation: fadeInPage 1.2s ease-out forwards;
@@ -42,20 +42,20 @@
 
         /* Premium Header */
         .header {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(102, 126, 234, 0.1);
             padding: 1.5rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.08);
             transition: all 0.3s ease;
         }
 
         .header.scrolled {
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
         }
 
         .header-content {
@@ -67,11 +67,13 @@
         .logo {
             font-size: 1.8rem;
             font-weight: 800;
-            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             text-decoration: none;
             transition: all 0.3s ease;
             position: relative;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             letter-spacing: -0.01em;
         }
 
@@ -82,7 +84,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: rgba(255, 255, 255, 0.8);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             transition: width 0.3s ease;
         }
 
@@ -92,7 +94,7 @@
 
         .logo:hover {
             transform: translateY(-2px);
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            text-shadow: 0 4px 20px rgba(102, 126, 234, 0.2);
         }
 
         /* Hero Section */
@@ -101,7 +103,8 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            color: white;
+            color: #2d3748;
+            background: linear-gradient(135deg, #f8faff 0%, #f0f4f8 100%);
         }
 
         .hero::before {
@@ -112,9 +115,9 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.08) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(255,255,255,0.05) 0%, transparent 50%);
+                radial-gradient(circle at 20% 30%, rgba(102, 126, 234, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(118, 75, 162, 0.02) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(102, 126, 234, 0.025) 0%, transparent 50%);
             pointer-events: none;
         }
 
@@ -130,11 +133,11 @@
             font-weight: 900;
             margin-bottom: 1.5rem;
             line-height: 1.1;
-            background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.9) 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-shadow: 0 4px 20px rgba(102, 126, 234, 0.1);
             letter-spacing: -0.02em;
         }
 
@@ -142,6 +145,7 @@
             font-size: 1.6rem;
             font-weight: 300;
             margin-bottom: 2rem;
+            color: #4a5568;
             opacity: 0.95;
             letter-spacing: 0.01em;
         }
@@ -150,6 +154,7 @@
             font-size: 1.3rem;
             margin-bottom: 4rem;
             line-height: 1.7;
+            color: #4a5568;
             opacity: 0.9;
             max-width: 700px;
             margin-left: auto;
@@ -159,7 +164,7 @@
         /* Course Grid */
         .courses {
             padding: 8rem 0;
-            background: linear-gradient(135deg, #f8faff 0%, #f0f4f8 100%);
+            background: #ffffff;
             position: relative;
         }
 
