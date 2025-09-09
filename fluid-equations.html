@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Governing Equations - Fluid Dynamics</title>
+    <meta name="description" content="Derivation and application of fundamental fluid mechanics equations including Navier-Stokes equations.">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="version" content="1.0">
+    <meta name="last-modified" content="2025-12-19">
+    
+    <link rel="canonical" href="https://cfdhandbook.com/fluid-equations.html">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background-color: #f7fafc;
+            min-height: 100vh;
+            opacity: 0;
+            animation: fadeInPage 1.2s ease-out forwards;
+            overflow-x: hidden;
+        }
+
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 2rem;
+            max-width: 1400px;
+        }
+
+        /* Header - Same as fundamentals */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.15);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-tab {
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            color: #4a5568;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-tab:hover::before,
+        .nav-tab.active::before {
+            opacity: 1;
+        }
+
+        .nav-tab:hover,
+        .nav-tab.active {
+            color: #10b981;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.15);
+        }
+
+        /* Home Hub Button */
+        .home-hub-button {
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            border: 2px solid rgba(16, 185, 129, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .home-hub-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .home-hub-button:hover::before {
+            opacity: 1;
+        }
+
+        .home-hub-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .home-hub-icon {
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .home-hub-button:hover .home-hub-icon {
+            transform: scale(1.1);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            font-size: 1.3rem;
+            color: #4a5568;
+            text-align: center;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .equations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .equation-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(16, 185, 129, 0.08);
+            border-radius: 20px;
+            padding: 3rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.06);
+        }
+
+        .equation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .equation-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .equation-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(16, 185, 129, 0.15);
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+
+        .equation-icon {
+            width: 5rem;
+            height: 5rem;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.3);
+            transition: all 0.4s ease;
+            font-weight: 700;
+        }
+
+        .equation-card:hover .equation-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 40px rgba(16, 185, 129, 0.4);
+        }
+
+        .equation-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .equation-description {
+            font-size: 1.1rem;
+            color: #4a5568;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .equation-formula {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            color: #0f766e;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .equation-status {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-available {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .status-coming-soon {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .header {
+                padding: 1rem 0;
+            }
+
+            .nav-tabs {
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .nav-tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .main-content {
+                padding: 2rem 0;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .page-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+            }
+
+            .equations-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .equation-card {
+                padding: 2rem;
+            }
+
+            .equation-icon {
+                width: 4rem;
+                height: 4rem;
+                font-size: 1.2rem;
+            }
+
+            .equation-title {
+                font-size: 1.3rem;
+            }
+
+            .equation-formula {
+                font-size: 0.9rem;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="fluid-dynamics.html" class="logo">Fluid Dynamics</a>
+                
+                <!-- Navigation Tabs -->
+                <div class="nav-tabs" id="navTabs">
+                    <a href="home.html" class="home-hub-button">
+                        <span class="home-hub-icon">🏠</span>
+                        <span>Course Hub</span>
+                    </a>
+                    <a href="fluid-dynamics.html" class="nav-tab">Home</a>
+                    <a href="fluid-fundamentals.html" class="nav-tab">Fundamentals</a>
+                    <a href="fluid-equations.html" class="nav-tab active">Equations</a>
+                    <a href="fluid-applications.html" class="nav-tab">Applications</a>
+                    <a href="fluid-experiments.html" class="nav-tab">Experiments</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <h1 class="page-title">Governing Equations</h1>
+            <p class="page-subtitle">Master the fundamental equations that govern fluid motion and behavior</p>
+            
+            <div class="equations-grid">
+                <div class="equation-card">
+                    <div class="equation-icon">∇</div>
+                    <h3 class="equation-title">Continuity Equation</h3>
+                    <p class="equation-description">Conservation of mass in fluid flow, relating density changes to velocity field divergence.</p>
+                    <div class="equation-formula">
+                        ∂ρ/∂t + ∇·(ρv) = 0
+                    </div>
+                    <span class="equation-status status-coming-soon">Coming Soon</span>
+                </div>
+
+                <div class="equation-card">
+                    <div class="equation-icon">NS</div>
+                    <h3 class="equation-title">Navier-Stokes Equations</h3>
+                    <p class="equation-description">The fundamental equations of fluid motion, describing momentum conservation including viscous effects.</p>
+                    <div class="equation-formula">
+                        ρ(∂v/∂t + v·∇v) = -∇p + μ∇²v + f
+                    </div>
+                    <span class="equation-status status-coming-soon">Coming Soon</span>
+                </div>
+
+                <div class="equation-card">
+                    <div class="equation-icon">E</div>
+                    <h3 class="equation-title">Energy Equation</h3>
+                    <p class="equation-description">Conservation of energy in fluid systems, including thermal effects and viscous dissipation.</p>
+                    <div class="equation-formula">
+                        ρCp(∂T/∂t + v·∇T) = k∇²T + Φ + Q
+                    </div>
+                    <span class="equation-status status-coming-soon">Coming Soon</span>
+                </div>
+
+                <div class="equation-card">
+                    <div class="equation-icon">B</div>
+                    <h3 class="equation-title">Bernoulli's Equation</h3>
+                    <p class="equation-description">Energy conservation for inviscid, incompressible flow along streamlines.</p>
+                    <div class="equation-formula">
+                        p + ½ρv² + ρgh = constant
+                    </div>
+                    <span class="equation-status status-coming-soon">Coming Soon</span>
+                </div>
+
+                <div class="equation-card">
+                    <div class="equation-icon">ω</div>
+                    <h3 class="equation-title">Vorticity Equation</h3>
+                    <p class="equation-description">Evolution of rotational motion in fluid flow, derived from the Navier-Stokes equations.</p>
+                    <div class="equation-formula">
+                        ∂ω/∂t + v·∇ω = ω·∇v + ν∇²ω
+                    </div>
+                    <span class="equation-status status-coming-soon">Coming Soon</span>
+                </div>
+
+                <div class="equation-card">
+                    <div class="equation-icon">Ψ</div>
+                    <h3 class="equation-title">Stream Function</h3>
+                    <p class="equation-description">Mathematical tool for analyzing 2D incompressible flow using streamlines and flow visualization.</p>
+                    <div class="equation-formula">
+                        u = ∂Ψ/∂y, v = -∂Ψ/∂x
+                    </div>
+                    <span class="equation-status status-coming-soon">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth transitions
+        function smoothTransition(url) {
+            document.body.style.opacity = '0';
+            document.body.style.transform = 'translateY(-30px)';
+            setTimeout(() => {
+                window.location.href = url;
+            }, 400);
+        }
+
+        // Navigation transitions
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                if (!this.classList.contains('active')) {
+                    e.preventDefault();
+                    smoothTransition(this.href);
+                }
+            });
+        });
+
+        // Equation card interactions
+        document.querySelectorAll('.equation-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Future: Navigate to specific equation pages
+                console.log('Equation clicked:', this.querySelector('.equation-title').textContent);
+            });
+        });
+
+        console.log('Fluid Equations page loaded');
+    </script>
+</body>
+</html>
