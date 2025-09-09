@@ -198,19 +198,43 @@
             margin-right: auto;
         }
 
-        .topics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+        /* Learning Path Header */
+        .learning-path-header {
+            text-align: center;
+            margin: 3rem 0 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(5, 150, 105, 0.03) 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(16, 185, 129, 0.1);
         }
 
-        .topic-card {
+        .learning-path-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 0.5rem;
+        }
+
+        .learning-path-header p {
+            font-size: 1.1rem;
+            color: #4a5568;
+        }
+
+        /* Sequential Learning Layout */
+        .learning-sequence {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .sequence-item {
+            display: flex;
+            align-items: center;
             background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(16, 185, 129, 0.08);
             border-radius: 20px;
-            padding: 2.5rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
@@ -218,67 +242,165 @@
             box-shadow: 0 8px 32px rgba(16, 185, 129, 0.06);
         }
 
-        .topic-card::before {
+        .sequence-item.available {
+            border-left: 4px solid #10b981;
+        }
+
+        .sequence-item.coming-soon {
+            border-left: 4px solid #f59e0b;
+            cursor: default;
+            opacity: 0.7;
+        }
+
+        .sequence-item.available::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
+            height: 3px;
             background: linear-gradient(90deg, #10b981 0%, #059669 100%);
             transform: translateX(-100%);
             transition: transform 0.6s ease;
         }
 
-        .topic-card:hover::before {
+        .sequence-item.available:hover::before {
             transform: translateX(0);
         }
 
-        .topic-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15);
+        .sequence-item.available:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.15);
             border-color: rgba(16, 185, 129, 0.2);
         }
 
-        .topic-icon {
-            width: 4rem;
-            height: 4rem;
+        .sequence-number {
+            width: 3rem;
+            height: 3rem;
             background: linear-gradient(135deg, #10b981, #059669);
-            border-radius: 16px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
             color: white;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.3);
+            margin-right: 1.5rem;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            transition: all 0.4s ease;
+            flex-shrink: 0;
+        }
+
+        .sequence-item.coming-soon .sequence-number {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .sequence-item.available:hover .sequence-number {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .sequence-content {
+            flex: 1;
+        }
+
+        .sequence-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .topic-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
             transition: all 0.4s ease;
         }
 
-        .topic-card:hover .topic-icon {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 12px 40px rgba(16, 185, 129, 0.4);
+        .sequence-item.coming-soon .topic-icon {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+        }
+
+        .topic-info {
+            flex: 1;
         }
 
         .topic-title {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: #2d3748;
-            margin-bottom: 1rem;
+            margin-bottom: 0.3rem;
         }
 
         .topic-description {
             font-size: 1rem;
             color: #4a5568;
             line-height: 1.6;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .topic-keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .keyword {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 12px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .sequence-item.coming-soon .keyword {
+            background: rgba(245, 158, 11, 0.1);
+            color: #d97706;
+            border-color: rgba(245, 158, 11, 0.2);
+        }
+
+        .prerequisite {
+            font-size: 0.85rem;
+            color: #f59e0b;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .sequence-arrow {
+            font-size: 1.5rem;
+            color: #10b981;
+            margin-left: 1rem;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .sequence-item:last-child .sequence-arrow {
+            display: none;
+        }
+
+        .sequence-item.available:hover .sequence-arrow {
+            transform: translateX(5px);
         }
 
         .topic-status {
             display: inline-block;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.7rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -329,23 +451,55 @@
                 margin-bottom: 2rem;
             }
 
-            .topics-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
+            .learning-path-header {
+                padding: 1.5rem;
+                margin: 2rem 0 1.5rem 0;
             }
 
-            .topic-card {
-                padding: 2rem;
+            .learning-path-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .learning-path-header p {
+                font-size: 1rem;
+            }
+
+            .sequence-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .sequence-number {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+
+            .sequence-header {
+                width: 100%;
+                justify-content: flex-start;
             }
 
             .topic-icon {
-                width: 3rem;
-                height: 3rem;
-                font-size: 1.2rem;
+                width: 2rem;
+                height: 2rem;
+                font-size: 1rem;
             }
 
             .topic-title {
                 font-size: 1.2rem;
+            }
+
+            .topic-keywords {
+                margin-bottom: 1rem;
+            }
+
+            .sequence-arrow {
+                align-self: center;
+                margin-left: 0;
+                margin-top: 1rem;
+                transform: rotate(90deg);
             }
         }
     </style>
@@ -377,50 +531,150 @@
     <div class="container">
         <div class="main-content">
             <h1 class="page-title">Fluid Fundamentals</h1>
-            <p class="page-subtitle">Master the fundamental concepts that form the foundation of fluid mechanics</p>
+            <p class="page-subtitle">Master the fundamental concepts in the recommended learning sequence</p>
             
-            <div class="topics-grid">
-                <div class="topic-card" onclick="navigateToTopic('fluid/fundamentals/fluid-properties.html')">
-                    <div class="topic-icon">🌊</div>
-                    <h3 class="topic-title">Fluid Properties</h3>
-                    <p class="topic-description">Density, viscosity, compressibility, and other fundamental properties that characterize fluid behavior under various conditions.</p>
-                    <span class="topic-status status-available">Available Now</span>
+            <!-- Learning Path Header -->
+            <div class="learning-path-header">
+                <h2>📚 Recommended Learning Sequence</h2>
+                <p>Follow this order for optimal understanding of fluid mechanics fundamentals</p>
+            </div>
+            
+            <!-- Sequential Learning List -->
+            <div class="learning-sequence">
+                
+                <!-- Topic 1: Fluid Properties -->
+                <div class="sequence-item available" onclick="navigateToTopic('fluid/fundamentals/fluid-properties.html')">
+                    <div class="sequence-number">1</div>
+                    <div class="sequence-content">
+                        <div class="sequence-header">
+                            <div class="topic-icon">🌊</div>
+                            <div class="topic-info">
+                                <h3 class="topic-title">Fluid Properties</h3>
+                                <span class="topic-status status-available">Available Now</span>
+                            </div>
+                        </div>
+                        <p class="topic-description">Start here: Learn about density, viscosity, compressibility, and surface tension - the fundamental properties that characterize all fluids.</p>
+                        <div class="topic-keywords">
+                            <span class="keyword">Density</span>
+                            <span class="keyword">Viscosity</span>
+                            <span class="keyword">Compressibility</span>
+                            <span class="keyword">Surface Tension</span>
+                        </div>
+                    </div>
+                    <div class="sequence-arrow">→</div>
                 </div>
 
-                <div class="topic-card" onclick="navigateToTopic('fluid/fundamentals/continuum-hypothesis.html')">
-                    <div class="topic-icon">🔬</div>
-                    <h3 class="topic-title">Continuum Hypothesis</h3>
-                    <p class="topic-description">Understanding when and why fluids can be treated as continuous media, and the mathematical implications of this assumption.</p>
-                    <span class="topic-status status-available">Available Now</span>
+                <!-- Topic 2: Continuum Hypothesis -->
+                <div class="sequence-item available" onclick="navigateToTopic('fluid/fundamentals/continuum-hypothesis.html')">
+                    <div class="sequence-number">2</div>
+                    <div class="sequence-content">
+                        <div class="sequence-header">
+                            <div class="topic-icon">🔬</div>
+                            <div class="topic-info">
+                                <h3 class="topic-title">Continuum Hypothesis</h3>
+                                <span class="topic-status status-available">Available Now</span>
+                            </div>
+                        </div>
+                        <p class="topic-description">Understand when fluids can be treated as continuous media and the mathematical framework this enables for analysis.</p>
+                        <div class="topic-keywords">
+                            <span class="keyword">Knudsen Number</span>
+                            <span class="keyword">Mean Free Path</span>
+                            <span class="keyword">No-Slip Condition</span>
+                        </div>
+                    </div>
+                    <div class="sequence-arrow">→</div>
                 </div>
 
-                <div class="topic-card">
-                    <div class="topic-icon">📐</div>
-                    <h3 class="topic-title">Fluid Kinematics</h3>
-                    <p class="topic-description">Description of fluid motion through velocity fields, streamlines, pathlines, and the mathematical tools for analyzing flow patterns.</p>
-                    <span class="topic-status status-coming-soon">Coming Soon</span>
+                <!-- Topic 3: Fluid Kinematics -->
+                <div class="sequence-item coming-soon">
+                    <div class="sequence-number">3</div>
+                    <div class="sequence-content">
+                        <div class="sequence-header">
+                            <div class="topic-icon">📐</div>
+                            <div class="topic-info">
+                                <h3 class="topic-title">Fluid Kinematics</h3>
+                                <span class="topic-status status-coming-soon">Coming Soon</span>
+                            </div>
+                        </div>
+                        <p class="topic-description">Learn to describe fluid motion using velocity fields, streamlines, pathlines, and mathematical tools for flow analysis.</p>
+                        <div class="topic-keywords">
+                            <span class="keyword">Velocity Fields</span>
+                            <span class="keyword">Streamlines</span>
+                            <span class="keyword">Pathlines</span>
+                            <span class="keyword">Flow Patterns</span>
+                        </div>
+                        <div class="prerequisite">Requires: Topics 1-2</div>
+                    </div>
+                    <div class="sequence-arrow">→</div>
                 </div>
 
-                <div class="topic-card">
-                    <div class="topic-icon">⚖️</div>
-                    <h3 class="topic-title">Conservation Principles</h3>
-                    <p class="topic-description">Mass, momentum, and energy conservation in fluid systems, forming the basis for all fluid mechanics analysis.</p>
-                    <span class="topic-status status-coming-soon">Coming Soon</span>
+                <!-- Topic 4: Conservation Principles -->
+                <div class="sequence-item coming-soon">
+                    <div class="sequence-number">4</div>
+                    <div class="sequence-content">
+                        <div class="sequence-header">
+                            <div class="topic-icon">⚖️</div>
+                            <div class="topic-info">
+                                <h3 class="topic-title">Conservation Principles</h3>
+                                <span class="topic-status status-coming-soon">Coming Soon</span>
+                            </div>
+                        </div>
+                        <p class="topic-description">Master mass, momentum, and energy conservation laws that form the mathematical foundation of fluid mechanics.</p>
+                        <div class="topic-keywords">
+                            <span class="keyword">Mass Conservation</span>
+                            <span class="keyword">Momentum Conservation</span>
+                            <span class="keyword">Energy Conservation</span>
+                        </div>
+                        <div class="prerequisite">Requires: Topics 1-3</div>
+                    </div>
+                    <div class="sequence-arrow">→</div>
                 </div>
 
-                <div class="topic-card">
-                    <div class="topic-icon">🌀</div>
-                    <h3 class="topic-title">Vorticity and Circulation</h3>
-                    <p class="topic-description">Rotational aspects of fluid motion, vortex dynamics, and their role in complex flow phenomena.</p>
-                    <span class="topic-status status-coming-soon">Coming Soon</span>
+                <!-- Topic 5: Vorticity and Circulation -->
+                <div class="sequence-item coming-soon">
+                    <div class="sequence-number">5</div>
+                    <div class="sequence-content">
+                        <div class="sequence-header">
+                            <div class="topic-icon">🌀</div>
+                            <div class="topic-info">
+                                <h3 class="topic-title">Vorticity and Circulation</h3>
+                                <span class="topic-status status-coming-soon">Coming Soon</span>
+                            </div>
+                        </div>
+                        <p class="topic-description">Explore rotational aspects of fluid motion, vortex dynamics, and their role in complex flow phenomena.</p>
+                        <div class="topic-keywords">
+                            <span class="keyword">Vorticity</span>
+                            <span class="keyword">Circulation</span>
+                            <span class="keyword">Vortex Dynamics</span>
+                            <span class="keyword">Rotation</span>
+                        </div>
+                        <div class="prerequisite">Requires: Topics 1-4</div>
+                    </div>
+                    <div class="sequence-arrow">→</div>
                 </div>
 
-                <div class="topic-card">
-                    <div class="topic-icon">📊</div>
-                    <h3 class="topic-title">Dimensional Analysis</h3>
-                    <p class="topic-description">Powerful techniques for simplifying complex problems and understanding the scaling relationships in fluid systems.</p>
-                    <span class="topic-status status-coming-soon">Coming Soon</span>
+                <!-- Topic 6: Dimensional Analysis -->
+                <div class="sequence-item coming-soon">
+                    <div class="sequence-number">6</div>
+                    <div class="sequence-content">
+                        <div class="sequence-header">
+                            <div class="topic-icon">📊</div>
+                            <div class="topic-info">
+                                <h3 class="topic-title">Dimensional Analysis</h3>
+                                <span class="topic-status status-coming-soon">Coming Soon</span>
+                            </div>
+                        </div>
+                        <p class="topic-description">Learn powerful techniques for simplifying problems and understanding scaling relationships in fluid systems.</p>
+                        <div class="topic-keywords">
+                            <span class="keyword">Pi Theorem</span>
+                            <span class="keyword">Buckingham Pi</span>
+                            <span class="keyword">Scaling Laws</span>
+                            <span class="keyword">Similarity</span>
+                        </div>
+                        <div class="prerequisite">Requires: Topics 1-5</div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
