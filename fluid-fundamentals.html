@@ -380,11 +380,11 @@
             <p class="page-subtitle">Master the fundamental concepts that form the foundation of fluid mechanics</p>
             
             <div class="topics-grid">
-                <div class="topic-card">
+                <div class="topic-card" onclick="navigateToTopic('fluid/fundamentals/fluid-properties.html')">
                     <div class="topic-icon">🌊</div>
                     <h3 class="topic-title">Fluid Properties</h3>
                     <p class="topic-description">Density, viscosity, compressibility, and other fundamental properties that characterize fluid behavior under various conditions.</p>
-                    <span class="topic-status status-coming-soon">Coming Soon</span>
+                    <span class="topic-status status-available">Available Now</span>
                 </div>
 
                 <div class="topic-card">
@@ -455,9 +455,23 @@
             });
         });
 
+        // Topic navigation function
+        function navigateToTopic(url) {
+            // Smooth transition effect
+            document.body.style.opacity = '0';
+            document.body.style.transform = 'translateY(-30px)';
+            setTimeout(() => {
+                window.location.href = url;
+            }, 400);
+        }
+
         // Topic card interactions
         document.querySelectorAll('.topic-card').forEach(card => {
             card.addEventListener('click', function() {
+                // Check if card has onclick attribute (available topics)
+                if (this.getAttribute('onclick')) {
+                    return; // Let the onclick handler take care of it
+                }
                 // Future: Navigate to specific topic pages
                 console.log('Topic clicked:', this.querySelector('.topic-title').textContent);
             });

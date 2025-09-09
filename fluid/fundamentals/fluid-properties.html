@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluid Properties - Fluid Dynamics</title>
+    <meta name="description" content="Comprehensive guide to fluid properties including density, viscosity, compressibility, and their applications in engineering.">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="version" content="1.0">
+    <meta name="last-modified" content="2025-12-19">
+    
+    <link rel="canonical" href="https://cfdhandbook.com/fluid/fundamentals/fluid-properties.html">
+    
+    <!-- MathJax for proper mathematical notation -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background-color: #f7fafc;
+            min-height: 100vh;
+            opacity: 0;
+            animation: fadeInPage 1.2s ease-out forwards;
+            overflow-x: hidden;
+        }
+
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 2rem;
+            max-width: 1400px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.15);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-tab {
+            padding: 0.6rem 1.2rem;
+            text-decoration: none;
+            color: #4a5568;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: 10px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-tab:hover::before,
+        .nav-tab.active::before {
+            opacity: 1;
+        }
+
+        .nav-tab:hover,
+        .nav-tab.active {
+            color: #10b981;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.15);
+        }
+
+        /* Home Hub Button */
+        .home-hub-button {
+            padding: 0.6rem 1.2rem;
+            text-decoration: none;
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            border: 2px solid rgba(16, 185, 129, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .home-hub-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .home-hub-button:hover::before {
+            opacity: 1;
+        }
+
+        .home-hub-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .home-hub-icon {
+            font-size: 0.9rem;
+            transition: transform 0.3s ease;
+        }
+
+        .home-hub-button:hover .home-hub-icon {
+            transform: scale(1.1);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 3rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-subtitle {
+            font-size: 1.4rem;
+            color: #4a5568;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Tab Navigation */
+        .tab-navigation {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 0.5rem;
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.08);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tab-button {
+            padding: 1rem 2rem;
+            border: none;
+            background: transparent;
+            color: #4a5568;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .tab-button:hover:not(.active) {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Property Cards */
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .property-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(16, 185, 129, 0.08);
+            border-radius: 24px;
+            padding: 3rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.06);
+        }
+
+        .property-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .property-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .property-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(16, 185, 129, 0.15);
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+
+        .property-icon {
+            width: 4rem;
+            height: 4rem;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .property-card:hover .property-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 40px rgba(16, 185, 129, 0.4);
+        }
+
+        .property-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .property-description {
+            font-size: 1.1rem;
+            color: #4a5568;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        /* Formula Sections */
+        .formula-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .formula-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0f766e;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .formula-title::before {
+            content: '📐';
+            font-size: 1rem;
+        }
+
+        .formula-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #0f766e;
+        }
+
+        /* Applications Section */
+        .applications-section {
+            background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
+            border: 1px solid rgba(245, 158, 11, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .applications-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #d97706;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .applications-title::before {
+            content: '🏭';
+            font-size: 1rem;
+        }
+
+        .applications-list {
+            list-style: none;
+        }
+
+        .applications-list li {
+            padding: 0.5rem 0;
+            color: #d97706;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .applications-list li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #f59e0b;
+            font-size: 0.8rem;
+        }
+
+        /* Academic Section */
+        .academic-section {
+            background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 100%);
+            border: 1px solid rgba(168, 85, 247, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .academic-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #7c3aed;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .academic-title::before {
+            content: '🎓';
+            font-size: 1rem;
+        }
+
+        .academic-content {
+            color: #7c3aed;
+            line-height: 1.7;
+        }
+
+        /* Units Table */
+        .units-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.1);
+        }
+
+        .units-table th,
+        .units-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .units-table th {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            font-weight: 600;
+        }
+
+        .units-table tr:hover {
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .nav-tabs {
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .nav-tab, .home-hub-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .main-content {
+                padding: 2rem 0;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .page-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .properties-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .property-card {
+                padding: 2rem;
+            }
+
+            .tab-navigation {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .tab-button {
+                padding: 0.8rem 1.5rem;
+            }
+
+            .formula-section,
+            .applications-section,
+            .academic-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../../fluid-dynamics.html" class="logo">Fluid Dynamics → Fundamentals</a>
+                
+                <!-- Navigation Tabs -->
+                <div class="nav-tabs" id="navTabs">
+                    <a href="../../home.html" class="home-hub-button">
+                        <span class="home-hub-icon">🏠</span>
+                        <span>Course Hub</span>
+                    </a>
+                    <a href="../../fluid-dynamics.html" class="nav-tab">Home</a>
+                    <a href="../../fluid-fundamentals.html" class="nav-tab">← Back to Fundamentals</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">Fluid Properties</h1>
+                <p class="page-subtitle">Comprehensive understanding of fundamental fluid properties and their applications in engineering analysis</p>
+            </div>
+            
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+                <button class="tab-button active" onclick="switchTab('overview')">Overview</button>
+                <button class="tab-button" onclick="switchTab('industry')">Industry</button>
+                <button class="tab-button" onclick="switchTab('academic')">Academic</button>
+            </div>
+
+            <!-- Overview Tab -->
+            <div id="overview" class="tab-content active">
+                <div class="properties-grid">
+                    <!-- Density -->
+                    <div class="property-card">
+                        <div class="property-icon">ρ</div>
+                        <h3 class="property-title">Density</h3>
+                        <p class="property-description">Mass per unit volume of a fluid, fundamental to all fluid mechanics calculations.</p>
+                        
+                        <div class="formula-section">
+                            <div class="formula-title">Definition</div>
+                            <div class="formula-content">
+                                $$\rho = \frac{m}{V}$$
+                                <p>where:</p>
+                                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                    <li>$\rho$ = density (kg/m³)</li>
+                                    <li>$m$ = mass (kg)</li>
+                                    <li>$V$ = volume (m³)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="formula-section">
+                            <div class="formula-title">Temperature Dependence</div>
+                            <div class="formula-content">
+                                $$\rho(T) = \rho_0 \left[1 - \beta(T - T_0)\right]$$
+                                <p>where:</p>
+                                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                    <li>$\beta$ = coefficient of thermal expansion (1/K)</li>
+                                    <li>$T_0$ = reference temperature (K)</li>
+                                    <li>$\rho_0$ = density at reference temperature</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <table class="units-table">
+                            <thead>
+                                <tr>
+                                    <th>System</th>
+                                    <th>Units</th>
+                                    <th>Typical Values</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>SI</td>
+                                    <td>kg/m³</td>
+                                    <td>Water: 1000, Air: 1.225</td>
+                                </tr>
+                                <tr>
+                                    <td>Imperial</td>
+                                    <td>lb/ft³</td>
+                                    <td>Water: 62.4, Air: 0.0765</td>
+                                </tr>
+                                <tr>
+                                    <td>CGS</td>
+                                    <td>g/cm³</td>
+                                    <td>Water: 1.0, Air: 0.001225</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Viscosity -->
+                    <div class="property-card">
+                        <div class="property-icon">μ</div>
+                        <h3 class="property-title">Viscosity</h3>
+                        <p class="property-description">Measure of a fluid's resistance to deformation and flow, critical for momentum transfer analysis.</p>
+                        
+                        <div class="formula-section">
+                            <div class="formula-title">Dynamic Viscosity</div>
+                            <div class="formula-content">
+                                $$\tau = \mu \frac{du}{dy}$$
+                                <p>Newton's law of viscosity, where:</p>
+                                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                    <li>$\tau$ = shear stress (Pa)</li>
+                                    <li>$\mu$ = dynamic viscosity (Pa·s)</li>
+                                    <li>$\frac{du}{dy}$ = velocity gradient (1/s)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="formula-section">
+                            <div class="formula-title">Kinematic Viscosity</div>
+                            <div class="formula-content">
+                                $$\nu = \frac{\mu}{\rho}$$
+                                <p>where:</p>
+                                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                    <li>$\nu$ = kinematic viscosity (m²/s)</li>
+                                    <li>$\mu$ = dynamic viscosity (Pa·s)</li>
+                                    <li>$\rho$ = density (kg/m³)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="formula-section">
+                            <div class="formula-title">Temperature Dependence (Liquids)</div>
+                            <div class="formula-content">
+                                $$\mu = A e^{B/T}$$
+                                <p>Arrhenius-type relationship where A and B are empirical constants</p>
+                            </div>
+                        </div>
+
+                        <table class="units-table">
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>SI Units</th>
+                                    <th>Common Units</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Dynamic Viscosity</td>
+                                    <td>Pa·s</td>
+                                    <td>cP (centipoise)</td>
+                                </tr>
+                                <tr>
+                                    <td>Kinematic Viscosity</td>
+                                    <td>m²/s</td>
+                                    <td>cSt (centistokes)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Compressibility -->
+                    <div class="property-card">
+                        <div class="property-icon">β</div>
+                        <h3 class="property-title">Compressibility</h3>
+                        <p class="property-description">Measure of the relative volume change of a fluid under pressure changes.</p>
+                        
+                        <div class="formula-section">
+                            <div class="formula-title">Bulk Modulus of Elasticity</div>
+                            <div class="formula-content">
+                                $$K = -V \frac{dp}{dV} = \rho \frac{dp}{d\rho}$$
+                                <p>where:</p>
+                                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                    <li>$K$ = bulk modulus (Pa)</li>
+                                    <li>$V$ = volume (m³)</li>
+                                    <li>$p$ = pressure (Pa)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="formula-section">
+                            <div class="formula-title">Compressibility</div>
+                            <div class="formula-content">
+                                $$\beta = \frac{1}{K} = -\frac{1}{V}\frac{dV}{dp} = \frac{1}{\rho}\frac{d\rho}{dp}$$
+                                <p>Compressibility is the reciprocal of bulk modulus</p>
+                            </div>
+                        </div>
+
+                        <div class="formula-section">
+                            <div class="formula-title">Speed of Sound</div>
+                            <div class="formula-content">
+                                $$c = \sqrt{\frac{K}{\rho}} = \sqrt{\frac{1}{\rho\beta}}$$
+                                <p>Relates compressibility to acoustic wave propagation</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Surface Tension -->
+                    <div class="property-card">
+                        <div class="property-icon">σ</div>
+                        <h3 class="property-title">Surface Tension</h3>
+                        <p class="property-description">Force per unit length acting at the interface between two immiscible fluids.</p>
+                        
+                        <div class="formula-section">
+                            <div class="formula-title">Surface Tension Force</div>
+                            <div class="formula-content">
+                                $$F = \sigma L$$
+                                <p>where:</p>
+                                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                    <li>$F$ = surface tension force (N)</li>
+                                    <li>$\sigma$ = surface tension coefficient (N/m)</li>
+                                    <li>$L$ = length of interface (m)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="formula-section">
+                            <div class="formula-title">Young-Laplace Equation</div>
+                            <div class="formula-content">
+                                $$\Delta p = \sigma \left(\frac{1}{R_1} + \frac{1}{R_2}\right)$$
+                                <p>Pressure difference across curved interface:</p>
+                                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                    <li>$\Delta p$ = pressure difference (Pa)</li>
+                                    <li>$R_1, R_2$ = principal radii of curvature (m)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="formula-section">
+                            <div class="formula-title">Capillary Rise</div>
+                            <div class="formula-content">
+                                $$h = \frac{2\sigma \cos\theta}{\rho g r}$$
+                                <p>Height of liquid rise in capillary tube:</p>
+                                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                    <li>$h$ = capillary rise height (m)</li>
+                                    <li>$\theta$ = contact angle (rad)</li>
+                                    <li>$r$ = tube radius (m)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Industry Tab -->
+            <div id="industry" class="tab-content">
+                <div class="properties-grid">
+                    <div class="property-card">
+                        <div class="property-icon">🏭</div>
+                        <h3 class="property-title">Industrial Applications of Density</h3>
+                        <p class="property-description">Critical parameter in process design, equipment sizing, and quality control across industries.</p>
+                        
+                        <div class="applications-section">
+                            <div class="applications-title">Key Applications</div>
+                            <ul class="applications-list">
+                                <li><strong>Petroleum Industry:</strong> API gravity for oil classification and pricing</li>
+                                <li><strong>Chemical Processing:</strong> Concentration monitoring and separation processes</li>
+                                <li><strong>Food & Beverage:</strong> Quality control and process optimization</li>
+                                <li><strong>Mining:</strong> Ore separation and flotation processes</li>
+                                <li><strong>HVAC Systems:</strong> Buoyancy calculations for natural ventilation</li>
+                            </ul>
+                        </div>
+
+                        <div class="formula-section">
+                            <div class="formula-title">API Gravity (Petroleum)</div>
+                            <div class="formula-content">
+                                $$\text{API} = \frac{141.5}{\text{SG}_{60°F}} - 131.5$$
+                                <p>where SG is specific gravity at 60°F</p>
+                            </div>
+                        </div>
+
+                        <div class="applications-section">
+                            <div class="applications-title">Industrial Measurement Methods</div>
+                            <ul class="applications-list">
+                                <li>Coriolis flow meters for real-time density measurement</li>
+                                <li>Hydrometers for batch quality control</li>
+                                <li>Nuclear density gauges for continuous monitoring</li>
+                                <li>Vibrating tube densitometers for high accuracy</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="property-card">
+                        <div class="property-icon">⚙️</div>
+                        <h3 class="property-title">Industrial Viscosity Applications</h3>
+                        <p class="property-description">Essential for pump selection, pipeline design, and process optimization in manufacturing.</p>
+                        
+                        <div class="applications-section">
+                            <div class="applications-title">Critical Applications</div>
+                            <ul class="applications-list">
+                                <li><strong>Pump Selection:</strong> Determines required power and efficiency</li>
+                                <li><strong>Pipeline Design:</strong> Pressure drop calculations and flow rates</li>
+                                <li><strong>Heat Exchangers:</strong> Heat transfer coefficient calculations</li>
+                                <li><strong>Mixing Equipment:</strong> Power requirements and mixing time</li>
+                                <li><strong>Coating Processes:</strong> Film thickness and quality control</li>
+                            </ul>
+                        </div>
+
+                        <div class="formula-section">
+                            <div class="formula-title">Pipeline Pressure Drop (Hagen-Poiseuille)</div>
+                            <div class="formula-content">
+                                $$\Delta p = \frac{32 \mu V L}{D^2}$$
+                                <p>For laminar flow in circular pipes:</p>
+                                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                    <li>$V$ = average velocity (m/s)</li>
+                                    <li>$L$ = pipe length (m)</li>
+                                    <li>$D$ = pipe diameter (m)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="applications-section">
+                            <div class="applications-title">Industrial Standards</div>
+                            <ul class="applications-list">
+                                <li>ASTM D445: Kinematic viscosity of transparent liquids</li>
+                                <li>ISO 3104: Petroleum products viscosity measurement</li>
+                                <li>ASTM D2983: Low-temperature viscosity using rotational viscometer</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="property-card">
+                        <div class="property-icon">🔧</div>
+                        <h3 class="property-title">Compressibility in Engineering</h3>
+                        <p class="property-description">Critical for high-speed flows, hydraulic systems, and acoustic applications.</p>
+                        
+                        <div class="applications-section">
+                            <div class="applications-title">Engineering Applications</div>
+                            <ul class="applications-list">
+                                <li><strong>Hydraulic Systems:</strong> Bulk modulus affects system stiffness and response</li>
+                                <li><strong>Gas Pipelines:</strong> Compressibility effects in flow calculations</li>
+                                <li><strong>Turbomachinery:</strong> Compressible flow in compressors and turbines</li>
+                                <li><strong>Shock Wave Analysis:</strong> High-speed impact and explosion modeling</li>
+                                <li><strong>Acoustic Design:</strong> Sound transmission and damping systems</li>
+                            </ul>
+                        </div>
+
+                        <div class="formula-section">
+                            <div class="formula-title">Mach Number</div>
+                            <div class="formula-content">
+                                $$Ma = \frac{V}{c} = \frac{V}{\sqrt{\frac{K}{\rho}}}$$
+                                <p>Relates flow velocity to compressibility effects</p>
+                            </div>
+                        </div>
+
+                        <div class="applications-section">
+                            <div class="applications-title">Design Considerations</div>
+                            <ul class="applications-list">
+                                <li>Ma < 0.3: Incompressible flow assumption valid</li>
+                                <li>Ma > 0.3: Compressibility effects become significant</li>
+                                <li>Hydraulic systems: High bulk modulus for rapid response</li>
+                                <li>Gas systems: Account for density variations with pressure</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Academic Tab -->
+            <div id="academic" class="tab-content">
+                <div class="properties-grid">
+                    <div class="property-card">
+                        <div class="property-icon">📚</div>
+                        <h3 class="property-title">Theoretical Foundations of Density</h3>
+                        <p class="property-description">Molecular kinetic theory and statistical mechanics basis of density variations.</p>
+                        
+                        <div class="academic-section">
+                            <div class="academic-title">Molecular Theory</div>
+                            <div class="academic-content">
+                                <p>From kinetic theory, density relates to molecular mass and number density:</p>
+                            </div>
+                        </div>
+
+                        <div class="formula-section">
+                            <div class="formula-title">Molecular Density</div>
+                            <div class="formula-content">
+                                $$\rho = n \cdot m_{molecule} = \frac{N}{V} \cdot m_{molecule}$$
+                                <p>where:</p>
+                                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                    <li>$n$ = number density (molecules/m³)</li>
+                                    <li>$N$ = total number of molecules</li>
+                                    <li>$m_{molecule}$ = molecular mass (kg)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="formula-section">
+                            <div class="formula-title">Ideal Gas Law Relation</div>
+                            <div class="formula-content">
+                                $$\rho = \frac{pM}{RT}$$
+                                <p>Connects density to thermodynamic state:</p>
+                                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                    <li>$p$ = pressure (Pa)</li>
+                                    <li>$M$ = molar mass (kg/mol)</li>
+                                    <li>$R$ = universal gas constant (J/mol·K)</li>
+                                    <li>$T$ = temperature (K)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="academic-section">
+                            <div class="academic-title">Research Applications</div>
+                            <div class="academic-content">
+                                <ul style="list-style: disc; margin-left: 2rem;">
+                                    <li>Equation of state development for real gases</li>
+                                    <li>Phase transition modeling</li>
+                                    <li>Computational fluid dynamics validation</li>
+                                    <li>Multiphase flow analysis</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="property-card">
+                        <div class="property-icon">🧮</div>
+                        <h3 class="property-title">Advanced Viscosity Theory</h3>
+                        <p class="property-description">Molecular origins of viscosity and non-Newtonian behavior from first principles.</p>
+                        
+                        <div class="academic-section">
+                            <div class="academic-title">Chapman-Enskog Theory</div>
+                            <div class="academic-content">
+                                <p>Rigorous kinetic theory derivation of viscosity for gases based on molecular interactions and collision integrals.</p>
+                            </div>
+                        </div>
+
+                        <div class="formula-section">
+                            <div class="formula-title">Kinetic Theory Viscosity</div>
+                            <div class="formula-content">
+                                $$\mu = \frac{5}{16} \frac{\sqrt{m k_B T / \pi}}{\sigma^2 \Omega^{(2,2)*}}$$
+                                <p>where:</p>
+                                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                    <li>$m$ = molecular mass (kg)</li>
+                                    <li>$k_B$ = Boltzmann constant (J/K)</li>
+                                    <li>$\sigma$ = collision diameter (m)</li>
+                                    <li>$\Omega^{(2,2)*}$ = collision integral</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="formula-section">
+                            <div class="formula-title">Non-Newtonian Constitutive Relations</div>
+                            <div class="formula-content">
+                                $$\boldsymbol{\tau} = \eta(\dot{\gamma}) \boldsymbol{\dot{\gamma}}$$
+                                <p>General form for non-Newtonian fluids:</p>
+                                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                    <li>$\boldsymbol{\tau}$ = stress tensor (Pa)</li>
+                                    <li>$\eta(\dot{\gamma})$ = apparent viscosity function</li>
+                                    <li>$\boldsymbol{\dot{\gamma}}$ = strain rate tensor (1/s)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="academic-section">
+                            <div class="academic-title">Research Frontiers</div>
+                            <div class="academic-content">
+                                <ul style="list-style: disc; margin-left: 2rem;">
+                                    <li>Molecular dynamics simulations of viscosity</li>
+                                    <li>Complex fluid rheology modeling</li>
+                                    <li>Microfluidics and nanofluidics effects</li>
+                                    <li>Viscoelastic material characterization</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="property-card">
+                        <div class="property-icon">🔬</div>
+                        <h3 class="property-title">Thermodynamic Relations</h3>
+                        <p class="property-description">Fundamental thermodynamic relationships connecting fluid properties.</p>
+                        
+                        <div class="formula-section">
+                            <div class="formula-title">Maxwell Relations</div>
+                            <div class="formula-content">
+                                $$\left(\frac{\partial \rho}{\partial T}\right)_p = -\rho^2 \left(\frac{\partial v}{\partial T}\right)_p = -\rho^2 \alpha v$$
+                                <p>where $\alpha$ is the coefficient of thermal expansion</p>
+                            </div>
+                        </div>
+
+                        <div class="formula-section">
+                            <div class="formula-title">Fundamental Thermodynamic Relation</div>
+                            <div class="formula-content">
+                                $$dU = TdS - pdV + \mu dN$$
+                                <p>Connects internal energy to entropy, volume, and particle number</p>
+                            </div>
+                        </div>
+
+                        <div class="formula-section">
+                            <div class="formula-title">Equation of State</div>
+                            <div class="formula-content">
+                                $$f(\rho, T, p) = 0$$
+                                <p>General relationship between density, temperature, and pressure</p>
+                                <br>
+                                <p><strong>Van der Waals equation:</strong></p>
+                                $$\left(p + \frac{a}{\bar{v}^2}\right)(\bar{v} - b) = RT$$
+                                <p>where $\bar{v} = 1/\rho$ is specific volume</p>
+                            </div>
+                        </div>
+
+                        <div class="academic-section">
+                            <div class="academic-title">Advanced Topics</div>
+                            <div class="academic-content">
+                                <ul style="list-style: disc; margin-left: 2rem;">
+                                    <li>Critical phenomena and scaling laws</li>
+                                    <li>Phase equilibrium calculations</li>
+                                    <li>Corresponding states principle</li>
+                                    <li>Quantum effects in dense fluids</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Smooth transitions
+        function smoothTransition(url) {
+            document.body.style.opacity = '0';
+            document.body.style.transform = 'translateY(-30px)';
+            setTimeout(() => {
+                window.location.href = url;
+            }, 400);
+        }
+
+        // Navigation transitions
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                if (!this.classList.contains('active')) {
+                    e.preventDefault();
+                    smoothTransition(this.href);
+                }
+            });
+        });
+
+        console.log('Fluid Properties page loaded with MathJax support');
+    </script>
+</body>
+</html>
