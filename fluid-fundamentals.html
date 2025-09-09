@@ -176,14 +176,13 @@
         }
 
         .content-wrapper {
-            padding: 3rem 0;
+            padding: 0;
         }
 
         .content-container {
             width: 100%;
-            margin: 0 auto;
-            padding: 0 2rem;
-            max-width: 1400px;
+            margin: 0;
+            padding: 0;
         }
 
         /* Premium Page Header - Full width like turbulence models */
@@ -229,25 +228,34 @@
             letter-spacing: 0.01em;
         }
 
-        /* Simple Module List */
+        /* Full Width Module List */
         .module-list {
-            max-width: 800px;
-            margin: 0 auto;
+            width: 100%;
+            margin: 0;
         }
 
-        /* Simple Module Items */
+        /* Full Width Module Items */
         .sequence-item {
             background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(16, 185, 129, 0.08);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
+            border-radius: 0;
+            padding: 3rem;
+            margin-bottom: 0;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
             cursor: pointer;
-            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.06);
+            box-shadow: none;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .sequence-item:first-child {
+            border-radius: 0;
+        }
+
+        .sequence-item:last-child {
+            border-bottom: none;
         }
 
         .sequence-item.available {
@@ -277,9 +285,8 @@
         }
 
         .sequence-item.available:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.15);
-            border-color: rgba(16, 185, 129, 0.2);
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.9) 100%);
+            border-color: rgba(16, 185, 129, 0.15);
         }
 
         .sequence-item::before {
