@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Continuum Hypothesis - Fluid Dynamics</title>
+    <meta name="description" content="Undergraduate guide to the continuum hypothesis in fluid mechanics, explaining when and why fluids can be treated as continuous media.">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="version" content="1.0">
+    <meta name="last-modified" content="2025-12-19">
+    
+    <link rel="canonical" href="https://cfdhandbook.com/fluid/fundamentals/continuum-hypothesis.html">
+    
+    <!-- MathJax Configuration -->
+    <script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background-color: #f7fafc;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 2rem;
+            max-width: 1400px;
+        }
+
+        /* Header - Exact k-epsilon style */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.15);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-tab {
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            color: #4a5568;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-tab:hover::before,
+        .nav-tab.active::before {
+            opacity: 1;
+        }
+
+        .nav-tab:hover,
+        .nav-tab.active {
+            color: #10b981;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.15);
+        }
+
+        /* Home Hub Button */
+        .home-hub-button {
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            border: 2px solid rgba(16, 185, 129, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .home-hub-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .home-hub-button:hover::before {
+            opacity: 1;
+        }
+
+        .home-hub-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .home-hub-icon {
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .home-hub-button:hover .home-hub-icon {
+            transform: scale(1.1);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 3rem;
+        }
+
+        /* Page Header - Exact k-epsilon style */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .model-subtitle {
+            font-size: 1.3rem;
+            color: #4a5568;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Academy Guide - Exact k-epsilon style */
+        .academy-guide {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(16, 185, 129, 0.08);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.06);
+        }
+
+        /* Guide Sections - Exact k-epsilon style */
+        .guide-section {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .guide-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .guide-section h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .guide-section h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .guide-text {
+            display: block;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #4b5563;
+            margin-bottom: 1rem;
+        }
+
+        /* Equation Blocks - Exact k-epsilon style */
+        .equation-block {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.05);
+        }
+
+        /* Term Definitions - Exact k-epsilon style */
+        .term-definitions {
+            background: rgba(248, 250, 252, 0.8);
+            border: 1px solid rgba(16, 185, 129, 0.08);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .term-definitions h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+
+        .term-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.05);
+            font-size: 0.95rem;
+            color: #4b5563;
+        }
+
+        .term-item:last-child {
+            border-bottom: none;
+        }
+
+        .term-item strong {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        /* Constants Table - Exact k-epsilon style */
+        .constants-table {
+            margin: 1.5rem 0;
+        }
+
+        .constants-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.1);
+        }
+
+        .constants-table th,
+        .constants-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .constants-table th {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .constants-table td {
+            font-size: 0.9rem;
+            color: #4b5563;
+        }
+
+        .constants-table tr:hover {
+            background: rgba(16, 185, 129, 0.02);
+        }
+
+        /* Guide Lists - Exact k-epsilon style */
+        .guide-list {
+            list-style: none;
+            margin: 1rem 0;
+            padding: 0;
+        }
+
+        .guide-item {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .guide-item::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-size: 0.8rem;
+            top: 0.1rem;
+        }
+
+        .guide-item .guide-text {
+            margin-bottom: 0;
+        }
+
+        .guide-emphasis {
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #1f2937;
+        }
+
+        /* Use Case Items - Exact k-epsilon style */
+        .use-case-item, .avoid-item {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+            border-left: 4px solid #10b981;
+        }
+
+        .avoid-item {
+            border-left-color: #ef4444;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .header {
+                padding: 1rem 0;
+            }
+
+            .nav-tabs {
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .nav-tab, .home-hub-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .model-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .academy-guide {
+                padding: 1.5rem;
+            }
+
+            .guide-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Header -->
+        <div class="header">
+            <div class="header-content">
+                <a href="../../fluid-fundamentals.html" class="logo">Fluid Dynamics Fundamentals</a>
+                <div class="nav-tabs">
+                    <a href="../../home.html" class="home-hub-button">
+                        <span class="home-hub-icon">🏠</span>
+                        <span>Course Hub</span>
+                    </a>
+                    <a href="../../fluid-fundamentals.html" class="nav-tab">← Back to Fundamentals</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>Continuum Hypothesis</h1>
+                <p class="model-subtitle">Understanding when and why fluids can be treated as continuous materials in engineering analysis</p>
+            </div>
+
+            <!-- Academy Guide Content -->
+            <div class="academy-guide">
+                
+                <!-- Introduction -->
+                <div class="guide-section">
+                    <h3>1. What is the Continuum Hypothesis?</h3>
+                    <p class="guide-text">The continuum hypothesis is a fundamental assumption in fluid mechanics that allows us to treat fluids as continuous materials rather than collections of individual molecules. This assumption makes it possible to use calculus and differential equations to analyze fluid behavior.</p>
+                    
+                    <h4>Why Do We Need This Assumption?</h4>
+                    <p class="guide-text">Fluids are actually made up of billions of molecules moving randomly and colliding with each other. Trying to track every single molecule would be impossible for engineering problems. Instead, we assume the fluid can be treated as a smooth, continuous material.</p>
+                    
+                    <h4>What Does "Continuous" Mean?</h4>
+                    <p class="guide-text">When we say a fluid is continuous, we mean that properties like density, velocity, and pressure can be defined at every point in space and vary smoothly from point to point. There are no gaps or holes in the fluid - it completely fills the space it occupies.</p>
+                    
+                    <h4>Mathematical Consequence</h4>
+                    <p class="guide-text">The continuum assumption allows us to define fluid properties as mathematical functions of position and time:</p>
+                    
+                    <div class="equation-block">
+                        $$\rho = \rho(x, y, z, t)$$
+                        $$\vec{V} = \vec{V}(x, y, z, t)$$
+                        $$p = p(x, y, z, t)$$
+                    </div>
+                    
+                    <p class="guide-text">This enables us to use partial derivatives and apply conservation laws using calculus.</p>
+                </div>
+
+                <!-- When is it Valid -->
+                <div class="guide-section">
+                    <h3>2. When is the Continuum Hypothesis Valid?</h3>
+                    <p class="guide-text">The continuum hypothesis works well for most engineering applications, but there are limits. Understanding these limits helps engineers know when they can safely use continuum-based analysis methods.</p>
+                    
+                    <h4>The Knudsen Number Criterion</h4>
+                    <p class="guide-text">The key parameter that determines validity is the Knudsen number:</p>
+                    
+                    <div class="equation-block">
+                        $$Kn = \frac{\lambda}{L}$$
+                    </div>
+                    
+                    <div class="term-definitions">
+                        <h4>Knudsen Number Variables:</h4>
+                        <div class="term-item"><strong>Kn:</strong> Knudsen number (dimensionless)</div>
+                        <div class="term-item"><strong>λ:</strong> Mean free path of molecules (m)</div>
+                        <div class="term-item"><strong>L:</strong> Characteristic length scale of the problem (m)</div>
+                    </div>
+                    
+                    <h4>Mean Free Path</h4>
+                    <p class="guide-text">The mean free path is the average distance a molecule travels between collisions with other molecules:</p>
+                    
+                    <div class="equation-block">
+                        $$\lambda = \frac{k_B T}{\sqrt{2} \pi d^2 p}$$
+                    </div>
+                    
+                    <div class="term-definitions">
+                        <h4>Mean Free Path Variables:</h4>
+                        <div class="term-item"><strong>k_B:</strong> Boltzmann constant (1.38 × 10⁻²³ J/K)</div>
+                        <div class="term-item"><strong>T:</strong> Temperature (K)</div>
+                        <div class="term-item"><strong>d:</strong> Molecular diameter (m)</div>
+                        <div class="term-item"><strong>p:</strong> Pressure (Pa)</div>
+                    </div>
+                    
+                    <h4>Validity Ranges</h4>
+                    <p class="guide-text">The continuum hypothesis is valid when the Knudsen number is small:</p>
+                    
+                    <div class="constants-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Knudsen Number</th>
+                                    <th>Flow Regime</th>
+                                    <th>Continuum Validity</th>
+                                    <th>Examples</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Kn < 0.01</td>
+                                    <td>Continuum</td>
+                                    <td>Fully valid</td>
+                                    <td>Most engineering flows</td>
+                                </tr>
+                                <tr>
+                                    <td>0.01 < Kn < 0.1</td>
+                                    <td>Slip flow</td>
+                                    <td>Valid with corrections</td>
+                                    <td>High-altitude flight</td>
+                                </tr>
+                                <tr>
+                                    <td>0.1 < Kn < 10</td>
+                                    <td>Transition</td>
+                                    <td>Questionable</td>
+                                    <td>Vacuum systems</td>
+                                </tr>
+                                <tr>
+                                    <td>Kn > 10</td>
+                                    <td>Free molecular</td>
+                                    <td>Not valid</td>
+                                    <td>Outer space</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Practical Examples -->
+                <div class="guide-section">
+                    <h3>3. Practical Examples and Applications</h3>
+                    <p class="guide-text">Understanding where the continuum hypothesis applies helps engineers choose appropriate analysis methods for different situations.</p>
+                    
+                    <h4>Typical Engineering Applications (Continuum Valid)</h4>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Water flow in pipes:</span> λ ≈ 10⁻¹⁰ m, pipe diameter ≈ 0.1 m, so Kn ≈ 10⁻⁹ << 1</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Air flow around cars:</span> λ ≈ 10⁻⁷ m, car length ≈ 5 m, so Kn ≈ 10⁻⁸ << 1</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">HVAC systems:</span> λ ≈ 10⁻⁷ m, duct size ≈ 0.5 m, so Kn ≈ 10⁻⁷ << 1</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Hydraulic systems:</span> Liquids have extremely small λ, always valid</span>
+                        </li>
+                    </ul>
+                    
+                    <h4>Borderline Cases (Use with Caution)</h4>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">High-altitude aircraft:</span> Low air density increases λ, may need slip boundary conditions</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Microfluidic devices:</span> Very small channels (< 1 μm) may violate continuum assumption</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Vacuum pumps:</span> Low pressure increases λ, molecular effects become important</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="use-case-item">
+                        <span class="guide-text"><span class="guide-emphasis">Rule of thumb:</span> For most undergraduate problems involving liquids or gases at atmospheric conditions, the continuum hypothesis is valid</span>
+                    </div>
+                </div>
+
+                <!-- Mathematical Implications -->
+                <div class="guide-section">
+                    <h3>4. Mathematical Tools Enabled by Continuum Assumption</h3>
+                    <p class="guide-text">The continuum hypothesis enables the use of powerful mathematical tools from calculus and differential equations. These tools form the foundation of fluid mechanics analysis.</p>
+                    
+                    <h4>Partial Derivatives</h4>
+                    <p class="guide-text">We can calculate how fluid properties change in space and time using partial derivatives:</p>
+                    
+                    <div class="equation-block">
+                        $$\frac{\partial \rho}{\partial t}, \quad \frac{\partial u}{\partial x}, \quad \frac{\partial p}{\partial y}$$
+                    </div>
+                    
+                    <p class="guide-text">These derivatives allow us to express conservation laws and constitutive relations mathematically.</p>
+                    
+                    <h4>Gradient, Divergence, and Curl</h4>
+                    <p class="guide-text">Vector calculus operations become meaningful for fluid fields:</p>
+                    
+                    <div class="equation-block">
+                        $$\nabla p = \frac{\partial p}{\partial x}\hat{i} + \frac{\partial p}{\partial y}\hat{j} + \frac{\partial p}{\partial z}\hat{k}$$
+                    </div>
+                    
+                    <div class="equation-block">
+                        $$\nabla \cdot \vec{V} = \frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} + \frac{\partial w}{\partial z}$$
+                    </div>
+                    
+                    <h4>Conservation Laws</h4>
+                    <p class="guide-text">The continuum approach allows us to write conservation laws in differential form:</p>
+                    
+                    <p class="guide-text"><strong>Mass Conservation (Continuity Equation):</strong></p>
+                    <div class="equation-block">
+                        $$\frac{\partial \rho}{\partial t} + \nabla \cdot (\rho \vec{V}) = 0$$
+                    </div>
+                    
+                    <p class="guide-text">This equation states that mass cannot be created or destroyed within the fluid.</p>
+                </div>
+
+                <!-- Physical Meaning -->
+                <div class="guide-section">
+                    <h3>5. Physical Meaning and Interpretation</h3>
+                    <p class="guide-text">Understanding what the continuum hypothesis means physically helps engineers apply it correctly and recognize its limitations.</p>
+                    
+                    <h4>Averaging Process</h4>
+                    <p class="guide-text">When we define fluid properties at a "point," we're actually averaging molecular properties over a small volume that:</p>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text">Contains enough molecules for <span class="guide-emphasis">statistical averaging</span> (typically > 10¹²)</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text">Is <span class="guide-emphasis">small compared to the flow</span> length scale</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text">Maintains <span class="guide-emphasis">local equilibrium</span> conditions</span>
+                        </li>
+                    </ul>
+                    
+                    <h4>Representative Elementary Volume (REV)</h4>
+                    <p class="guide-text">The REV is the smallest volume over which we can define meaningful average properties:</p>
+                    
+                    <div class="equation-block">
+                        $$\rho(x,y,z,t) = \lim_{\Delta V \to \Delta V_{REV}} \frac{\Delta m}{\Delta V}$$
+                    </div>
+                    
+                    <p class="guide-text">Below the REV size, properties fluctuate wildly due to molecular motion. Above the REV size, properties represent meaningful local averages.</p>
+                    
+                    <div class="constants-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fluid</th>
+                                    <th>Typical REV Size</th>
+                                    <th>Number of Molecules</th>
+                                    <th>Property Fluctuations</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Air (STP)</td>
+                                    <td>10⁻¹⁵ m³</td>
+                                    <td>~10⁷</td>
+                                    <td>< 0.1%</td>
+                                </tr>
+                                <tr>
+                                    <td>Water (20°C)</td>
+                                    <td>10⁻²¹ m³</td>
+                                    <td>~10⁸</td>
+                                    <td>< 0.01%</td>
+                                </tr>
+                                <tr>
+                                    <td>Steam (100°C)</td>
+                                    <td>10⁻¹⁸ m³</td>
+                                    <td>~10⁶</td>
+                                    <td>< 0.3%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Boundary Conditions -->
+                <div class="guide-section">
+                    <h3>6. Boundary Conditions in Continuum Mechanics</h3>
+                    <p class="guide-text">The continuum hypothesis affects how we apply boundary conditions at solid walls and interfaces. Understanding these effects is crucial for accurate flow analysis.</p>
+                    
+                    <h4>No-Slip Condition</h4>
+                    <p class="guide-text">At solid walls, the continuum assumption leads to the no-slip boundary condition:</p>
+                    
+                    <div class="equation-block">
+                        $$\vec{V}_{fluid} = \vec{V}_{wall}$$
+                    </div>
+                    
+                    <p class="guide-text">The fluid velocity exactly matches the wall velocity. For stationary walls, this means the fluid velocity is zero at the wall surface.</p>
+                    
+                    <h4>When No-Slip Breaks Down</h4>
+                    <p class="guide-text">In rarefied gases (high Kn), slip occurs at walls:</p>
+                    
+                    <div class="equation-block">
+                        $$u_{slip} = \frac{2-\sigma}{\sigma} \lambda \frac{\partial u}{\partial y}\bigg|_{wall}$$
+                    </div>
+                    
+                    <p class="guide-text">where σ is the accommodation coefficient (typically 0.7-1.0 for most surfaces).</p>
+                    
+                    <div class="term-definitions">
+                        <h4>Slip Flow Variables:</h4>
+                        <div class="term-item"><strong>u_slip:</strong> Slip velocity at wall (m/s)</div>
+                        <div class="term-item"><strong>σ:</strong> Accommodation coefficient (0-1)</div>
+                        <div class="term-item"><strong>∂u/∂y:</strong> Velocity gradient at wall (s⁻¹)</div>
+                    </div>
+                    
+                    <h4>Practical Implications</h4>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text">For <span class="guide-emphasis">most liquid flows</span>, no-slip is always valid</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text">For <span class="guide-emphasis">gas flows at atmospheric pressure</span>, no-slip is typically valid</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text">For <span class="guide-emphasis">high-altitude or vacuum applications</span>, slip effects may be important</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Engineering Applications -->
+                <div class="guide-section">
+                    <h3>7. Engineering Applications and Design Considerations</h3>
+                    <p class="guide-text">The continuum hypothesis enables most fluid mechanics calculations used in engineering design. Understanding its applications and limitations helps engineers choose appropriate analysis methods.</p>
+                    
+                    <h4>Where Continuum Analysis Excels</h4>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Pipeline flow analysis:</span> Pressure drop, flow rate, and pump sizing calculations</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Aerodynamic design:</span> Lift and drag calculations for vehicles and aircraft</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Heat exchanger design:</span> Convective heat transfer and pressure drop analysis</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">HVAC systems:</span> Air flow distribution and ventilation effectiveness</span>
+                        </li>
+                    </ul>
+                    
+                    <h4>Special Considerations</h4>
+                    <p class="guide-text">Some engineering situations require careful consideration of continuum validity:</p>
+                    
+                    <div class="use-case-item">
+                        <span class="guide-text"><span class="guide-emphasis">Microfluidics:</span> Channels smaller than 1 μm may show molecular effects</span>
+                    </div>
+                    
+                    <div class="use-case-item">
+                        <span class="guide-text"><span class="guide-emphasis">Vacuum systems:</span> Low pressure increases molecular effects</span>
+                    </div>
+                    
+                    <div class="use-case-item">
+                        <span class="guide-text"><span class="guide-emphasis">High-speed gas flows:</span> Shock waves may violate local equilibrium</span>
+                    </div>
+                    
+                    <h4>Alternative Approaches</h4>
+                    <p class="guide-text">When continuum analysis is not valid, engineers use:</p>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Kinetic theory:</span> For rarefied gas flows</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Molecular dynamics:</span> For nanoscale systems</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Monte Carlo methods:</span> For complex molecular interactions</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Problem Solving -->
+                <div class="guide-section">
+                    <h3>8. Using the Continuum Hypothesis in Problem Solving</h3>
+                    <p class="guide-text">When solving fluid mechanics problems, the continuum hypothesis provides the foundation for applying mathematical analysis methods.</p>
+                    
+                    <h4>Step 1: Verify Continuum Validity</h4>
+                    <p class="guide-text">Before applying continuum methods, check that the Knudsen number is small:</p>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text">Identify the <span class="guide-emphasis">smallest length scale</span> in your problem</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text">Estimate the <span class="guide-emphasis">mean free path</span> for your fluid conditions</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text">Calculate <span class="guide-emphasis">Knudsen number</span> and check validity range</span>
+                        </li>
+                    </ul>
+                    
+                    <h4>Step 2: Apply Continuum Equations</h4>
+                    <p class="guide-text">Once continuum validity is established, you can use:</p>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Conservation equations:</span> Mass, momentum, and energy conservation</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Constitutive relations:</span> Newton's law of viscosity, Fourier's law</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Boundary conditions:</span> No-slip at walls, interface conditions</span>
+                        </li>
+                    </ul>
+                    
+                    <h4>Step 3: Interpret Results</h4>
+                    <p class="guide-text">Remember that continuum results represent averaged behavior over many molecules. Individual molecular motions are not captured, but macroscopic flow behavior is accurately predicted.</p>
+                    
+                    <div class="avoid-item">
+                        <span class="guide-text"><span class="guide-emphasis">Common mistake:</span> Applying continuum methods to systems where Kn > 0.1 without considering molecular effects</span>
+                    </div>
+                </div>
+
+                <!-- Summary -->
+                <div class="guide-section">
+                    <h3>9. Summary and Key Takeaways</h3>
+                    <p class="guide-text">The continuum hypothesis is the foundation that makes fluid mechanics analysis possible using mathematical tools. Understanding its validity and limitations is essential for engineering applications.</p>
+                    
+                    <h4>Key Points to Remember</h4>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text">The continuum hypothesis treats fluids as <span class="guide-emphasis">continuous materials</span> rather than molecular collections</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text">Validity depends on the <span class="guide-emphasis">Knudsen number</span> being much less than 1</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text">It enables the use of <span class="guide-emphasis">calculus and differential equations</span> for fluid analysis</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text">Most engineering applications satisfy the <span class="guide-emphasis">continuum requirements</span></span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text">Alternative methods are needed for <span class="guide-emphasis">rarefied gases</span> and <span class="guide-emphasis">nanoscale flows</span></span>
+                        </li>
+                    </ul>
+                    
+                    <div class="use-case-item">
+                        <span class="guide-text"><span class="guide-emphasis">Bottom line:</span> For undergraduate fluid mechanics, the continuum hypothesis is almost always valid and forms the basis for all analysis methods</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth transitions for navigation
+        function smoothTransition(url) {
+            document.body.style.opacity = '0';
+            document.body.style.transform = 'translateY(-30px)';
+            setTimeout(() => {
+                window.location.href = url;
+            }, 400);
+        }
+
+        // Navigation click handlers
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                smoothTransition(this.href);
+            });
+        });
+
+        document.querySelector('.home-hub-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            smoothTransition(this.href);
+        });
+
+        console.log('Continuum Hypothesis - Undergraduate Academy Guide loaded');
+    </script>
+</body>
+</html>
