@@ -170,89 +170,104 @@
             transform: scale(1.1);
         }
 
-        /* Main Content */
+        /* Main Content - Full width like turbulence models */
         .main-content {
-            padding: 4rem 0;
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 0;
         }
 
-        .page-title {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
+        .content-wrapper {
+            padding: 3rem 0;
+        }
+
+        .content-container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 2rem;
+            max-width: 1400px;
+        }
+
+        /* Premium Page Header - Full width like turbulence models */
+        .page-header {
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: white;
+            padding: 6rem 2rem 4rem 2rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .page-header h1 {
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .page-subtitle {
-            font-size: 1.3rem;
-            color: #4a5568;
-            text-align: center;
-            margin-bottom: 4rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Academic Course Header */
-        .course-header {
-            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.9) 100%);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(16, 185, 129, 0.1);
-            border-radius: 24px;
-            padding: 3rem;
-            margin-bottom: 3rem;
-            box-shadow: 0 12px 40px rgba(16, 185, 129, 0.08);
-        }
-
-        .course-title-section {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .page-title {
-            font-size: 3.2rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-family: 'Georgia', 'Times New Roman', serif;
-            letter-spacing: -0.02em;
-        }
-
-        .course-subtitle {
-            font-size: 1.3rem;
-            color: #4a5568;
+            font-size: 1.4rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
             font-style: italic;
-            font-weight: 400;
+            font-weight: 300;
             letter-spacing: 0.01em;
         }
 
-        .course-info {
-            border-top: 2px solid rgba(16, 185, 129, 0.1);
-            padding-top: 2rem;
+        /* Featured Section - Like turbulence models */
+        .featured-section {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(16, 185, 129, 0.08);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.06);
         }
 
-        .course-meta {
+        .featured-section h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 1.5rem;
+        }
+
+        .course-meta-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem;
+            margin: 2rem 0;
         }
 
-        .meta-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1rem;
+        .meta-card {
             background: rgba(16, 185, 129, 0.05);
-            border-radius: 12px;
             border: 1px solid rgba(16, 185, 129, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .meta-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.1);
         }
 
         .meta-label {
@@ -261,41 +276,13 @@
             color: #059669;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 0.3rem;
-            font-family: system-ui, -apple-system, sans-serif;
+            margin-bottom: 0.5rem;
         }
 
         .meta-value {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 500;
             color: #2d3748;
-        }
-
-        /* Course Overview */
-        .course-overview {
-            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(16, 185, 129, 0.08);
-            border-radius: 20px;
-            padding: 2.5rem;
-            margin-bottom: 3rem;
-            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.06);
-        }
-
-        .course-overview h2 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #10b981;
-            margin-bottom: 1.5rem;
-            font-family: system-ui, -apple-system, sans-serif;
-        }
-
-        .course-overview p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #4b5563;
-            margin-bottom: 2rem;
-            text-align: justify;
         }
 
         .learning-objectives {
@@ -306,26 +293,19 @@
             margin-top: 2rem;
         }
 
-        .learning-objectives h3 {
-            font-size: 1.4rem;
+        .learning-objectives h4 {
+            font-size: 1.3rem;
             font-weight: 600;
             color: #059669;
             margin-bottom: 1rem;
-            font-family: system-ui, -apple-system, sans-serif;
         }
 
-        .learning-objectives p {
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            color: #4b5563;
-        }
-
-        .learning-objectives ul {
+        .objectives-list {
             list-style: none;
             padding: 0;
         }
 
-        .learning-objectives li {
+        .objectives-list li {
             padding: 0.5rem 0;
             padding-left: 1.5rem;
             position: relative;
@@ -333,7 +313,7 @@
             line-height: 1.6;
         }
 
-        .learning-objectives li::before {
+        .objectives-list li::before {
             content: '◆';
             position: absolute;
             left: 0;
@@ -341,28 +321,25 @@
             font-size: 0.8rem;
         }
 
-        /* Module Sequence Header */
-        .module-sequence-header {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: rgba(16, 185, 129, 0.05);
-            border-radius: 16px;
-            border: 1px solid rgba(16, 185, 129, 0.1);
+        /* Models Section - Like turbulence models */
+        .models-section {
+            margin-bottom: 3rem;
         }
 
-        .module-sequence-header h2 {
-            font-size: 1.8rem;
-            font-weight: 600;
+        .models-section h3 {
+            font-size: 2rem;
+            font-weight: 700;
             color: #10b981;
-            margin-bottom: 0.5rem;
-            font-family: system-ui, -apple-system, sans-serif;
+            margin-bottom: 1.5rem;
+            text-align: center;
         }
 
-        .sequence-instruction {
-            font-size: 1rem;
-            color: #4a5568;
-            font-style: italic;
+        /* Models Grid - Like turbulence models */
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
 
         /* Sequential Learning Layout */
@@ -372,19 +349,18 @@
         }
 
         .sequence-item {
-            display: flex;
-            align-items: flex-start;
             background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.9) 100%);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(16, 185, 129, 0.08);
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 2.5rem;
-            margin-bottom: 2rem;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
             cursor: pointer;
             box-shadow: 0 8px 32px rgba(16, 185, 129, 0.06);
+            display: flex;
+            flex-direction: column;
         }
 
         .sequence-item.available {
@@ -419,23 +395,43 @@
             border-color: rgba(16, 185, 129, 0.2);
         }
 
+        .sequence-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .sequence-item.available:hover::before {
+            transform: translateX(0);
+        }
+
+        .sequence-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
         .sequence-number {
-            width: 4rem;
-            height: 4rem;
+            width: 3rem;
+            height: 3rem;
             background: linear-gradient(135deg, #10b981, #059669);
-            border-radius: 12px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 300;
+            font-size: 1.3rem;
+            font-weight: 700;
             color: white;
-            margin-right: 2rem;
-            margin-top: 0.5rem;
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.25);
+            margin-right: 1.5rem;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
             transition: all 0.4s ease;
             flex-shrink: 0;
-            font-family: 'Georgia', 'Times New Roman', serif;
         }
 
         .sequence-item.coming-soon .sequence-number {
@@ -600,70 +596,58 @@
                 margin-bottom: 2rem;
             }
 
-            .course-header {
+            .page-header {
+                padding: 4rem 1rem 3rem 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .page-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .featured-section {
                 padding: 2rem;
                 margin-bottom: 2rem;
             }
 
-            .page-title {
-                font-size: 2.2rem;
+            .featured-section h3 {
+                font-size: 1.6rem;
             }
 
-            .course-subtitle {
-                font-size: 1.1rem;
-            }
-
-            .course-meta {
+            .course-meta-grid {
                 grid-template-columns: 1fr;
                 gap: 1rem;
-            }
-
-            .course-overview {
-                padding: 2rem;
-                margin-bottom: 2rem;
-            }
-
-            .course-overview h2 {
-                font-size: 1.5rem;
-            }
-
-            .course-overview p {
-                font-size: 1rem;
-                text-align: left;
             }
 
             .learning-objectives {
                 padding: 1.5rem;
             }
 
-            .module-sequence-header {
-                padding: 1.5rem;
-                margin-bottom: 1.5rem;
+            .models-section h3 {
+                font-size: 1.6rem;
             }
 
-            .module-sequence-header h2 {
-                font-size: 1.5rem;
+            .models-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
 
             .sequence-item {
-                flex-direction: column;
-                align-items: flex-start;
                 padding: 2rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .sequence-number {
-                width: 3rem;
-                height: 3rem;
-                font-size: 1.2rem;
-                margin-right: 0;
-                margin-bottom: 1rem;
-                margin-top: 0;
             }
 
             .sequence-header {
-                width: 100%;
-                justify-content: flex-start;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .sequence-number {
+                width: 2.5rem;
+                height: 2.5rem;
+                font-size: 1.1rem;
             }
 
             .topic-icon {
@@ -677,19 +661,7 @@
             }
 
             .topic-description {
-                text-align: left;
                 font-size: 1rem;
-            }
-
-            .topic-keywords {
-                margin-bottom: 1rem;
-            }
-
-            .sequence-arrow {
-                align-self: center;
-                margin-left: 0;
-                margin-top: 1rem;
-                transform: rotate(90deg);
             }
         }
     </style>
@@ -717,195 +689,177 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <div class="container">
         <div class="main-content">
-            <!-- Course Header -->
-            <div class="course-header">
-                <div class="course-title-section">
-                    <h1 class="page-title">Fundamentals of Fluid Mechanics</h1>
-                    <p class="course-subtitle">A Systematic Study of Essential Concepts</p>
-                </div>
-                
-                <div class="course-info">
-                    <div class="course-meta">
-                        <div class="meta-item">
-                            <span class="meta-label">Course Level:</span>
-                            <span class="meta-value">Undergraduate</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Prerequisites:</span>
-                            <span class="meta-value">Calculus, Basic Physics</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Duration:</span>
-                            <span class="meta-value">6 Modules</span>
-                        </div>
-                    </div>
-                </div>
+            <!-- Page Header - Full width -->
+            <div class="page-header">
+                <h1>Fundamentals of Fluid Mechanics</h1>
+                <p class="page-subtitle">A Systematic Study of Essential Concepts</p>
             </div>
 
-            <!-- Course Overview -->
-            <div class="course-overview">
-                <h2>Course Overview</h2>
-                <p>This course provides a comprehensive foundation in fluid mechanics fundamentals, progressing systematically from basic fluid properties to advanced concepts in dimensional analysis. Each module builds upon previous knowledge, ensuring a solid understanding of the physical principles governing fluid behavior.</p>
-                
-                <div class="learning-objectives">
-                    <h3>Learning Objectives</h3>
-                    <p>Upon completion of this course, students will be able to:</p>
-                    <ul>
-                        <li>Understand and apply fundamental fluid properties in engineering calculations</li>
-                        <li>Recognize the validity and limitations of the continuum hypothesis</li>
-                        <li>Describe fluid motion using kinematic concepts and mathematical tools</li>
-                        <li>Apply conservation principles to solve fluid mechanics problems</li>
-                        <li>Analyze rotational flow phenomena and vorticity dynamics</li>
-                        <li>Utilize dimensional analysis for problem simplification and scaling</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- Module Sequence -->
-            <div class="module-sequence-header">
-                <h2>Course Modules</h2>
-                <p class="sequence-instruction">Complete modules in the prescribed sequence for optimal learning progression</p>
-            </div>
-            
-            <!-- Sequential Learning List -->
-            <div class="learning-sequence">
-                
-                <!-- Topic 1: Fluid Properties -->
-                <div class="sequence-item available" onclick="navigateToTopic('fluid/fundamentals/fluid-properties.html')">
-                    <div class="sequence-number">1</div>
-                    <div class="sequence-content">
-                        <div class="sequence-header">
-                            <div class="topic-icon">🌊</div>
-                            <div class="topic-info">
-                                <h3 class="topic-title">Fluid Properties</h3>
-                                <span class="topic-status status-available">✓</span>
+            <div class="content-container">
+                <div class="content-wrapper">
+
+                    <!-- Course Overview Section -->
+                    <div class="featured-section guide-overview">
+                        <h3>Course Overview</h3>
+                        <p style="color: #4a5568; margin-bottom: 2rem; line-height: 1.7;">This course provides a comprehensive foundation in fluid mechanics fundamentals, progressing systematically from basic fluid properties to advanced concepts in dimensional analysis. Each module builds upon previous knowledge, ensuring a solid understanding of the physical principles governing fluid behavior.</p>
+                        
+                        <div class="course-meta-grid">
+                            <div class="meta-card">
+                                <div class="meta-label">Course Level</div>
+                                <div class="meta-value">Undergraduate</div>
+                            </div>
+                            <div class="meta-card">
+                                <div class="meta-label">Prerequisites</div>
+                                <div class="meta-value">Calculus, Basic Physics</div>
+                            </div>
+                            <div class="meta-card">
+                                <div class="meta-label">Duration</div>
+                                <div class="meta-value">6 Modules</div>
                             </div>
                         </div>
-                        <p class="topic-description">An introduction to the essential physical properties that characterize fluid behavior, including density, viscosity, compressibility, and surface tension. This module establishes the foundational understanding necessary for all subsequent fluid mechanics analysis.</p>
-                        <div class="topic-keywords">
-                            <span class="keyword">Density</span>
-                            <span class="keyword">Viscosity</span>
-                            <span class="keyword">Compressibility</span>
-                            <span class="keyword">Surface Tension</span>
+
+                        <div class="learning-objectives">
+                            <h4>Learning Objectives</h4>
+                            <p style="color: #4a5568; margin-bottom: 1rem;">Upon completion of this course, students will be able to:</p>
+                            <ul class="objectives-list">
+                                <li>Understand and apply fundamental fluid properties in engineering calculations</li>
+                                <li>Recognize the validity and limitations of the continuum hypothesis</li>
+                                <li>Describe fluid motion using kinematic concepts and mathematical tools</li>
+                                <li>Apply conservation principles to solve fluid mechanics problems</li>
+                                <li>Analyze rotational flow phenomena and vorticity dynamics</li>
+                                <li>Utilize dimensional analysis for problem simplification and scaling</li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="sequence-arrow">→</div>
-                </div>
 
-                <!-- Topic 2: Continuum Hypothesis -->
-                <div class="sequence-item available" onclick="navigateToTopic('fluid/fundamentals/continuum-hypothesis.html')">
-                    <div class="sequence-number">2</div>
-                    <div class="sequence-content">
-                        <div class="sequence-header">
-                            <div class="topic-icon">🔬</div>
-                            <div class="topic-info">
-                                <h3 class="topic-title">Continuum Hypothesis</h3>
-                                <span class="topic-status status-available">✓</span>
+                    <!-- Module Sequence Section -->
+                    <div class="models-section">
+                        <h3>Course Modules</h3>
+                        <p style="color: #4a5568; margin-bottom: 2rem; line-height: 1.6;">Complete modules in the prescribed sequence for optimal learning progression. Each module builds upon concepts from previous modules.</p>
+                        
+                        <div class="models-grid">
+                            
+                            <!-- Module 1: Fluid Properties -->
+                            <div class="sequence-item available" onclick="navigateToTopic('fluid/fundamentals/fluid-properties.html')">
+                                <div class="sequence-header">
+                                    <div class="sequence-number">1</div>
+                                    <div class="topic-icon">🌊</div>
+                                    <div class="topic-info">
+                                        <h3 class="topic-title">Fluid Properties</h3>
+                                        <span class="topic-status status-available">✓</span>
+                                    </div>
+                                </div>
+                                <p class="topic-description">An introduction to the essential physical properties that characterize fluid behavior, including density, viscosity, compressibility, and surface tension. This module establishes the foundational understanding necessary for all subsequent fluid mechanics analysis.</p>
+                                <div class="topic-keywords">
+                                    <span class="keyword">Density</span>
+                                    <span class="keyword">Viscosity</span>
+                                    <span class="keyword">Compressibility</span>
+                                    <span class="keyword">Surface Tension</span>
+                                </div>
                             </div>
-                        </div>
-                        <p class="topic-description">Examination of the fundamental assumption underlying continuum fluid mechanics, including validity criteria, mathematical implications, and boundary conditions. Essential for understanding the theoretical foundation of all fluid mechanics equations.</p>
-                        <div class="topic-keywords">
-                            <span class="keyword">Knudsen Number</span>
-                            <span class="keyword">Mean Free Path</span>
-                            <span class="keyword">No-Slip Condition</span>
-                        </div>
-                    </div>
-                    <div class="sequence-arrow">→</div>
-                </div>
 
-                <!-- Topic 3: Fluid Kinematics -->
-                <div class="sequence-item coming-soon">
-                    <div class="sequence-number">3</div>
-                    <div class="sequence-content">
-                        <div class="sequence-header">
-                            <div class="topic-icon">📐</div>
-                            <div class="topic-info">
-                                <h3 class="topic-title">Fluid Kinematics</h3>
-                                <span class="topic-status status-coming-soon">Coming Soon</span>
+                            <!-- Module 2: Continuum Hypothesis -->
+                            <div class="sequence-item available" onclick="navigateToTopic('fluid/fundamentals/continuum-hypothesis.html')">
+                                <div class="sequence-header">
+                                    <div class="sequence-number">2</div>
+                                    <div class="topic-icon">🔬</div>
+                                    <div class="topic-info">
+                                        <h3 class="topic-title">Continuum Hypothesis</h3>
+                                        <span class="topic-status status-available">✓</span>
+                                    </div>
+                                </div>
+                                <p class="topic-description">Examination of the fundamental assumption underlying continuum fluid mechanics, including validity criteria, mathematical implications, and boundary conditions. Essential for understanding the theoretical foundation of all fluid mechanics equations.</p>
+                                <div class="topic-keywords">
+                                    <span class="keyword">Knudsen Number</span>
+                                    <span class="keyword">Mean Free Path</span>
+                                    <span class="keyword">No-Slip Condition</span>
+                                </div>
                             </div>
-                        </div>
-                        <p class="topic-description">Mathematical description of fluid motion through velocity field analysis, streamline theory, and kinematic relationships. Develops the geometric and analytical tools necessary for characterizing flow patterns and fluid deformation.</p>
-                        <div class="topic-keywords">
-                            <span class="keyword">Velocity Fields</span>
-                            <span class="keyword">Streamlines</span>
-                            <span class="keyword">Pathlines</span>
-                            <span class="keyword">Flow Patterns</span>
-                        </div>
-                        <div class="prerequisite">Requires: Topics 1-2</div>
-                    </div>
-                    <div class="sequence-arrow">→</div>
-                </div>
 
-                <!-- Topic 4: Conservation Principles -->
-                <div class="sequence-item coming-soon">
-                    <div class="sequence-number">4</div>
-                    <div class="sequence-content">
-                        <div class="sequence-header">
-                            <div class="topic-icon">⚖️</div>
-                            <div class="topic-info">
-                                <h3 class="topic-title">Conservation Principles</h3>
-                                <span class="topic-status status-coming-soon">Coming Soon</span>
+                            <!-- Module 3: Fluid Kinematics -->
+                            <div class="sequence-item coming-soon">
+                                <div class="sequence-header">
+                                    <div class="sequence-number">3</div>
+                                    <div class="topic-icon">📐</div>
+                                    <div class="topic-info">
+                                        <h3 class="topic-title">Fluid Kinematics</h3>
+                                        <span class="topic-status status-coming-soon">Coming Soon</span>
+                                    </div>
+                                </div>
+                                <p class="topic-description">Mathematical description of fluid motion through velocity field analysis, streamline theory, and kinematic relationships. Develops the geometric and analytical tools necessary for characterizing flow patterns and fluid deformation.</p>
+                                <div class="topic-keywords">
+                                    <span class="keyword">Velocity Fields</span>
+                                    <span class="keyword">Streamlines</span>
+                                    <span class="keyword">Pathlines</span>
+                                    <span class="keyword">Flow Patterns</span>
+                                </div>
+                                <div class="prerequisite">Requires: Modules 1-2</div>
                             </div>
-                        </div>
-                        <p class="topic-description">Derivation and application of fundamental conservation laws governing fluid systems. Establishes the differential equation framework for mass, momentum, and energy conservation that forms the basis of the Navier-Stokes equations.</p>
-                        <div class="topic-keywords">
-                            <span class="keyword">Mass Conservation</span>
-                            <span class="keyword">Momentum Conservation</span>
-                            <span class="keyword">Energy Conservation</span>
-                        </div>
-                        <div class="prerequisite">Requires: Topics 1-3</div>
-                    </div>
-                    <div class="sequence-arrow">→</div>
-                </div>
 
-                <!-- Topic 5: Vorticity and Circulation -->
-                <div class="sequence-item coming-soon">
-                    <div class="sequence-number">5</div>
-                    <div class="sequence-content">
-                        <div class="sequence-header">
-                            <div class="topic-icon">🌀</div>
-                            <div class="topic-info">
-                                <h3 class="topic-title">Vorticity and Circulation</h3>
-                                <span class="topic-status status-coming-soon">Coming Soon</span>
+                            <!-- Module 4: Conservation Principles -->
+                            <div class="sequence-item coming-soon">
+                                <div class="sequence-header">
+                                    <div class="sequence-number">4</div>
+                                    <div class="topic-icon">⚖️</div>
+                                    <div class="topic-info">
+                                        <h3 class="topic-title">Conservation Principles</h3>
+                                        <span class="topic-status status-coming-soon">Coming Soon</span>
+                                    </div>
+                                </div>
+                                <p class="topic-description">Derivation and application of fundamental conservation laws governing fluid systems. Establishes the differential equation framework for mass, momentum, and energy conservation that forms the basis of the Navier-Stokes equations.</p>
+                                <div class="topic-keywords">
+                                    <span class="keyword">Mass Conservation</span>
+                                    <span class="keyword">Momentum Conservation</span>
+                                    <span class="keyword">Energy Conservation</span>
+                                </div>
+                                <div class="prerequisite">Requires: Modules 1-3</div>
                             </div>
-                        </div>
-                        <p class="topic-description">Analysis of rotational motion in fluid systems through vorticity and circulation concepts. Investigates the mathematical description of fluid rotation, vortex dynamics, and the relationship between local rotation and global circulation in complex flow fields.</p>
-                        <div class="topic-keywords">
-                            <span class="keyword">Vorticity</span>
-                            <span class="keyword">Circulation</span>
-                            <span class="keyword">Vortex Dynamics</span>
-                            <span class="keyword">Rotation</span>
-                        </div>
-                        <div class="prerequisite">Requires: Topics 1-4</div>
-                    </div>
-                    <div class="sequence-arrow">→</div>
-                </div>
 
-                <!-- Topic 6: Dimensional Analysis -->
-                <div class="sequence-item coming-soon">
-                    <div class="sequence-number">6</div>
-                    <div class="sequence-content">
-                        <div class="sequence-header">
-                            <div class="topic-icon">📊</div>
-                            <div class="topic-info">
-                                <h3 class="topic-title">Dimensional Analysis</h3>
-                                <span class="topic-status status-coming-soon">Coming Soon</span>
+                            <!-- Module 5: Vorticity and Circulation -->
+                            <div class="sequence-item coming-soon">
+                                <div class="sequence-header">
+                                    <div class="sequence-number">5</div>
+                                    <div class="topic-icon">🌀</div>
+                                    <div class="topic-info">
+                                        <h3 class="topic-title">Vorticity and Circulation</h3>
+                                        <span class="topic-status status-coming-soon">Coming Soon</span>
+                                    </div>
+                                </div>
+                                <p class="topic-description">Analysis of rotational motion in fluid systems through vorticity and circulation concepts. Investigates the mathematical description of fluid rotation, vortex dynamics, and the relationship between local rotation and global circulation in complex flow fields.</p>
+                                <div class="topic-keywords">
+                                    <span class="keyword">Vorticity</span>
+                                    <span class="keyword">Circulation</span>
+                                    <span class="keyword">Vortex Dynamics</span>
+                                    <span class="keyword">Rotation</span>
+                                </div>
+                                <div class="prerequisite">Requires: Modules 1-4</div>
                             </div>
+
+                            <!-- Module 6: Dimensional Analysis -->
+                            <div class="sequence-item coming-soon">
+                                <div class="sequence-header">
+                                    <div class="sequence-number">6</div>
+                                    <div class="topic-icon">📊</div>
+                                    <div class="topic-info">
+                                        <h3 class="topic-title">Dimensional Analysis</h3>
+                                        <span class="topic-status status-coming-soon">Coming Soon</span>
+                                    </div>
+                                </div>
+                                <p class="topic-description">Application of dimensional analysis and similarity principles to fluid mechanics problems. Develops systematic approaches for reducing complex problems to dimensionless form and establishing scaling relationships for experimental and theoretical investigations.</p>
+                                <div class="topic-keywords">
+                                    <span class="keyword">Pi Theorem</span>
+                                    <span class="keyword">Buckingham Pi</span>
+                                    <span class="keyword">Scaling Laws</span>
+                                    <span class="keyword">Similarity</span>
+                                </div>
+                                <div class="prerequisite">Requires: Modules 1-5</div>
+                            </div>
+
                         </div>
-                        <p class="topic-description">Application of dimensional analysis and similarity principles to fluid mechanics problems. Develops systematic approaches for reducing complex problems to dimensionless form and establishing scaling relationships for experimental and theoretical investigations.</p>
-                        <div class="topic-keywords">
-                            <span class="keyword">Pi Theorem</span>
-                            <span class="keyword">Buckingham Pi</span>
-                            <span class="keyword">Scaling Laws</span>
-                            <span class="keyword">Similarity</span>
-                        </div>
-                        <div class="prerequisite">Requires: Topics 1-5</div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
