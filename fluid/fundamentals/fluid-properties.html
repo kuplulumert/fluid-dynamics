@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fluid Properties - Fluid Dynamics</title>
-    <meta name="description" content="Comprehensive academic guide to fluid properties from undergraduate to graduate level covering theoretical foundations, molecular origins, and advanced research topics.">
+    <meta name="description" content="Comprehensive academic guide to fundamental fluid properties including density, viscosity, compressibility, and surface tension.">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -210,7 +210,7 @@
             line-height: 1.6;
         }
 
-        /* Academy Guide */
+        /* Academy Guide - Exact k-epsilon style */
         .academy-guide {
             background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%);
             backdrop-filter: blur(20px);
@@ -243,15 +243,110 @@
             gap: 0.5rem;
         }
 
+        .guide-section h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .guide-text {
+            display: block;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #4b5563;
+            margin-bottom: 1rem;
+        }
+
+        /* Equation Blocks - Exact k-epsilon style */
+        .equation-block {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.05);
+        }
+
+        /* Term Definitions - Exact k-epsilon style */
+        .term-definitions {
+            background: rgba(248, 250, 252, 0.8);
+            border: 1px solid rgba(16, 185, 129, 0.08);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .term-definitions h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+
+        .term-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.05);
+            font-size: 0.95rem;
+            color: #4b5563;
+        }
+
+        .term-item:last-child {
+            border-bottom: none;
+        }
+
+        .term-item strong {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        /* Constants Table - Exact k-epsilon style */
+        .constants-table {
+            margin: 1.5rem 0;
+        }
+
+        .constants-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.1);
+        }
+
+        .constants-table th,
+        .constants-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .constants-table th {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .constants-table td {
+            font-size: 0.9rem;
+            color: #4b5563;
+        }
+
+        .constants-table tr:hover {
+            background: rgba(16, 185, 129, 0.02);
+        }
+
         /* Guide Lists - Exact k-epsilon style */
         .guide-list {
             list-style: none;
-            margin: 0;
+            margin: 1rem 0;
             padding: 0;
         }
 
         .guide-item {
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             padding-left: 1.5rem;
             position: relative;
         }
@@ -265,12 +360,8 @@
             top: 0.1rem;
         }
 
-        .guide-text {
-            display: block;
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #4b5563;
-            padding-left: 0;
+        .guide-item .guide-text {
+            margin-bottom: 0;
         }
 
         .guide-emphasis {
@@ -280,99 +371,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             color: #1f2937;
-        }
-
-        /* Use Case Items - Exact k-epsilon style */
-        .use-case-item, .avoid-item {
-            background: rgba(255, 255, 255, 0.7);
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 6px;
-            border-left: 4px solid #10b981;
-        }
-
-        .avoid-item {
-            border-left-color: #ef4444;
-        }
-
-        /* Mathematical Expressions */
-        .formula-box {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            border: 1px solid rgba(16, 185, 129, 0.1);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            font-family: 'Courier New', monospace;
-            text-align: center;
-        }
-
-        .formula-title {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #0f766e;
-            margin-bottom: 0.5rem;
-            font-family: system-ui, -apple-system, sans-serif;
-        }
-
-        .math-inline {
-            font-family: 'Times New Roman', serif;
-        }
-
-        /* Level Indicators */
-        .level-badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 1rem;
-        }
-
-        .undergraduate {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
-            color: white;
-        }
-
-        .graduate {
-            background: linear-gradient(135deg, #7c3aed, #6d28d9);
-            color: white;
-        }
-
-        .research {
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-            color: white;
-        }
-
-        /* Property Headers */
-        .property-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background: rgba(16, 185, 129, 0.05);
-            border-radius: 12px;
-        }
-
-        .property-symbol {
-            width: 3rem;
-            height: 3rem;
-            background: linear-gradient(135deg, #10b981, #059669);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-            font-weight: 700;
-        }
-
-        .property-name {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #2d3748;
         }
 
         /* Responsive Design */
@@ -410,12 +408,6 @@
             .guide-section {
                 padding: 1.5rem;
             }
-
-            .property-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
         }
     </style>
 </head>
@@ -439,377 +431,434 @@
             <!-- Page Header -->
             <div class="page-header">
                 <h1>Fluid Properties</h1>
-                <p class="model-subtitle">Comprehensive academic treatment from molecular foundations to advanced transport phenomena</p>
+                <p class="model-subtitle">Fundamental physical properties that govern fluid behavior and transport phenomena</p>
             </div>
 
-            <!-- Academy Guide Tab Content -->
+            <!-- Academy Guide Content -->
             <div class="academy-guide">
                 
                 <!-- Introduction -->
                 <div class="guide-section">
-                    <span class="level-badge undergraduate">Undergraduate Foundation</span>
-                    <h3>1. Fundamental Concepts</h3>
-                    <ul class="guide-list">
-                        <li class="guide-item">
-                            <span class="guide-text">Fluid properties are <span class="guide-emphasis">intensive thermodynamic variables</span> that characterize fluid state independent of system size.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text">Properties emerge from <span class="guide-emphasis">molecular-scale interactions</span> and determine macroscopic transport behavior.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text">Classification: <span class="guide-emphasis">Thermodynamic properties</span> (density, temperature, pressure) vs <span class="guide-emphasis">transport properties</span> (viscosity, thermal conductivity).</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text">The <span class="guide-emphasis">continuum hypothesis</span> enables continuous field descriptions despite molecular discreteness.</span>
-                        </li>
-                    </ul>
+                    <h3>Fundamental Concepts and Physical Foundations</h3>
+                    <p class="guide-text">Fluid properties are intensive thermodynamic variables that characterize the state and behavior of fluids at the continuum scale. These properties emerge from molecular-scale interactions and statistical mechanics, providing the foundation for all fluid mechanics analysis through constitutive relations and transport equations.</p>
+                    
+                    <h4>Property Classification</h4>
+                    <p class="guide-text">Fluid properties can be systematically classified into thermodynamic properties (density, temperature, pressure) that define the equilibrium state, and transport properties (viscosity, thermal conductivity, diffusivity) that govern non-equilibrium processes and momentum, energy, and mass transfer rates.</p>
+                    
+                    <h4>Continuum Hypothesis</h4>
+                    <p class="guide-text">The continuum assumption allows fluid properties to be defined as continuous functions of space and time, despite the discrete molecular nature of matter. This approach is valid when the characteristic length scale of the flow is much larger than the molecular mean free path, typically satisfied for length scales greater than 10⁻⁶ m in gases at standard conditions.</p>
                 </div>
 
                 <!-- Density Section -->
-                <div class="property-header">
-                    <div class="property-symbol">ρ</div>
-                    <div class="property-name">Density</div>
-                </div>
-
-                <!-- Density - Undergraduate -->
                 <div class="guide-section">
-                    <span class="level-badge undergraduate">Undergraduate Level</span>
-                    <h3>2. Density: Mass per Unit Volume</h3>
-                    <ul class="guide-list">
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Basic definition:</span> Mass contained in a unit volume of fluid.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Mathematical form:</span> $\rho = \lim_{\Delta V \to \Delta V'} \frac{\Delta m}{\Delta V}$ where $\Delta V'$ maintains continuum validity.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Specific volume relation:</span> $v = \frac{1}{\rho}$ represents volume per unit mass.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Temperature dependence:</span> $\rho(T) = \rho_0[1 - \beta(T - T_0)]$ with thermal expansion coefficient $\beta$.</span>
-                        </li>
-                    </ul>
-
-                    <div class="formula-box">
-                        <div class="formula-title">Thermal Expansion Coefficient</div>
+                    <h3>Density: Mass Distribution and Molecular Foundations</h3>
+                    <p class="guide-text">Density represents the local mass concentration in a fluid and serves as the primary link between molecular-scale properties and macroscopic behavior. Understanding density variations is fundamental to buoyancy effects, compressible flow analysis, and multiphase systems.</p>
+                    
+                    <h4>Mathematical Definition</h4>
+                    <div class="equation-block">
+                        $$\rho = \lim_{\Delta V \to \Delta V'} \frac{\Delta m}{\Delta V}$$
+                    </div>
+                    
+                    <p class="guide-text">where $\Delta V'$ represents the smallest volume for which the continuum assumption remains valid. This limit ensures that density is well-defined while maintaining sufficient molecular content for statistical averaging.</p>
+                    
+                    <div class="term-definitions">
+                        <h4>Variable Definitions:</h4>
+                        <div class="term-item"><strong>ρ:</strong> Density (kg/m³)</div>
+                        <div class="term-item"><strong>m:</strong> Mass contained in volume element (kg)</div>
+                        <div class="term-item"><strong>V:</strong> Volume element (m³)</div>
+                        <div class="term-item"><strong>ΔV':</strong> Minimum volume maintaining continuum validity (m³)</div>
+                    </div>
+                    
+                    <h4>Specific Volume Relationship</h4>
+                    <div class="equation-block">
+                        $$v = \frac{1}{\rho} = \frac{V}{m}$$
+                    </div>
+                    
+                    <p class="guide-text">Specific volume $v$ represents the volume occupied per unit mass and is the natural variable in many thermodynamic relations. The reciprocal relationship between density and specific volume is fundamental to equation of state formulations.</p>
+                    
+                    <h4>Temperature Dependence and Thermal Expansion</h4>
+                    <div class="equation-block">
+                        $$\rho(T) = \rho_0 [1 - \beta(T - T_0)]$$
+                    </div>
+                    
+                    <p class="guide-text">where the thermal expansion coefficient is defined as:</p>
+                    
+                    <div class="equation-block">
                         $$\beta = -\frac{1}{\rho} \left(\frac{\partial \rho}{\partial T}\right)_p$$
                     </div>
-
-                    <div class="use-case-item">
-                        <span class="guide-text"><span class="guide-emphasis">Typical values:</span> Water at 20°C: ρ = 998 kg/m³, Air at STP: ρ = 1.225 kg/m³</span>
+                    
+                    <div class="constants-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fluid</th>
+                                    <th>Density (kg/m³)</th>
+                                    <th>β (K⁻¹)</th>
+                                    <th>Temperature (°C)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Water</td>
+                                    <td>998.2</td>
+                                    <td>2.1 × 10⁻⁴</td>
+                                    <td>20</td>
+                                </tr>
+                                <tr>
+                                    <td>Air</td>
+                                    <td>1.225</td>
+                                    <td>3.4 × 10⁻³</td>
+                                    <td>15</td>
+                                </tr>
+                                <tr>
+                                    <td>Ethanol</td>
+                                    <td>789.3</td>
+                                    <td>1.1 × 10⁻³</td>
+                                    <td>20</td>
+                                </tr>
+                                <tr>
+                                    <td>Mercury</td>
+                                    <td>13534</td>
+                                    <td>1.8 × 10⁻⁴</td>
+                                    <td>20</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
-                <!-- Density - Graduate -->
+                <!-- Statistical Mechanics of Density -->
                 <div class="guide-section">
-                    <span class="level-badge graduate">Graduate Level</span>
-                    <h3>3. Molecular and Statistical Foundations of Density</h3>
-                    <ul class="guide-list">
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Statistical definition:</span> $\rho = n \langle m \rangle$ where $n$ is number density and $\langle m \rangle$ is average molecular mass.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Ideal gas relation:</span> $\rho = \frac{pM}{RT}$ connects density to thermodynamic state variables.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Van der Waals equation:</span> $(p + \frac{a}{\bar{v}^2})(\bar{v} - b) = RT$ accounts for molecular size and interactions.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Density fluctuations:</span> $\langle (\delta \rho)^2 \rangle = \rho k_B T \kappa_T$ relate to compressibility.</span>
-                        </li>
-                    </ul>
-
-                    <div class="formula-box">
-                        <div class="formula-title">Van der Waals Density Expression</div>
-                        $$\rho = \frac{M}{RT} \left(p + \frac{a\rho^2}{M^2}\right) \frac{1}{1 - \frac{b\rho}{M}}$$
+                    <h3>Statistical Mechanical Foundation</h3>
+                    <p class="guide-text">From molecular kinetic theory, density relates directly to the number density and average molecular mass of the fluid constituents. This connection provides the bridge between microscopic molecular properties and macroscopic fluid behavior.</p>
+                    
+                    <h4>Molecular Expression</h4>
+                    <div class="equation-block">
+                        $$\rho = n \langle m \rangle = \frac{N}{V} \langle m \rangle$$
                     </div>
-                </div>
-
-                <!-- Density - Research -->
-                <div class="guide-section">
-                    <span class="level-badge research">Research Frontiers</span>
-                    <h3>4. Advanced Density Research</h3>
-                    <ul class="guide-list">
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Critical phenomena:</span> Near critical point, density difference follows $\rho_l - \rho_g \sim |T - T_c|^{\beta}$ where $\beta \approx 0.325$.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Density functional theory:</span> $\Omega[\rho(\vec{r})] = F[\rho(\vec{r})] + \int \rho(\vec{r}) V_{ext}(\vec{r}) d\vec{r}$ for inhomogeneous systems.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Machine learning:</span> Neural networks predict density from molecular structure with quantum accuracy.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Quantum effects:</span> Significant in dense hydrogen and ultracold atomic gases.</span>
-                        </li>
-                    </ul>
-
-                    <div class="formula-box">
-                        <div class="formula-title">Critical Scaling Law</div>
-                        $$\rho_l - \rho_g = B |T - T_c|^{\beta} + B_1 |T - T_c|^{\beta + \Delta_1} + ...$$
-                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">where $\beta = 0.325$ and $\Delta_1 = 0.5$ are universal critical exponents</p>
+                    
+                    <p class="guide-text">For multicomponent systems, the total density becomes the sum of partial densities:</p>
+                    
+                    <div class="equation-block">
+                        $$\rho = \sum_i \rho_i = \sum_i n_i m_i$$
                     </div>
+                    
+                    <div class="term-definitions">
+                        <h4>Statistical Variables:</h4>
+                        <div class="term-item"><strong>n:</strong> Number density (molecules/m³)</div>
+                        <div class="term-item"><strong>N:</strong> Total number of molecules</div>
+                        <div class="term-item"><strong>⟨m⟩:</strong> Average molecular mass (kg)</div>
+                        <div class="term-item"><strong>nᵢ:</strong> Number density of species i</div>
+                        <div class="term-item"><strong>mᵢ:</strong> Molecular mass of species i</div>
+                    </div>
+                    
+                    <h4>Equation of State Relations</h4>
+                    <p class="guide-text">The ideal gas law provides the simplest connection between density and thermodynamic variables:</p>
+                    
+                    <div class="equation-block">
+                        $$\rho = \frac{pM}{RT} = \frac{pm}{k_B T}$$
+                    </div>
+                    
+                    <p class="guide-text">For real gases, the Van der Waals equation accounts for molecular size and intermolecular forces:</p>
+                    
+                    <div class="equation-block">
+                        $$\left(p + \frac{a}{\bar{v}^2}\right)(\bar{v} - b) = RT$$
+                    </div>
+                    
+                    <p class="guide-text">which can be rearranged to give density explicitly as a function of pressure and temperature, though the resulting expression is implicit and requires iterative solution methods.</p>
                 </div>
 
                 <!-- Viscosity Section -->
-                <div class="property-header">
-                    <div class="property-symbol">μ</div>
-                    <div class="property-name">Viscosity</div>
+                <div class="guide-section">
+                    <h3>Viscosity: Molecular Momentum Transfer</h3>
+                    <p class="guide-text">Viscosity quantifies a fluid's resistance to deformation and represents the macroscopic manifestation of molecular momentum transfer processes. The viscous stress arises from molecular collisions and intermolecular forces, creating internal friction that opposes relative motion between fluid layers.</p>
+                    
+                    <h4>Newton's Law of Viscosity</h4>
+                    <div class="equation-block">
+                        $$\tau = \mu \frac{du}{dy}$$
+                    </div>
+                    
+                    <p class="guide-text">This fundamental relation defines Newtonian fluids, where the shear stress is linearly proportional to the velocity gradient. The proportionality constant μ is the dynamic viscosity, an intrinsic property of the fluid.</p>
+                    
+                    <div class="term-definitions">
+                        <h4>Viscosity Variables:</h4>
+                        <div class="term-item"><strong>τ:</strong> Shear stress (Pa)</div>
+                        <div class="term-item"><strong>μ:</strong> Dynamic viscosity (Pa·s)</div>
+                        <div class="term-item"><strong>ν:</strong> Kinematic viscosity (m²/s)</div>
+                        <div class="term-item"><strong>du/dy:</strong> Velocity gradient (s⁻¹)</div>
+                    </div>
+                    
+                    <h4>Kinematic Viscosity</h4>
+                    <div class="equation-block">
+                        $$\nu = \frac{\mu}{\rho}$$
+                    </div>
+                    
+                    <p class="guide-text">Kinematic viscosity represents momentum diffusivity and appears naturally in the Navier-Stokes equations. It has dimensions of area per time (m²/s), analogous to thermal diffusivity and mass diffusivity in heat and mass transfer.</p>
+                    
+                    <h4>Generalized Viscous Stress Tensor</h4>
+                    <p class="guide-text">For three-dimensional flow, the complete viscous stress tensor is:</p>
+                    
+                    <div class="equation-block">
+                        $$\tau_{ij} = \mu \left(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}\right) + \lambda \delta_{ij} \frac{\partial u_k}{\partial x_k}$$
+                    </div>
+                    
+                    <p class="guide-text">where λ is the second viscosity coefficient, related to bulk viscosity effects in compressible flows. For incompressible flows, the second term vanishes due to continuity.</p>
                 </div>
 
-                <!-- Viscosity - Undergraduate -->
+                <!-- Kinetic Theory of Viscosity -->
                 <div class="guide-section">
-                    <span class="level-badge undergraduate">Undergraduate Level</span>
-                    <h3>5. Viscosity: Resistance to Flow</h3>
-                    <ul class="guide-list">
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Newton's law:</span> $\tau = \mu \frac{du}{dy}$ relates shear stress to velocity gradient.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Dynamic viscosity:</span> μ has units Pa·s, measures internal friction in fluid.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Kinematic viscosity:</span> $\nu = \frac{\mu}{\rho}$ represents momentum diffusivity (m²/s).</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Temperature effects:</span> Liquids: viscosity decreases with T, Gases: viscosity increases with T.</span>
-                        </li>
-                    </ul>
-
-                    <div class="formula-box">
-                        <div class="formula-title">Sutherland's Formula (Gases)</div>
-                        $$\mu = \mu_0 \frac{T_0 + S}{T + S} \left(\frac{T}{T_0}\right)^{3/2}$$
-                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">where S is Sutherland's constant (for air: S = 110.4 K)</p>
+                    <h3>Kinetic Theory and Molecular Origins</h3>
+                    <p class="guide-text">The molecular basis of viscosity emerges from kinetic theory, which relates macroscopic transport properties to molecular collision processes and intermolecular potential functions.</p>
+                    
+                    <h4>Chapman-Enskog Theory</h4>
+                    <p class="guide-text">Rigorous kinetic theory provides the exact expression for gas viscosity:</p>
+                    
+                    <div class="equation-block">
+                        $$\mu = \frac{5}{16} \frac{\sqrt{mk_BT/\pi}}{\sigma^2 \Omega^{(2,2)*}(T^*)}$$
                     </div>
-                </div>
-
-                <!-- Viscosity - Graduate -->
-                <div class="guide-section">
-                    <span class="level-badge graduate">Graduate Level</span>
-                    <h3>6. Kinetic Theory and Molecular Origins</h3>
-                    <ul class="guide-list">
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Chapman-Enskog theory:</span> Rigorous kinetic theory derivation for gas viscosity.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Molecular expression:</span> $\mu = \frac{5}{16} \frac{\sqrt{mk_BT/\pi}}{\sigma^2 \Omega^{(2,2)*}}$ depends on collision integrals.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Generalized Newton's law:</span> $\tau_{ij} = 2\mu S_{ij}$ for three-dimensional flow fields.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Non-Newtonian fluids:</span> $\eta = \eta_\infty + (\eta_0 - \eta_\infty)[1 + (\lambda\dot{\gamma})^2]^{(n-1)/2}$ (Carreau model).</span>
-                        </li>
-                    </ul>
-
-                    <div class="formula-box">
-                        <div class="formula-title">Rate of Strain Tensor</div>
-                        $$S_{ij} = \frac{1}{2}\left(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}\right) - \frac{1}{3}\delta_{ij}\frac{\partial u_k}{\partial x_k}$$
+                    
+                    <div class="term-definitions">
+                        <h4>Kinetic Theory Parameters:</h4>
+                        <div class="term-item"><strong>m:</strong> Molecular mass (kg)</div>
+                        <div class="term-item"><strong>kᵦ:</strong> Boltzmann constant (1.381 × 10⁻²³ J/K)</div>
+                        <div class="term-item"><strong>σ:</strong> Collision diameter (m)</div>
+                        <div class="term-item"><strong>Ω⁽²'²⁾*:</strong> Collision integral (dimensionless)</div>
+                        <div class="term-item"><strong>T*:</strong> Reduced temperature = kᵦT/ε</div>
                     </div>
-                </div>
-
-                <!-- Viscosity - Research -->
-                <div class="guide-section">
-                    <span class="level-badge research">Research Frontiers</span>
-                    <h3>7. Advanced Viscosity Research</h3>
-                    <ul class="guide-list">
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Green-Kubo relations:</span> $\mu = \frac{V}{k_BT} \int_0^\infty \langle P_{xy}(0)P_{xy}(t) \rangle dt$ from molecular dynamics.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Complex fluids:</span> Active matter, liquid crystals, and granular flows exhibit exotic rheology.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Nanoconfinement:</span> Viscosity changes dramatically in channels smaller than 10 nm.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Quantum viscosity:</span> Superfluid helium exhibits zero viscosity below λ-point.</span>
-                        </li>
-                    </ul>
-
-                    <div class="use-case-item">
-                        <span class="guide-text"><span class="guide-emphasis">Emerging applications:</span> Microfluidics, biological flows, smart materials, and quantum fluids</span>
+                    
+                    <h4>Temperature Dependence</h4>
+                    <p class="guide-text">For gases, viscosity increases with temperature due to increased molecular motion:</p>
+                    
+                    <div class="equation-block">
+                        $$\mu \propto T^{0.5 \text{ to } 1.0}$$
                     </div>
+                    
+                    <p class="guide-text">For liquids, viscosity decreases exponentially with temperature due to reduced intermolecular binding:</p>
+                    
+                    <div class="equation-block">
+                        $$\mu = A e^{E_a/RT}$$
+                    </div>
+                    
+                    <p class="guide-text">where $E_a$ is the activation energy for viscous flow, typically 10-50 kJ/mol for common liquids.</p>
                 </div>
 
                 <!-- Compressibility Section -->
-                <div class="property-header">
-                    <div class="property-symbol">β</div>
-                    <div class="property-name">Compressibility</div>
-                </div>
-
-                <!-- Compressibility - Undergraduate -->
                 <div class="guide-section">
-                    <span class="level-badge undergraduate">Undergraduate Level</span>
-                    <h3>8. Compressibility: Volume Response to Pressure</h3>
-                    <ul class="guide-list">
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Isothermal compressibility:</span> $\kappa_T = -\frac{1}{V}\left(\frac{\partial V}{\partial p}\right)_T$ measures volume change at constant temperature.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Adiabatic compressibility:</span> $\kappa_S = -\frac{1}{V}\left(\frac{\partial V}{\partial p}\right)_S$ for isentropic processes.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Bulk modulus:</span> $K = \frac{1}{\kappa}$ represents resistance to compression.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Speed of sound:</span> $c = \sqrt{\frac{K_S}{\rho}} = \sqrt{\frac{1}{\rho\kappa_S}}$ connects to wave propagation.</span>
-                        </li>
-                    </ul>
-
-                    <div class="formula-box">
-                        <div class="formula-title">Ideal Gas Sound Speed</div>
+                    <h3>Compressibility: Elastic Response and Wave Propagation</h3>
+                    <p class="guide-text">Compressibility quantifies the volumetric response of a fluid to pressure changes and is intimately connected to the speed of sound and acoustic wave propagation. This property becomes critical in high-speed flows where Mach number effects are significant.</p>
+                    
+                    <h4>Fundamental Definitions</h4>
+                    <p class="guide-text">Isothermal compressibility measures volume change at constant temperature:</p>
+                    
+                    <div class="equation-block">
+                        $$\kappa_T = -\frac{1}{V}\left(\frac{\partial V}{\partial p}\right)_T = \frac{1}{\rho}\left(\frac{\partial \rho}{\partial p}\right)_T$$
+                    </div>
+                    
+                    <p class="guide-text">Adiabatic compressibility applies to rapid processes where heat transfer is negligible:</p>
+                    
+                    <div class="equation-block">
+                        $$\kappa_S = -\frac{1}{V}\left(\frac{\partial V}{\partial p}\right)_S = \frac{1}{\rho}\left(\frac{\partial \rho}{\partial p}\right)_S$$
+                    </div>
+                    
+                    <div class="term-definitions">
+                        <h4>Compressibility Variables:</h4>
+                        <div class="term-item"><strong>κₜ:</strong> Isothermal compressibility (Pa⁻¹)</div>
+                        <div class="term-item"><strong>κₛ:</strong> Adiabatic compressibility (Pa⁻¹)</div>
+                        <div class="term-item"><strong>K:</strong> Bulk modulus = 1/κ (Pa)</div>
+                        <div class="term-item"><strong>c:</strong> Speed of sound (m/s)</div>
+                    </div>
+                    
+                    <h4>Speed of Sound and Wave Theory</h4>
+                    <div class="equation-block">
+                        $$c = \sqrt{\frac{1}{\rho\kappa_S}} = \sqrt{\frac{K_S}{\rho}}$$
+                    </div>
+                    
+                    <p class="guide-text">For ideal gases, this simplifies to:</p>
+                    
+                    <div class="equation-block">
                         $$c = \sqrt{\gamma \frac{p}{\rho}} = \sqrt{\gamma RT}$$
-                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">where $\gamma = c_p/c_v$ is the heat capacity ratio</p>
                     </div>
-                </div>
-
-                <!-- Compressibility - Graduate -->
-                <div class="guide-section">
-                    <span class="level-badge graduate">Graduate Level</span>
-                    <h3>9. Thermodynamic Relations and Wave Theory</h3>
-                    <ul class="guide-list">
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Maxwell relation:</span> $\frac{\kappa_T}{\kappa_S} = \gamma$ connects isothermal and adiabatic compressibilities.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Grüneisen parameter:</span> $\Gamma = \frac{\alpha V}{c_v \kappa_T}$ relates thermal and mechanical properties.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Acoustic wave equation:</span> $\frac{\partial^2 p'}{\partial t^2} = c^2 \nabla^2 p'$ governs small-amplitude waves.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Nonlinear acoustics:</span> Finite amplitude effects introduce harmonic generation and shock formation.</span>
-                        </li>
-                    </ul>
-
-                    <div class="formula-box">
-                        <div class="formula-title">Nonlinear Wave Equation</div>
-                        $$\frac{\partial^2 p'}{\partial t^2} = c^2 \nabla^2 p' + \frac{\beta}{2\rho_0 c^2} \frac{\partial^2 (p')^2}{\partial t^2}$$
+                    
+                    <p class="guide-text">where $\gamma = c_p/c_v$ is the heat capacity ratio. This fundamental relation connects thermodynamic properties to acoustic wave propagation and forms the basis for compressible flow analysis.</p>
+                    
+                    <h4>Thermodynamic Relations</h4>
+                    <p class="guide-text">Maxwell relations connect isothermal and adiabatic compressibilities:</p>
+                    
+                    <div class="equation-block">
+                        $$\frac{\kappa_T}{\kappa_S} = \gamma = \frac{c_p}{c_v}$$
                     </div>
-                </div>
-
-                <!-- Compressibility - Research -->
-                <div class="guide-section">
-                    <span class="level-badge research">Research Frontiers</span>
-                    <h3>10. Extreme Conditions and Quantum Effects</h3>
-                    <ul class="guide-list">
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">High-pressure EOS:</span> Birch-Murnaghan equation describes compression to TPa pressures.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Quantum corrections:</span> $\kappa_T^{quantum} = \kappa_T^{classical} \left[1 + \frac{\hbar^2}{24mk_BT^2}\nabla^2 n\right]$ for dense systems.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Relativistic matter:</span> $p = \frac{1}{3}\epsilon$ for ultrarelativistic fluids.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Applications:</span> Planetary interiors, neutron stars, inertial confinement fusion.</span>
-                        </li>
-                    </ul>
+                    
+                    <div class="constants-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fluid</th>
+                                    <th>κₜ (Pa⁻¹)</th>
+                                    <th>c (m/s)</th>
+                                    <th>γ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Water (20°C)</td>
+                                    <td>4.6 × 10⁻¹⁰</td>
+                                    <td>1482</td>
+                                    <td>1.01</td>
+                                </tr>
+                                <tr>
+                                    <td>Air (15°C)</td>
+                                    <td>7.0 × 10⁻⁶</td>
+                                    <td>340</td>
+                                    <td>1.40</td>
+                                </tr>
+                                <tr>
+                                    <td>Ethanol (20°C)</td>
+                                    <td>1.1 × 10⁻⁹</td>
+                                    <td>1162</td>
+                                    <td>1.13</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <!-- Surface Tension Section -->
-                <div class="property-header">
-                    <div class="property-symbol">σ</div>
-                    <div class="property-name">Surface Tension</div>
+                <div class="guide-section">
+                    <h3>Surface Tension: Interface Energy and Molecular Cohesion</h3>
+                    <p class="guide-text">Surface tension arises from the asymmetric molecular environment at fluid interfaces, where molecules experience unbalanced intermolecular forces compared to the bulk phase. This property governs capillary phenomena, droplet formation, and wetting behavior.</p>
+                    
+                    <h4>Fundamental Definition</h4>
+                    <div class="equation-block">
+                        $$\sigma = \frac{F}{L} = \frac{\partial E}{\partial A}$$
+                    </div>
+                    
+                    <p class="guide-text">Surface tension can be interpreted as either force per unit length acting along the interface or energy required to create unit area of new interface. Both interpretations are thermodynamically equivalent and lead to the same numerical values.</p>
+                    
+                    <h4>Young-Laplace Equation</h4>
+                    <p class="guide-text">The pressure difference across a curved interface is given by:</p>
+                    
+                    <div class="equation-block">
+                        $$\Delta p = \sigma \left(\frac{1}{R_1} + \frac{1}{R_2}\right) = \sigma \kappa$$
+                    </div>
+                    
+                    <p class="guide-text">where $\kappa$ is the mean curvature and $R_1, R_2$ are the principal radii of curvature. This equation is fundamental to understanding droplet stability, bubble dynamics, and capillary phenomena.</p>
+                    
+                    <div class="term-definitions">
+                        <h4>Curvature Parameters:</h4>
+                        <div class="term-item"><strong>R₁, R₂:</strong> Principal radii of curvature (m)</div>
+                        <div class="term-item"><strong>κ:</strong> Mean curvature = 1/R₁ + 1/R₂ (m⁻¹)</div>
+                        <div class="term-item"><strong>Δp:</strong> Pressure jump across interface (Pa)</div>
+                        <div class="term-item"><strong>σ:</strong> Surface tension coefficient (N/m)</div>
+                    </div>
+                    
+                    <h4>Capillary Rise Phenomenon</h4>
+                    <div class="equation-block">
+                        $$h = \frac{2\sigma \cos\theta}{\rho g r}$$
+                    </div>
+                    
+                    <p class="guide-text">where θ is the contact angle measuring wetting behavior. Complete wetting corresponds to θ = 0°, while θ = 180° indicates complete non-wetting. Most practical systems exhibit intermediate contact angles determined by the balance of adhesive and cohesive forces.</p>
                 </div>
 
-                <!-- Surface Tension - Undergraduate -->
+                <!-- Advanced Topics -->
                 <div class="guide-section">
-                    <span class="level-badge undergraduate">Undergraduate Level</span>
-                    <h3>11. Surface Tension: Interface Energy</h3>
-                    <ul class="guide-list">
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Definition:</span> $\sigma = \frac{F}{L} = \frac{\partial E}{\partial A}$ represents force per length or energy per area.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Young-Laplace equation:</span> $\Delta p = \sigma \left(\frac{1}{R_1} + \frac{1}{R_2}\right)$ for curved interfaces.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Capillary rise:</span> $h = \frac{2\sigma \cos\theta}{\rho g r}$ in circular tubes.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Contact angle:</span> θ < 90° indicates wetting, θ > 90° indicates non-wetting behavior.</span>
-                        </li>
-                    </ul>
-
-                    <div class="use-case-item">
-                        <span class="guide-text"><span class="guide-emphasis">Special cases:</span> Spherical droplet: Δp = 2σ/R, Soap bubble: Δp = 4σ/R</span>
+                    <h3>Advanced Topics and Research Applications</h3>
+                    <p class="guide-text">Modern research in fluid properties extends beyond classical continuum mechanics to encompass quantum effects, critical phenomena, and complex multiphase systems that challenge traditional theoretical frameworks.</p>
+                    
+                    <h4>Critical Phenomena and Scaling Laws</h4>
+                    <p class="guide-text">Near the critical point, fluid properties exhibit universal scaling behavior independent of molecular details:</p>
+                    
+                    <div class="equation-block">
+                        $$\rho_l - \rho_g = B |T - T_c|^{\beta}$$
+                    </div>
+                    
+                    <p class="guide-text">where $\beta \approx 0.325$ is a universal critical exponent. Similar scaling laws govern viscosity, compressibility, and surface tension near critical conditions.</p>
+                    
+                    <h4>Molecular Dynamics and Green-Kubo Relations</h4>
+                    <p class="guide-text">Transport properties can be computed from equilibrium molecular dynamics using fluctuation-dissipation relations:</p>
+                    
+                    <div class="equation-block">
+                        $$\mu = \frac{V}{k_B T} \int_0^\infty \langle P_{xy}(0) P_{xy}(t) \rangle dt$$
+                    </div>
+                    
+                    <p class="guide-text">where $P_{xy}$ represents off-diagonal components of the pressure tensor. These relations provide exact expressions for transport properties in terms of equilibrium fluctuations.</p>
+                    
+                    <h4>Multiphase and Complex Systems</h4>
+                    <p class="guide-text">Effective properties in multiphase systems require careful consideration of phase interactions:</p>
+                    
+                    <div class="equation-block">
+                        $$\rho_{eff} = \sum_i \alpha_i \rho_i, \quad \mu_{eff} = \mu_0(1 + 2.5\phi + 6.2\phi^2 + \mathcal{O}(\phi^3))$$
+                    </div>
+                    
+                    <p class="guide-text">where $\alpha_i$ are volume fractions and the viscosity expression represents Einstein's result for dilute suspensions, with higher-order corrections for concentrated systems.</p>
+                    
+                    <div class="constants-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>Classical Range</th>
+                                    <th>Quantum Effects</th>
+                                    <th>Critical Behavior</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Density</td>
+                                    <td>Equation of state</td>
+                                    <td>Quantum statistics</td>
+                                    <td>Power law scaling</td>
+                                </tr>
+                                <tr>
+                                    <td>Viscosity</td>
+                                    <td>Kinetic theory</td>
+                                    <td>Superfluid transition</td>
+                                    <td>Critical divergence</td>
+                                </tr>
+                                <tr>
+                                    <td>Compressibility</td>
+                                    <td>Thermodynamic</td>
+                                    <td>Zero-point motion</td>
+                                    <td>Critical opalescence</td>
+                                </tr>
+                                <tr>
+                                    <td>Surface Tension</td>
+                                    <td>Capillary theory</td>
+                                    <td>Tolman length</td>
+                                    <td>Interface fluctuations</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
-                <!-- Surface Tension - Graduate -->
+                <!-- Experimental and Computational Methods -->
                 <div class="guide-section">
-                    <span class="level-badge graduate">Graduate Level</span>
-                    <h3>12. Molecular Theory and Interface Thermodynamics</h3>
-                    <ul class="guide-list">
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Statistical origin:</span> $\sigma = \frac{1}{2} \int_{-\infty}^{\infty} [p_N(z) - p_T(z)] dz$ from pressure tensor anisotropy.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Square gradient theory:</span> $\sigma = \int_{-\infty}^{\infty} \kappa \left(\frac{d\rho}{dz}\right)^2 dz$ relates to density gradients.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Kelvin equation:</span> $\ln\left(\frac{p}{p_0}\right) = \frac{2\sigma V_m}{rRT}$ for vapor pressure over curved surfaces.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Gibbs adsorption:</span> $d\sigma = -\sum_i \Gamma_i d\mu_i$ connects surface tension to adsorption.</span>
-                        </li>
-                    </ul>
-
-                    <div class="formula-box">
-                        <div class="formula-title">Gibbs Adsorption Isotherm</div>
-                        $$\Gamma_2 = -\frac{1}{RT}\left(\frac{\partial\sigma}{\partial \ln c_2}\right)_{T,p}$$
-                    </div>
+                    <h3>Measurement Techniques and Computational Methods</h3>
+                    <p class="guide-text">Accurate determination of fluid properties requires sophisticated experimental techniques and computational methods that span multiple length and time scales, from molecular simulations to macroscopic measurements.</p>
+                    
+                    <h4>Density Measurement Methods</h4>
+                    <p class="guide-text">Precision density measurement employs various techniques depending on required accuracy and sample characteristics. Vibrating tube densitometers achieve accuracies of ±10⁻⁵ g/cm³, while Coriolis flow meters enable real-time density monitoring in industrial processes.</p>
+                    
+                    <h4>Viscosity Measurement Techniques</h4>
+                    <p class="guide-text">Viscometry encompasses capillary methods for Newtonian fluids, rotational rheometry for complex fluids, and falling ball techniques for high-viscosity systems. Each method has specific advantages and limitations depending on viscosity range and fluid behavior.</p>
+                    
+                    <h4>Computational Property Prediction</h4>
+                    <p class="guide-text">Modern computational methods include ab initio quantum calculations for small molecules, classical molecular dynamics for larger systems, and machine learning approaches for rapid property screening. These methods increasingly complement experimental measurements and enable property prediction for extreme conditions.</p>
                 </div>
 
-                <!-- Surface Tension - Research -->
+                <!-- Applications and Future Directions -->
                 <div class="guide-section">
-                    <span class="level-badge research">Research Frontiers</span>
-                    <h3>13. Advanced Interface Science</h3>
-                    <ul class="guide-list">
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Dynamic interfaces:</span> Time-dependent surface tension during adsorption and desorption processes.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Nanoscale effects:</span> $\sigma(R) = \sigma_\infty \left(1 - \frac{\delta}{R}\right)$ with Tolman length δ for small droplets.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Quantum droplets:</span> Balance between kinetic energy and mean-field interactions in ultracold gases.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Machine learning:</span> AI prediction of surface properties from molecular structure and composition.</span>
-                        </li>
-                    </ul>
-
-                    <div class="avoid-item">
-                        <span class="guide-text"><span class="guide-emphasis">Research challenges:</span> Multiscale modeling, dynamic wetting, biological interfaces, active matter surfaces</span>
-                    </div>
-                </div>
-
-                <!-- Future Directions -->
-                <div class="guide-section">
-                    <span class="level-badge research">Future Directions</span>
-                    <h3>14. Emerging Research Areas</h3>
-                    <ul class="guide-list">
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Multiphase properties:</span> Effective properties in complex mixtures and suspensions.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Active matter:</span> Properties of self-propelled particles and biological fluids.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Machine learning:</span> AI-driven property prediction and materials discovery.</span>
-                        </li>
-                        <li class="guide-item">
-                            <span class="guide-text"><span class="guide-emphasis">Quantum fluids:</span> Superfluid properties and quantum phase transitions.</span>
-                        </li>
-                    </ul>
-
-                    <div class="use-case-item">
-                        <span class="guide-text"><span class="guide-emphasis">Interdisciplinary impact:</span> Biophysics, materials science, planetary science, and energy applications</span>
-                    </div>
+                    <h3>Contemporary Applications and Future Directions</h3>
+                    <p class="guide-text">Understanding fluid properties at a fundamental level enables advances in diverse fields from nanotechnology to planetary science. Current research frontiers include active matter, quantum fluids, and machine learning-accelerated materials discovery.</p>
+                    
+                    <h4>Emerging Research Areas</h4>
+                    <p class="guide-text">Active matter systems exhibit effective viscosity that depends on activity level and collective motion. Quantum fluids display exotic properties like superfluidity and quantum turbulence. Nanoconfined fluids show dramatically altered transport properties due to surface effects and molecular layering.</p>
+                    
+                    <h4>Technological Applications</h4>
+                    <p class="guide-text">Microfluidics exploits surface tension and viscosity at microscales for precise fluid manipulation. Energy applications leverage fluid property optimization for enhanced heat transfer and reduced pumping losses. Biological systems utilize property gradients for transport and mixing in living organisms.</p>
+                    
+                    <h4>Future Research Directions</h4>
+                    <p class="guide-text">Machine learning approaches promise to revolutionize property prediction by learning complex relationships from experimental data and molecular simulations. Multiscale modeling techniques aim to bridge quantum mechanical calculations with continuum descriptions. Understanding property modification through external fields opens new possibilities for smart materials and adaptive systems.</p>
                 </div>
 
             </div>
@@ -817,6 +866,16 @@
     </div>
 
     <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
         // Smooth transitions for navigation
         function smoothTransition(url) {
             document.body.style.opacity = '0';
@@ -839,7 +898,7 @@
             smoothTransition(this.href);
         });
 
-        console.log('Fluid Properties - K-epsilon style Academy Guide loaded');
+        console.log('Fluid Properties - Academy Guide loaded with k-epsilon structure');
     </script>
 </body>
 </html>
