@@ -229,136 +229,25 @@
             letter-spacing: 0.01em;
         }
 
-        /* Featured Section - Like turbulence models */
-        .featured-section {
-            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(16, 185, 129, 0.08);
-            border-radius: 20px;
-            padding: 3rem;
-            margin-bottom: 3rem;
-            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.06);
-        }
-
-        .featured-section h3 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #10b981;
-            margin-bottom: 1.5rem;
-        }
-
-        .course-meta-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .meta-card {
-            background: rgba(16, 185, 129, 0.05);
-            border: 1px solid rgba(16, 185, 129, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .meta-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.1);
-        }
-
-        .meta-label {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #059669;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.5rem;
-        }
-
-        .meta-value {
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: #2d3748;
-        }
-
-        .learning-objectives {
-            background: rgba(16, 185, 129, 0.03);
-            border: 1px solid rgba(16, 185, 129, 0.1);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-top: 2rem;
-        }
-
-        .learning-objectives h4 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #059669;
-            margin-bottom: 1rem;
-        }
-
-        .objectives-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .objectives-list li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-            color: #4b5563;
-            line-height: 1.6;
-        }
-
-        .objectives-list li::before {
-            content: '◆';
-            position: absolute;
-            left: 0;
-            color: #10b981;
-            font-size: 0.8rem;
-        }
-
-        /* Models Section - Like turbulence models */
-        .models-section {
-            margin-bottom: 3rem;
-        }
-
-        .models-section h3 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #10b981;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        /* Models Grid - Like turbulence models */
-        .models-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        /* Sequential Learning Layout */
-        .learning-sequence {
-            max-width: 900px;
+        /* Simple Module List */
+        .module-list {
+            max-width: 800px;
             margin: 0 auto;
         }
 
+        /* Simple Module Items */
         .sequence-item {
-            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.9) 100%);
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(16, 185, 129, 0.08);
-            border-radius: 20px;
-            padding: 2.5rem;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
             cursor: pointer;
             box-shadow: 0 8px 32px rgba(16, 185, 129, 0.06);
-            display: flex;
-            flex-direction: column;
         }
 
         .sequence-item.available {
@@ -412,21 +301,21 @@
         .sequence-header {
             display: flex;
             align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .sequence-number {
-            width: 3rem;
-            height: 3rem;
+            width: 2.5rem;
+            height: 2.5rem;
             background: linear-gradient(135deg, #10b981, #059669);
-            border-radius: 50%;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: white;
-            margin-right: 1.5rem;
+            margin-right: 1rem;
             box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
             transition: all 0.4s ease;
             flex-shrink: 0;
@@ -454,22 +343,8 @@
         }
 
         .topic-icon {
-            width: 2.5rem;
-            height: 2.5rem;
-            background: linear-gradient(135deg, #10b981, #059669);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: white;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
-            transition: all 0.4s ease;
-        }
-
-        .sequence-item.coming-soon .topic-icon {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+            font-size: 1.5rem;
+            margin-right: 1rem;
         }
 
         .topic-info {
@@ -477,19 +352,17 @@
         }
 
         .topic-title {
-            font-size: 1.4rem;
-            font-weight: 400;
+            font-size: 1.3rem;
+            font-weight: 700;
             color: #2d3748;
             margin-bottom: 0.5rem;
-            font-family: 'Georgia', 'Times New Roman', serif;
         }
 
         .topic-description {
-            font-size: 1.05rem;
+            font-size: 1rem;
             color: #4a5568;
-            line-height: 1.7;
-            margin-bottom: 1.2rem;
-            text-align: justify;
+            line-height: 1.6;
+            margin-bottom: 1rem;
         }
 
         .topic-keywords {
@@ -606,60 +479,38 @@
                 font-size: 1.2rem;
             }
 
-            .featured-section {
-                padding: 2rem;
-                margin-bottom: 2rem;
-            }
-
-            .featured-section h3 {
-                font-size: 1.6rem;
-            }
-
-            .course-meta-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .learning-objectives {
-                padding: 1.5rem;
-            }
-
-            .models-section h3 {
-                font-size: 1.6rem;
-            }
-
-            .models-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
+            .module-list {
+                max-width: 100%;
             }
 
             .sequence-item {
-                padding: 2rem;
+                padding: 1.5rem;
+                margin-bottom: 1rem;
             }
 
             .sequence-header {
-                flex-wrap: wrap;
-                gap: 1rem;
+                align-items: flex-start;
+                gap: 0.5rem;
             }
 
             .sequence-number {
-                width: 2.5rem;
-                height: 2.5rem;
-                font-size: 1.1rem;
-            }
-
-            .topic-icon {
                 width: 2rem;
                 height: 2rem;
                 font-size: 1rem;
+                margin-right: 0.8rem;
+            }
+
+            .topic-icon {
+                font-size: 1.2rem;
+                margin-right: 0.5rem;
             }
 
             .topic-title {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
 
             .topic-description {
-                font-size: 1rem;
+                font-size: 0.95rem;
             }
         }
     </style>
@@ -698,46 +549,8 @@
             <div class="content-container">
                 <div class="content-wrapper">
 
-                    <!-- Course Overview Section -->
-                    <div class="featured-section guide-overview">
-                        <h3>Course Overview</h3>
-                        <p style="color: #4a5568; margin-bottom: 2rem; line-height: 1.7;">This course provides a comprehensive foundation in fluid mechanics fundamentals, progressing systematically from basic fluid properties to advanced concepts in dimensional analysis. Each module builds upon previous knowledge, ensuring a solid understanding of the physical principles governing fluid behavior.</p>
-                        
-                        <div class="course-meta-grid">
-                            <div class="meta-card">
-                                <div class="meta-label">Course Level</div>
-                                <div class="meta-value">Undergraduate</div>
-                            </div>
-                            <div class="meta-card">
-                                <div class="meta-label">Prerequisites</div>
-                                <div class="meta-value">Calculus, Basic Physics</div>
-                            </div>
-                            <div class="meta-card">
-                                <div class="meta-label">Duration</div>
-                                <div class="meta-value">6 Modules</div>
-                            </div>
-                        </div>
-
-                        <div class="learning-objectives">
-                            <h4>Learning Objectives</h4>
-                            <p style="color: #4a5568; margin-bottom: 1rem;">Upon completion of this course, students will be able to:</p>
-                            <ul class="objectives-list">
-                                <li>Understand and apply fundamental fluid properties in engineering calculations</li>
-                                <li>Recognize the validity and limitations of the continuum hypothesis</li>
-                                <li>Describe fluid motion using kinematic concepts and mathematical tools</li>
-                                <li>Apply conservation principles to solve fluid mechanics problems</li>
-                                <li>Analyze rotational flow phenomena and vorticity dynamics</li>
-                                <li>Utilize dimensional analysis for problem simplification and scaling</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Module Sequence Section -->
-                    <div class="models-section">
-                        <h3>Course Modules</h3>
-                        <p style="color: #4a5568; margin-bottom: 2rem; line-height: 1.6;">Complete modules in the prescribed sequence for optimal learning progression. Each module builds upon concepts from previous modules.</p>
-                        
-                        <div class="models-grid">
+                    <!-- Simple Module List -->
+                    <div class="module-list">
                             
                             <!-- Module 1: Fluid Properties -->
                             <div class="sequence-item available" onclick="navigateToTopic('fluid/fundamentals/fluid-properties.html')">
