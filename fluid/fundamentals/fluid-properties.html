@@ -431,7 +431,7 @@
             <!-- Page Header -->
             <div class="page-header">
                 <h1>Fluid Properties</h1>
-                <p class="model-subtitle">Fundamental physical properties that govern fluid behavior and transport phenomena</p>
+                <p class="model-subtitle">Essential physical properties for understanding fluid behavior in engineering applications</p>
             </div>
 
             <!-- Academy Guide Content -->
@@ -439,49 +439,53 @@
                 
                 <!-- Introduction -->
                 <div class="guide-section">
-                    <h3>Fundamental Concepts and Physical Foundations</h3>
-                    <p class="guide-text">Fluid properties are intensive thermodynamic variables that characterize the state and behavior of fluids at the continuum scale. These properties emerge from molecular-scale interactions and statistical mechanics, providing the foundation for all fluid mechanics analysis through constitutive relations and transport equations.</p>
+                    <h3>Introduction to Fluid Properties</h3>
+                    <p class="guide-text">Fluid properties are physical characteristics that describe how fluids behave under different conditions. Understanding these properties is essential for solving engineering problems involving fluid flow, heat transfer, and mass transport in practical applications.</p>
                     
-                    <h4>Property Classification</h4>
-                    <p class="guide-text">Fluid properties can be systematically classified into thermodynamic properties (density, temperature, pressure) that define the equilibrium state, and transport properties (viscosity, thermal conductivity, diffusivity) that govern non-equilibrium processes and momentum, energy, and mass transfer rates.</p>
+                    <h4>Why Fluid Properties Matter</h4>
+                    <p class="guide-text">In engineering design, fluid properties determine how fluids will behave in pipes, pumps, heat exchangers, and other equipment. Knowing these properties allows engineers to predict pressure drops, calculate required pump power, design efficient heat transfer systems, and ensure safe operation of fluid handling equipment.</p>
                     
-                    <h4>Continuum Hypothesis</h4>
-                    <p class="guide-text">The continuum assumption allows fluid properties to be defined as continuous functions of space and time, despite the discrete molecular nature of matter. This approach is valid when the characteristic length scale of the flow is much larger than the molecular mean free path, typically satisfied for length scales greater than 10⁻⁶ m in gases at standard conditions.</p>
+                    <h4>Types of Fluid Properties</h4>
+                    <p class="guide-text">We classify fluid properties into two main categories: thermodynamic properties (like density and temperature) that describe the fluid's state, and transport properties (like viscosity) that describe how the fluid moves and transfers momentum, heat, and mass.</p>
+                    
+                    <h4>The Continuum Approach</h4>
+                    <p class="guide-text">In engineering applications, we treat fluids as continuous materials rather than collections of individual molecules. This continuum approach is valid for most practical engineering problems and allows us to use calculus and differential equations to analyze fluid behavior.</p>
                 </div>
 
                 <!-- Density Section -->
                 <div class="guide-section">
-                    <h3>Density: Mass Distribution and Molecular Foundations</h3>
-                    <p class="guide-text">Density represents the local mass concentration in a fluid and serves as the primary link between molecular-scale properties and macroscopic behavior. Understanding density variations is fundamental to buoyancy effects, compressible flow analysis, and multiphase systems.</p>
+                    <h3>Density: Mass per Unit Volume</h3>
+                    <p class="guide-text">Density is one of the most fundamental properties of a fluid, representing how much mass is contained in a given volume. It affects buoyancy forces, pressure variations in static fluids, and is essential for mass conservation calculations in fluid flow problems.</p>
                     
-                    <h4>Mathematical Definition</h4>
+                    <h4>Basic Definition</h4>
                     <div class="equation-block">
-                        $$\rho = \lim_{\Delta V \to \Delta V'} \frac{\Delta m}{\Delta V}$$
+                        $$\rho = \frac{m}{V}$$
                     </div>
                     
-                    <p class="guide-text">where $\Delta V'$ represents the smallest volume for which the continuum assumption remains valid. This limit ensures that density is well-defined while maintaining sufficient molecular content for statistical averaging.</p>
+                    <p class="guide-text">This simple ratio tells us how tightly packed the fluid molecules are. Denser fluids like mercury have more mass in the same volume compared to lighter fluids like air.</p>
                     
                     <div class="term-definitions">
                         <h4>Variable Definitions:</h4>
                         <div class="term-item"><strong>ρ:</strong> Density (kg/m³)</div>
-                        <div class="term-item"><strong>m:</strong> Mass contained in volume element (kg)</div>
-                        <div class="term-item"><strong>V:</strong> Volume element (m³)</div>
-                        <div class="term-item"><strong>ΔV':</strong> Minimum volume maintaining continuum validity (m³)</div>
+                        <div class="term-item"><strong>m:</strong> Mass of fluid (kg)</div>
+                        <div class="term-item"><strong>V:</strong> Volume of fluid (m³)</div>
                     </div>
                     
-                    <h4>Specific Volume Relationship</h4>
+                    <h4>Specific Volume</h4>
                     <div class="equation-block">
                         $$v = \frac{1}{\rho} = \frac{V}{m}$$
                     </div>
                     
-                    <p class="guide-text">Specific volume $v$ represents the volume occupied per unit mass and is the natural variable in many thermodynamic relations. The reciprocal relationship between density and specific volume is fundamental to equation of state formulations.</p>
+                    <p class="guide-text">Specific volume tells us how much space one kilogram of fluid occupies. It's simply the inverse of density and is useful in thermodynamic calculations.</p>
                     
-                    <h4>Temperature Dependence and Thermal Expansion</h4>
+                    <h4>How Density Changes with Temperature</h4>
+                    <p class="guide-text">Most fluids become less dense when heated because thermal expansion increases their volume while mass stays constant:</p>
+                    
                     <div class="equation-block">
                         $$\rho(T) = \rho_0 [1 - \beta(T - T_0)]$$
                     </div>
                     
-                    <p class="guide-text">where the thermal expansion coefficient is defined as:</p>
+                    <p class="guide-text">where $\beta$ is the thermal expansion coefficient that tells us how much the density changes per degree of temperature change:</p>
                     
                     <div class="equation-block">
                         $$\beta = -\frac{1}{\rho} \left(\frac{\partial \rho}{\partial T}\right)_p$$
@@ -491,101 +495,112 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Fluid</th>
+                                    <th>Common Fluids</th>
                                     <th>Density (kg/m³)</th>
-                                    <th>β (K⁻¹)</th>
-                                    <th>Temperature (°C)</th>
+                                    <th>Typical Uses</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Water</td>
-                                    <td>998.2</td>
-                                    <td>2.1 × 10⁻⁴</td>
-                                    <td>20</td>
+                                    <td>Water (20°C)</td>
+                                    <td>998</td>
+                                    <td>Cooling systems, hydraulics</td>
                                 </tr>
                                 <tr>
-                                    <td>Air</td>
+                                    <td>Air (15°C)</td>
                                     <td>1.225</td>
-                                    <td>3.4 × 10⁻³</td>
-                                    <td>15</td>
+                                    <td>HVAC, pneumatics</td>
                                 </tr>
                                 <tr>
-                                    <td>Ethanol</td>
-                                    <td>789.3</td>
-                                    <td>1.1 × 10⁻³</td>
-                                    <td>20</td>
+                                    <td>Gasoline</td>
+                                    <td>720</td>
+                                    <td>Automotive fuel systems</td>
                                 </tr>
                                 <tr>
-                                    <td>Mercury</td>
-                                    <td>13534</td>
-                                    <td>1.8 × 10⁻⁴</td>
-                                    <td>20</td>
+                                    <td>Engine Oil</td>
+                                    <td>880</td>
+                                    <td>Lubrication systems</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- Statistical Mechanics of Density -->
+                <!-- Gas Density -->
                 <div class="guide-section">
-                    <h3>Statistical Mechanical Foundation</h3>
-                    <p class="guide-text">From molecular kinetic theory, density relates directly to the number density and average molecular mass of the fluid constituents. This connection provides the bridge between microscopic molecular properties and macroscopic fluid behavior.</p>
+                    <h3>Gas Density and the Ideal Gas Law</h3>
+                    <p class="guide-text">For gases, density is strongly dependent on both pressure and temperature. Understanding this relationship is crucial for analyzing gas flow in pipes, compressors, and atmospheric applications.</p>
                     
-                    <h4>Molecular Expression</h4>
+                    <h4>Ideal Gas Density</h4>
                     <div class="equation-block">
-                        $$\rho = n \langle m \rangle = \frac{N}{V} \langle m \rangle$$
+                        $$\rho = \frac{pM}{RT}$$
                     </div>
                     
-                    <p class="guide-text">For multicomponent systems, the total density becomes the sum of partial densities:</p>
-                    
-                    <div class="equation-block">
-                        $$\rho = \sum_i \rho_i = \sum_i n_i m_i$$
-                    </div>
+                    <p class="guide-text">This fundamental relationship shows that gas density increases with pressure and decreases with temperature. The molecular weight M determines how heavy the gas molecules are.</p>
                     
                     <div class="term-definitions">
-                        <h4>Statistical Variables:</h4>
-                        <div class="term-item"><strong>n:</strong> Number density (molecules/m³)</div>
-                        <div class="term-item"><strong>N:</strong> Total number of molecules</div>
-                        <div class="term-item"><strong>⟨m⟩:</strong> Average molecular mass (kg)</div>
-                        <div class="term-item"><strong>nᵢ:</strong> Number density of species i</div>
-                        <div class="term-item"><strong>mᵢ:</strong> Molecular mass of species i</div>
+                        <h4>Ideal Gas Variables:</h4>
+                        <div class="term-item"><strong>p:</strong> Absolute pressure (Pa)</div>
+                        <div class="term-item"><strong>M:</strong> Molecular weight (kg/mol)</div>
+                        <div class="term-item"><strong>R:</strong> Universal gas constant (8314 J/mol·K)</div>
+                        <div class="term-item"><strong>T:</strong> Absolute temperature (K)</div>
                     </div>
                     
-                    <h4>Equation of State Relations</h4>
-                    <p class="guide-text">The ideal gas law provides the simplest connection between density and thermodynamic variables:</p>
+                    <h4>Practical Applications</h4>
+                    <p class="guide-text">The ideal gas law is remarkably accurate for most engineering calculations involving gases at moderate pressures and temperatures. It's used to calculate air density in HVAC systems, gas flow rates in pipelines, and fuel-air mixing ratios in combustion engines.</p>
                     
-                    <div class="equation-block">
-                        $$\rho = \frac{pM}{RT} = \frac{pm}{k_B T}$$
+                    <div class="constants-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Gas</th>
+                                    <th>Molecular Weight (kg/mol)</th>
+                                    <th>Density at STP (kg/m³)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Air</td>
+                                    <td>0.02897</td>
+                                    <td>1.225</td>
+                                </tr>
+                                <tr>
+                                    <td>Oxygen</td>
+                                    <td>0.03200</td>
+                                    <td>1.429</td>
+                                </tr>
+                                <tr>
+                                    <td>Nitrogen</td>
+                                    <td>0.02801</td>
+                                    <td>1.251</td>
+                                </tr>
+                                <tr>
+                                    <td>Carbon Dioxide</td>
+                                    <td>0.04401</td>
+                                    <td>1.977</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    
-                    <p class="guide-text">For real gases, the Van der Waals equation accounts for molecular size and intermolecular forces:</p>
-                    
-                    <div class="equation-block">
-                        $$\left(p + \frac{a}{\bar{v}^2}\right)(\bar{v} - b) = RT$$
-                    </div>
-                    
-                    <p class="guide-text">which can be rearranged to give density explicitly as a function of pressure and temperature, though the resulting expression is implicit and requires iterative solution methods.</p>
                 </div>
 
                 <!-- Viscosity Section -->
                 <div class="guide-section">
-                    <h3>Viscosity: Molecular Momentum Transfer</h3>
-                    <p class="guide-text">Viscosity quantifies a fluid's resistance to deformation and represents the macroscopic manifestation of molecular momentum transfer processes. The viscous stress arises from molecular collisions and intermolecular forces, creating internal friction that opposes relative motion between fluid layers.</p>
+                    <h3>Viscosity: Resistance to Flow</h3>
+                    <p class="guide-text">Viscosity measures how much a fluid resists flowing. Think of honey versus water - honey has high viscosity (flows slowly) while water has low viscosity (flows easily). This property is crucial for calculating pressure drops in pipes and determining pump power requirements.</p>
                     
                     <h4>Newton's Law of Viscosity</h4>
                     <div class="equation-block">
                         $$\tau = \mu \frac{du}{dy}$$
                     </div>
                     
-                    <p class="guide-text">This fundamental relation defines Newtonian fluids, where the shear stress is linearly proportional to the velocity gradient. The proportionality constant μ is the dynamic viscosity, an intrinsic property of the fluid.</p>
+                    <p class="guide-text">This equation tells us that the shear stress (force per area) in a fluid is proportional to how fast the velocity changes across the fluid layers. The proportionality constant μ is the dynamic viscosity.</p>
                     
                     <div class="term-definitions">
                         <h4>Viscosity Variables:</h4>
-                        <div class="term-item"><strong>τ:</strong> Shear stress (Pa)</div>
-                        <div class="term-item"><strong>μ:</strong> Dynamic viscosity (Pa·s)</div>
-                        <div class="term-item"><strong>ν:</strong> Kinematic viscosity (m²/s)</div>
-                        <div class="term-item"><strong>du/dy:</strong> Velocity gradient (s⁻¹)</div>
+                        <div class="term-item"><strong>τ:</strong> Shear stress - force per unit area (Pa)</div>
+                        <div class="term-item"><strong>μ:</strong> Dynamic viscosity (Pa·s or kg/m·s)</div>
+                        <div class="term-item"><strong>du/dy:</strong> Velocity gradient - how fast velocity changes (s⁻¹)</div>
                     </div>
                     
                     <h4>Kinematic Viscosity</h4>
@@ -593,129 +608,183 @@
                         $$\nu = \frac{\mu}{\rho}$$
                     </div>
                     
-                    <p class="guide-text">Kinematic viscosity represents momentum diffusivity and appears naturally in the Navier-Stokes equations. It has dimensions of area per time (m²/s), analogous to thermal diffusivity and mass diffusivity in heat and mass transfer.</p>
+                    <p class="guide-text">Kinematic viscosity combines viscosity and density into a single property. It appears frequently in fluid mechanics equations and has units of m²/s. It represents how fast momentum spreads through the fluid.</p>
                     
-                    <h4>Generalized Viscous Stress Tensor</h4>
-                    <p class="guide-text">For three-dimensional flow, the complete viscous stress tensor is:</p>
+                    <h4>Temperature Effects on Viscosity</h4>
+                    <p class="guide-text">Viscosity changes dramatically with temperature, but differently for liquids and gases:</p>
                     
-                    <div class="equation-block">
-                        $$\tau_{ij} = \mu \left(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}\right) + \lambda \delta_{ij} \frac{\partial u_k}{\partial x_k}$$
-                    </div>
-                    
-                    <p class="guide-text">where λ is the second viscosity coefficient, related to bulk viscosity effects in compressible flows. For incompressible flows, the second term vanishes due to continuity.</p>
-                </div>
-
-                <!-- Kinetic Theory of Viscosity -->
-                <div class="guide-section">
-                    <h3>Kinetic Theory and Molecular Origins</h3>
-                    <p class="guide-text">The molecular basis of viscosity emerges from kinetic theory, which relates macroscopic transport properties to molecular collision processes and intermolecular potential functions.</p>
-                    
-                    <h4>Chapman-Enskog Theory</h4>
-                    <p class="guide-text">Rigorous kinetic theory provides the exact expression for gas viscosity:</p>
-                    
-                    <div class="equation-block">
-                        $$\mu = \frac{5}{16} \frac{\sqrt{mk_BT/\pi}}{\sigma^2 \Omega^{(2,2)*}(T^*)}$$
-                    </div>
-                    
-                    <div class="term-definitions">
-                        <h4>Kinetic Theory Parameters:</h4>
-                        <div class="term-item"><strong>m:</strong> Molecular mass (kg)</div>
-                        <div class="term-item"><strong>kᵦ:</strong> Boltzmann constant (1.381 × 10⁻²³ J/K)</div>
-                        <div class="term-item"><strong>σ:</strong> Collision diameter (m)</div>
-                        <div class="term-item"><strong>Ω⁽²'²⁾*:</strong> Collision integral (dimensionless)</div>
-                        <div class="term-item"><strong>T*:</strong> Reduced temperature = kᵦT/ε</div>
-                    </div>
-                    
-                    <h4>Temperature Dependence</h4>
-                    <p class="guide-text">For gases, viscosity increases with temperature due to increased molecular motion:</p>
-                    
-                    <div class="equation-block">
-                        $$\mu \propto T^{0.5 \text{ to } 1.0}$$
-                    </div>
-                    
-                    <p class="guide-text">For liquids, viscosity decreases exponentially with temperature due to reduced intermolecular binding:</p>
-                    
-                    <div class="equation-block">
-                        $$\mu = A e^{E_a/RT}$$
-                    </div>
-                    
-                    <p class="guide-text">where $E_a$ is the activation energy for viscous flow, typically 10-50 kJ/mol for common liquids.</p>
-                </div>
-
-                <!-- Compressibility Section -->
-                <div class="guide-section">
-                    <h3>Compressibility: Elastic Response and Wave Propagation</h3>
-                    <p class="guide-text">Compressibility quantifies the volumetric response of a fluid to pressure changes and is intimately connected to the speed of sound and acoustic wave propagation. This property becomes critical in high-speed flows where Mach number effects are significant.</p>
-                    
-                    <h4>Fundamental Definitions</h4>
-                    <p class="guide-text">Isothermal compressibility measures volume change at constant temperature:</p>
-                    
-                    <div class="equation-block">
-                        $$\kappa_T = -\frac{1}{V}\left(\frac{\partial V}{\partial p}\right)_T = \frac{1}{\rho}\left(\frac{\partial \rho}{\partial p}\right)_T$$
-                    </div>
-                    
-                    <p class="guide-text">Adiabatic compressibility applies to rapid processes where heat transfer is negligible:</p>
-                    
-                    <div class="equation-block">
-                        $$\kappa_S = -\frac{1}{V}\left(\frac{\partial V}{\partial p}\right)_S = \frac{1}{\rho}\left(\frac{\partial \rho}{\partial p}\right)_S$$
-                    </div>
-                    
-                    <div class="term-definitions">
-                        <h4>Compressibility Variables:</h4>
-                        <div class="term-item"><strong>κₜ:</strong> Isothermal compressibility (Pa⁻¹)</div>
-                        <div class="term-item"><strong>κₛ:</strong> Adiabatic compressibility (Pa⁻¹)</div>
-                        <div class="term-item"><strong>K:</strong> Bulk modulus = 1/κ (Pa)</div>
-                        <div class="term-item"><strong>c:</strong> Speed of sound (m/s)</div>
-                    </div>
-                    
-                    <h4>Speed of Sound and Wave Theory</h4>
-                    <div class="equation-block">
-                        $$c = \sqrt{\frac{1}{\rho\kappa_S}} = \sqrt{\frac{K_S}{\rho}}$$
-                    </div>
-                    
-                    <p class="guide-text">For ideal gases, this simplifies to:</p>
-                    
-                    <div class="equation-block">
-                        $$c = \sqrt{\gamma \frac{p}{\rho}} = \sqrt{\gamma RT}$$
-                    </div>
-                    
-                    <p class="guide-text">where $\gamma = c_p/c_v$ is the heat capacity ratio. This fundamental relation connects thermodynamic properties to acoustic wave propagation and forms the basis for compressible flow analysis.</p>
-                    
-                    <h4>Thermodynamic Relations</h4>
-                    <p class="guide-text">Maxwell relations connect isothermal and adiabatic compressibilities:</p>
-                    
-                    <div class="equation-block">
-                        $$\frac{\kappa_T}{\kappa_S} = \gamma = \frac{c_p}{c_v}$$
-                    </div>
+                    <p class="guide-text"><strong>Liquids:</strong> Viscosity decreases as temperature increases (easier to pour hot syrup than cold)</p>
+                    <p class="guide-text"><strong>Gases:</strong> Viscosity increases as temperature increases (hotter gases are "stickier")</p>
                     
                     <div class="constants-table">
                         <table>
                             <thead>
                                 <tr>
                                     <th>Fluid</th>
-                                    <th>κₜ (Pa⁻¹)</th>
-                                    <th>c (m/s)</th>
-                                    <th>γ</th>
+                                    <th>Dynamic Viscosity μ (Pa·s)</th>
+                                    <th>Kinematic Viscosity ν (m²/s)</th>
+                                    <th>Temperature (°C)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Water (20°C)</td>
+                                    <td>Water</td>
+                                    <td>1.00 × 10⁻³</td>
+                                    <td>1.00 × 10⁻⁶</td>
+                                    <td>20</td>
+                                </tr>
+                                <tr>
+                                    <td>Air</td>
+                                    <td>1.81 × 10⁻⁵</td>
+                                    <td>1.48 × 10⁻⁵</td>
+                                    <td>15</td>
+                                </tr>
+                                <tr>
+                                    <td>Engine Oil</td>
+                                    <td>0.10 - 0.50</td>
+                                    <td>1.1 × 10⁻⁴ - 5.7 × 10⁻⁴</td>
+                                    <td>20</td>
+                                </tr>
+                                <tr>
+                                    <td>Glycerin</td>
+                                    <td>1.49</td>
+                                    <td>1.18 × 10⁻³</td>
+                                    <td>20</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Viscosity Applications -->
+                <div class="guide-section">
+                    <h3>Viscosity in Engineering Applications</h3>
+                    <p class="guide-text">Viscosity is essential for many engineering calculations. It determines pressure losses in pipes, power requirements for pumps, and heat transfer rates in heat exchangers.</p>
+                    
+                    <h4>Pressure Drop in Pipes</h4>
+                    <p class="guide-text">For laminar flow in circular pipes, the pressure drop depends directly on viscosity:</p>
+                    
+                    <div class="equation-block">
+                        $$\Delta p = \frac{32 \mu V L}{D^2}$$
+                    </div>
+                    
+                    <div class="term-definitions">
+                        <h4>Pipeline Variables:</h4>
+                        <div class="term-item"><strong>Δp:</strong> Pressure drop along pipe (Pa)</div>
+                        <div class="term-item"><strong>V:</strong> Average velocity (m/s)</div>
+                        <div class="term-item"><strong>L:</strong> Pipe length (m)</div>
+                        <div class="term-item"><strong>D:</strong> Pipe diameter (m)</div>
+                    </div>
+                    
+                    <h4>Reynolds Number</h4>
+                    <p class="guide-text">The Reynolds number uses kinematic viscosity to predict flow behavior:</p>
+                    
+                    <div class="equation-block">
+                        $$Re = \frac{VD}{\nu} = \frac{\rho VD}{\mu}$$
+                    </div>
+                    
+                    <p class="guide-text">This dimensionless number tells us whether flow will be laminar (Re < 2300) or turbulent (Re > 4000) in pipes.</p>
+                    
+                    <h4>Common Viscosity Values</h4>
+                    <p class="guide-text">Understanding typical viscosity ranges helps in engineering design:</p>
+                    
+                    <div class="constants-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fluid Type</th>
+                                    <th>Viscosity Range (Pa·s)</th>
+                                    <th>Examples</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Gases</td>
+                                    <td>10⁻⁶ to 10⁻⁴</td>
+                                    <td>Air, steam, natural gas</td>
+                                </tr>
+                                <tr>
+                                    <td>Water-like liquids</td>
+                                    <td>10⁻³ to 10⁻²</td>
+                                    <td>Water, alcohol, gasoline</td>
+                                </tr>
+                                <tr>
+                                    <td>Oils</td>
+                                    <td>10⁻² to 1</td>
+                                    <td>Engine oil, hydraulic fluid</td>
+                                </tr>
+                                <tr>
+                                    <td>Thick liquids</td>
+                                    <td>1 to 100</td>
+                                    <td>Honey, glycerin, molasses</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Compressibility Section -->
+                <div class="guide-section">
+                    <h3>Compressibility: How Much Fluids Squeeze</h3>
+                    <p class="guide-text">Compressibility tells us how much a fluid's volume changes when pressure is applied. This property is important for understanding gas behavior, hydraulic systems, and high-speed flows where pressure changes are significant.</p>
+                    
+                    <h4>What is Compressibility?</h4>
+                    <p class="guide-text">Compressibility measures how "squishy" a fluid is. Gases are highly compressible (easy to squeeze), while liquids are nearly incompressible (very hard to squeeze).</p>
+                    
+                    <div class="equation-block">
+                        $$\beta = -\frac{1}{V}\frac{\Delta V}{\Delta p}$$
+                    </div>
+                    
+                    <p class="guide-text">The negative sign ensures that compressibility is positive since volume decreases when pressure increases.</p>
+                    
+                    <div class="term-definitions">
+                        <h4>Compressibility Variables:</h4>
+                        <div class="term-item"><strong>β:</strong> Compressibility (Pa⁻¹)</div>
+                        <div class="term-item"><strong>ΔV:</strong> Volume change (m³)</div>
+                        <div class="term-item"><strong>Δp:</strong> Pressure change (Pa)</div>
+                        <div class="term-item"><strong>K:</strong> Bulk modulus = 1/β (Pa)</div>
+                    </div>
+                    
+                    <h4>Speed of Sound Connection</h4>
+                    <p class="guide-text">Compressibility is directly related to how fast sound travels through the fluid:</p>
+                    
+                    <div class="equation-block">
+                        $$c = \sqrt{\frac{K}{\rho}}$$
+                    </div>
+                    
+                    <p class="guide-text">Stiffer fluids (low compressibility, high K) conduct sound faster. This is why sound travels much faster in water than in air.</p>
+                    
+                    <h4>Practical Implications</h4>
+                    <p class="guide-text">In hydraulic systems, low compressibility of oil provides quick response. In gas systems, high compressibility allows for energy storage but requires careful pressure calculations.</p>
+                    
+                    <div class="constants-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fluid</th>
+                                    <th>Compressibility β (Pa⁻¹)</th>
+                                    <th>Sound Speed (m/s)</th>
+                                    <th>Behavior</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Water</td>
                                     <td>4.6 × 10⁻¹⁰</td>
                                     <td>1482</td>
-                                    <td>1.01</td>
+                                    <td>Nearly incompressible</td>
                                 </tr>
                                 <tr>
-                                    <td>Air (15°C)</td>
+                                    <td>Air</td>
                                     <td>7.0 × 10⁻⁶</td>
                                     <td>340</td>
-                                    <td>1.40</td>
+                                    <td>Highly compressible</td>
                                 </tr>
                                 <tr>
-                                    <td>Ethanol (20°C)</td>
-                                    <td>1.1 × 10⁻⁹</td>
-                                    <td>1162</td>
-                                    <td>1.13</td>
+                                    <td>Hydraulic Oil</td>
+                                    <td>6.9 × 10⁻¹⁰</td>
+                                    <td>1200</td>
+                                    <td>Nearly incompressible</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -724,141 +793,185 @@
 
                 <!-- Surface Tension Section -->
                 <div class="guide-section">
-                    <h3>Surface Tension: Interface Energy and Molecular Cohesion</h3>
-                    <p class="guide-text">Surface tension arises from the asymmetric molecular environment at fluid interfaces, where molecules experience unbalanced intermolecular forces compared to the bulk phase. This property governs capillary phenomena, droplet formation, and wetting behavior.</p>
+                    <h3>Surface Tension: Forces at Fluid Interfaces</h3>
+                    <p class="guide-text">Surface tension is the force that acts along the surface of a liquid, trying to minimize the surface area. It's what allows insects to walk on water and causes water to form droplets rather than spreading out completely.</p>
                     
-                    <h4>Fundamental Definition</h4>
+                    <h4>Basic Definition</h4>
                     <div class="equation-block">
-                        $$\sigma = \frac{F}{L} = \frac{\partial E}{\partial A}$$
+                        $$\sigma = \frac{F}{L}$$
                     </div>
                     
-                    <p class="guide-text">Surface tension can be interpreted as either force per unit length acting along the interface or energy required to create unit area of new interface. Both interpretations are thermodynamically equivalent and lead to the same numerical values.</p>
-                    
-                    <h4>Young-Laplace Equation</h4>
-                    <p class="guide-text">The pressure difference across a curved interface is given by:</p>
-                    
-                    <div class="equation-block">
-                        $$\Delta p = \sigma \left(\frac{1}{R_1} + \frac{1}{R_2}\right) = \sigma \kappa$$
-                    </div>
-                    
-                    <p class="guide-text">where $\kappa$ is the mean curvature and $R_1, R_2$ are the principal radii of curvature. This equation is fundamental to understanding droplet stability, bubble dynamics, and capillary phenomena.</p>
+                    <p class="guide-text">Surface tension is the force per unit length acting along a liquid surface. Think of it as an invisible "skin" on the liquid surface that resists being stretched.</p>
                     
                     <div class="term-definitions">
-                        <h4>Curvature Parameters:</h4>
-                        <div class="term-item"><strong>R₁, R₂:</strong> Principal radii of curvature (m)</div>
-                        <div class="term-item"><strong>κ:</strong> Mean curvature = 1/R₁ + 1/R₂ (m⁻¹)</div>
-                        <div class="term-item"><strong>Δp:</strong> Pressure jump across interface (Pa)</div>
-                        <div class="term-item"><strong>σ:</strong> Surface tension coefficient (N/m)</div>
+                        <h4>Surface Tension Variables:</h4>
+                        <div class="term-item"><strong>σ:</strong> Surface tension (N/m)</div>
+                        <div class="term-item"><strong>F:</strong> Force acting along surface (N)</div>
+                        <div class="term-item"><strong>L:</strong> Length over which force acts (m)</div>
                     </div>
                     
-                    <h4>Capillary Rise Phenomenon</h4>
+                    <h4>Pressure Inside Droplets and Bubbles</h4>
+                    <p class="guide-text">Surface tension creates higher pressure inside curved interfaces:</p>
+                    
+                    <div class="equation-block">
+                        $$\Delta p = \frac{2\sigma}{R}$$
+                    </div>
+                    
+                    <p class="guide-text">For a spherical droplet or bubble with radius R. Smaller droplets have higher internal pressure.</p>
+                    
+                    <h4>Capillary Rise in Tubes</h4>
                     <div class="equation-block">
                         $$h = \frac{2\sigma \cos\theta}{\rho g r}$$
                     </div>
                     
-                    <p class="guide-text">where θ is the contact angle measuring wetting behavior. Complete wetting corresponds to θ = 0°, while θ = 180° indicates complete non-wetting. Most practical systems exhibit intermediate contact angles determined by the balance of adhesive and cohesive forces.</p>
-                </div>
-
-                <!-- Advanced Topics -->
-                <div class="guide-section">
-                    <h3>Advanced Topics and Research Applications</h3>
-                    <p class="guide-text">Modern research in fluid properties extends beyond classical continuum mechanics to encompass quantum effects, critical phenomena, and complex multiphase systems that challenge traditional theoretical frameworks.</p>
+                    <p class="guide-text">This equation predicts how high a liquid will rise in a thin tube due to surface tension effects.</p>
                     
-                    <h4>Critical Phenomena and Scaling Laws</h4>
-                    <p class="guide-text">Near the critical point, fluid properties exhibit universal scaling behavior independent of molecular details:</p>
-                    
-                    <div class="equation-block">
-                        $$\rho_l - \rho_g = B |T - T_c|^{\beta}$$
+                    <div class="term-definitions">
+                        <h4>Capillary Variables:</h4>
+                        <div class="term-item"><strong>h:</strong> Height of liquid rise (m)</div>
+                        <div class="term-item"><strong>θ:</strong> Contact angle (degrees)</div>
+                        <div class="term-item"><strong>r:</strong> Tube radius (m)</div>
+                        <div class="term-item"><strong>g:</strong> Gravitational acceleration (9.81 m/s²)</div>
                     </div>
-                    
-                    <p class="guide-text">where $\beta \approx 0.325$ is a universal critical exponent. Similar scaling laws govern viscosity, compressibility, and surface tension near critical conditions.</p>
-                    
-                    <h4>Molecular Dynamics and Green-Kubo Relations</h4>
-                    <p class="guide-text">Transport properties can be computed from equilibrium molecular dynamics using fluctuation-dissipation relations:</p>
-                    
-                    <div class="equation-block">
-                        $$\mu = \frac{V}{k_B T} \int_0^\infty \langle P_{xy}(0) P_{xy}(t) \rangle dt$$
-                    </div>
-                    
-                    <p class="guide-text">where $P_{xy}$ represents off-diagonal components of the pressure tensor. These relations provide exact expressions for transport properties in terms of equilibrium fluctuations.</p>
-                    
-                    <h4>Multiphase and Complex Systems</h4>
-                    <p class="guide-text">Effective properties in multiphase systems require careful consideration of phase interactions:</p>
-                    
-                    <div class="equation-block">
-                        $$\rho_{eff} = \sum_i \alpha_i \rho_i, \quad \mu_{eff} = \mu_0(1 + 2.5\phi + 6.2\phi^2 + \mathcal{O}(\phi^3))$$
-                    </div>
-                    
-                    <p class="guide-text">where $\alpha_i$ are volume fractions and the viscosity expression represents Einstein's result for dilute suspensions, with higher-order corrections for concentrated systems.</p>
                     
                     <div class="constants-table">
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Property</th>
-                                    <th>Classical Range</th>
-                                    <th>Quantum Effects</th>
-                                    <th>Critical Behavior</th>
+                                    <th>Liquid</th>
+                                    <th>Surface Tension (N/m)</th>
+                                    <th>Contact Angle with Glass</th>
+                                    <th>Wetting Behavior</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Density</td>
-                                    <td>Equation of state</td>
-                                    <td>Quantum statistics</td>
-                                    <td>Power law scaling</td>
+                                    <td>Water</td>
+                                    <td>0.0728</td>
+                                    <td>0° (clean glass)</td>
+                                    <td>Wets glass</td>
                                 </tr>
                                 <tr>
-                                    <td>Viscosity</td>
-                                    <td>Kinetic theory</td>
-                                    <td>Superfluid transition</td>
-                                    <td>Critical divergence</td>
+                                    <td>Mercury</td>
+                                    <td>0.486</td>
+                                    <td>140°</td>
+                                    <td>Does not wet glass</td>
                                 </tr>
                                 <tr>
-                                    <td>Compressibility</td>
-                                    <td>Thermodynamic</td>
-                                    <td>Zero-point motion</td>
-                                    <td>Critical opalescence</td>
-                                </tr>
-                                <tr>
-                                    <td>Surface Tension</td>
-                                    <td>Capillary theory</td>
-                                    <td>Tolman length</td>
-                                    <td>Interface fluctuations</td>
+                                    <td>Ethanol</td>
+                                    <td>0.0223</td>
+                                    <td>0°</td>
+                                    <td>Wets glass</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- Experimental and Computational Methods -->
+                <!-- Property Relationships -->
                 <div class="guide-section">
-                    <h3>Measurement Techniques and Computational Methods</h3>
-                    <p class="guide-text">Accurate determination of fluid properties requires sophisticated experimental techniques and computational methods that span multiple length and time scales, from molecular simulations to macroscopic measurements.</p>
+                    <h3>How Properties Work Together</h3>
+                    <p class="guide-text">Fluid properties don't work in isolation - they're interconnected and affect each other. Understanding these relationships helps engineers predict fluid behavior in complex systems.</p>
                     
-                    <h4>Density Measurement Methods</h4>
-                    <p class="guide-text">Precision density measurement employs various techniques depending on required accuracy and sample characteristics. Vibrating tube densitometers achieve accuracies of ±10⁻⁵ g/cm³, while Coriolis flow meters enable real-time density monitoring in industrial processes.</p>
+                    <h4>Density and Buoyancy</h4>
+                    <p class="guide-text">When fluids of different densities are present, buoyancy forces develop:</p>
                     
-                    <h4>Viscosity Measurement Techniques</h4>
-                    <p class="guide-text">Viscometry encompasses capillary methods for Newtonian fluids, rotational rheometry for complex fluids, and falling ball techniques for high-viscosity systems. Each method has specific advantages and limitations depending on viscosity range and fluid behavior.</p>
+                    <div class="equation-block">
+                        $$F_b = \rho_{fluid} g V_{object}$$
+                    </div>
                     
-                    <h4>Computational Property Prediction</h4>
-                    <p class="guide-text">Modern computational methods include ab initio quantum calculations for small molecules, classical molecular dynamics for larger systems, and machine learning approaches for rapid property screening. These methods increasingly complement experimental measurements and enable property prediction for extreme conditions.</p>
+                    <p class="guide-text">Objects float when their density is less than the fluid density. This principle is used in ship design, hot air balloons, and oil-water separation systems.</p>
+                    
+                    <h4>Viscosity and Flow Patterns</h4>
+                    <p class="guide-text">The Reynolds number combines density, viscosity, and flow conditions to predict flow behavior:</p>
+                    
+                    <div class="equation-block">
+                        $$Re = \frac{\rho V D}{\mu}$$
+                    </div>
+                    
+                    <p class="guide-text">Low Reynolds numbers (Re < 2300) indicate laminar flow, while high Reynolds numbers (Re > 4000) indicate turbulent flow.</p>
+                    
+                    <h4>Property Measurement in Practice</h4>
+                    <p class="guide-text">Engineers use various instruments to measure fluid properties:</p>
+                    
+                    <div class="constants-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>Common Instruments</th>
+                                    <th>Typical Accuracy</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Density</td>
+                                    <td>Hydrometers, digital densitometers</td>
+                                    <td>±0.1%</td>
+                                </tr>
+                                <tr>
+                                    <td>Viscosity</td>
+                                    <td>Viscometers, rheometers</td>
+                                    <td>±1-5%</td>
+                                </tr>
+                                <tr>
+                                    <td>Surface Tension</td>
+                                    <td>Tensiometers, drop weight method</td>
+                                    <td>±2%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
-                <!-- Applications and Future Directions -->
+                <!-- Engineering Applications -->
                 <div class="guide-section">
-                    <h3>Contemporary Applications and Future Directions</h3>
-                    <p class="guide-text">Understanding fluid properties at a fundamental level enables advances in diverse fields from nanotechnology to planetary science. Current research frontiers include active matter, quantum fluids, and machine learning-accelerated materials discovery.</p>
+                    <h3>Engineering Applications and Problem Solving</h3>
+                    <p class="guide-text">Understanding fluid properties allows engineers to solve real-world problems involving fluid systems. Here are some common applications where these properties are essential.</p>
                     
-                    <h4>Emerging Research Areas</h4>
-                    <p class="guide-text">Active matter systems exhibit effective viscosity that depends on activity level and collective motion. Quantum fluids display exotic properties like superfluidity and quantum turbulence. Nanoconfined fluids show dramatically altered transport properties due to surface effects and molecular layering.</p>
+                    <h4>Pump and Pipeline Design</h4>
+                    <p class="guide-text">Engineers use fluid properties to calculate pump power requirements and predict pressure losses in piping systems. Higher viscosity fluids require more powerful pumps, while density affects the hydrostatic pressure in vertical pipes.</p>
                     
-                    <h4>Technological Applications</h4>
-                    <p class="guide-text">Microfluidics exploits surface tension and viscosity at microscales for precise fluid manipulation. Energy applications leverage fluid property optimization for enhanced heat transfer and reduced pumping losses. Biological systems utilize property gradients for transport and mixing in living organisms.</p>
+                    <h4>Heat Exchanger Design</h4>
+                    <p class="guide-text">Fluid properties determine heat transfer rates and pressure drops in heat exchangers. The Prandtl number, which combines viscosity and thermal properties, is crucial for heat transfer calculations.</p>
                     
-                    <h4>Future Research Directions</h4>
-                    <p class="guide-text">Machine learning approaches promise to revolutionize property prediction by learning complex relationships from experimental data and molecular simulations. Multiscale modeling techniques aim to bridge quantum mechanical calculations with continuum descriptions. Understanding property modification through external fields opens new possibilities for smart materials and adaptive systems.</p>
+                    <h4>HVAC Systems</h4>
+                    <p class="guide-text">Air density variations with temperature drive natural convection in buildings. Understanding these property changes helps engineers design efficient ventilation and heating systems.</p>
+                    
+                    <h4>Automotive Applications</h4>
+                    <p class="guide-text">Engine oil viscosity must be carefully selected based on operating temperature to provide proper lubrication. Fuel density affects injection timing and combustion efficiency in modern engines.</p>
+                </div>
+
+                <!-- Problem-Solving Approach -->
+                <div class="guide-section">
+                    <h3>Solving Problems with Fluid Properties</h3>
+                    <p class="guide-text">When solving fluid mechanics problems, follow this systematic approach to use fluid properties effectively.</p>
+                    
+                    <h4>Step 1: Identify Required Properties</h4>
+                    <p class="guide-text">Determine which fluid properties are needed for your specific problem. Pressure drop calculations require viscosity, buoyancy problems need density differences, and capillary effects involve surface tension.</p>
+                    
+                    <h4>Step 2: Account for Temperature Effects</h4>
+                    <p class="guide-text">Most fluid properties change significantly with temperature. Always check if temperature variations in your system are large enough to affect the properties.</p>
+                    
+                    <h4>Step 3: Choose Appropriate Models</h4>
+                    <p class="guide-text">For most undergraduate problems, constant properties or simple temperature correlations are sufficient. The ideal gas law works well for gases at moderate conditions.</p>
+                    
+                    <h4>Common Engineering Assumptions</h4>
+                    <p class="guide-text">In many undergraduate problems, we make simplifying assumptions:</p>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text">Liquids are often treated as <span class="guide-emphasis">incompressible</span> (constant density)</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text">Properties are assumed <span class="guide-emphasis">constant</span> if temperature changes are small</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text">Gases at low speeds can be treated as <span class="guide-emphasis">incompressible</span> (Mach number < 0.3)</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text">Surface tension effects are negligible for <span class="guide-emphasis">large-scale flows</span></span>
+                        </li>
+                    </ul>
                 </div>
 
             </div>
