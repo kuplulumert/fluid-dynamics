@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fluid Properties - Academic Guide</title>
+    <title>Fluid Properties - Fluid Dynamics</title>
     <meta name="description" content="Comprehensive academic guide to fluid properties from undergraduate to graduate level covering theoretical foundations, molecular origins, and advanced research topics.">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
@@ -13,32 +13,22 @@
     
     <link rel="canonical" href="https://cfdhandbook.com/fluid/fundamentals/fluid-properties.html">
     
-    <!-- MathJax for proper mathematical notation -->
+    <!-- MathJax Configuration -->
+    <script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+    </script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>
-        MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']],
-                processEscapes: true,
-                processEnvironments: true,
-                tags: 'ams',
-                macros: {
-                    vec: ['\\boldsymbol{#1}', 1],
-                    grad: '\\nabla',
-                    div: '\\nabla \\cdot',
-                    curl: '\\nabla \\times',
-                    laplacian: '\\nabla^2',
-                    pdiff: ['\\frac{\\partial #1}{\\partial #2}', 2],
-                    ddiff: ['\\frac{d #1}{d #2}', 2]
-                }
-            },
-            options: {
-                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
-            }
-        };
-    </script>
 
     <style>
         * {
@@ -48,8 +38,8 @@
         }
 
         body {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            line-height: 1.7;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
             color: #2d3748;
             background-color: #f7fafc;
             min-height: 100vh;
@@ -62,14 +52,22 @@
             max-width: 1400px;
         }
 
-        /* Header */
+        /* Header - Exact k-epsilon style */
         .header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(16, 185, 129, 0.1);
             padding: 1.5rem 0;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 10px rgba(16, 185, 129, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.15);
         }
 
         .header-content {
@@ -91,50 +89,94 @@
 
         .nav-tabs {
             display: flex;
-            gap: 1.5rem;
+            gap: 2.5rem;
             align-items: center;
         }
 
         .nav-tab {
-            padding: 0.6rem 1.2rem;
+            padding: 0.75rem 1.5rem;
             text-decoration: none;
             color: #4a5568;
             font-size: 0.9rem;
             font-weight: 500;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
         }
 
-        .nav-tab:hover {
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-tab:hover::before,
+        .nav-tab.active::before {
+            opacity: 1;
+        }
+
+        .nav-tab:hover,
+        .nav-tab.active {
             color: #10b981;
-            background: rgba(16, 185, 129, 0.05);
-            border-color: rgba(16, 185, 129, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.15);
         }
 
         /* Home Hub Button */
         .home-hub-button {
-            padding: 0.6rem 1.2rem;
+            padding: 0.75rem 1.5rem;
             text-decoration: none;
             color: white;
             font-size: 0.9rem;
             font-weight: 600;
-            border-radius: 8px;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
             background: linear-gradient(135deg, #10b981, #059669);
-            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            border: 2px solid rgba(16, 185, 129, 0.2);
             display: flex;
             align-items: center;
-            gap: 0.4rem;
-            transition: all 0.3s ease;
+            gap: 0.5rem;
+        }
+
+        .home-hub-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .home-hub-button:hover::before {
+            opacity: 1;
         }
 
         .home-hub-button:hover {
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+            border-color: rgba(16, 185, 129, 0.4);
         }
 
         .home-hub-icon {
-            font-size: 0.9rem;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .home-hub-button:hover .home-hub-icon {
+            transform: scale(1.1);
         }
 
         /* Main Content */
@@ -144,91 +186,47 @@
             padding-bottom: 3rem;
         }
 
-        /* Page Header */
+        /* Page Header - Exact k-epsilon style */
         .page-header {
             text-align: center;
             margin-bottom: 3rem;
         }
 
         .page-header h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 800;
             margin-bottom: 1rem;
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-family: system-ui, -apple-system, sans-serif;
         }
 
         .model-subtitle {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             color: #4a5568;
-            max-width: 800px;
+            max-width: 700px;
             margin: 0 auto;
             line-height: 1.6;
-            font-style: italic;
-        }
-
-        /* Academic Level Indicators */
-        .level-indicator {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 1rem;
-        }
-
-        .undergraduate {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
-            color: white;
-            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
-        }
-
-        .graduate {
-            background: linear-gradient(135deg, #7c3aed, #6d28d9);
-            color: white;
-            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3);
-        }
-
-        .research {
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-            color: white;
-            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
         }
 
         /* Academy Guide */
         .academy-guide {
-            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.9) 100%);
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(16, 185, 129, 0.08);
-            border-radius: 24px;
-            padding: 3rem;
-            box-shadow: 0 12px 40px rgba(16, 185, 129, 0.08);
-        }
-
-        /* Guide Sections */
-        .guide-section {
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(16, 185, 129, 0.1);
             border-radius: 20px;
             padding: 2.5rem;
-            margin-bottom: 3rem;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.06);
         }
 
-        .guide-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+        /* Guide Sections - Exact k-epsilon style */
+        .guide-section {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
         }
 
         .guide-section:last-child {
@@ -236,192 +234,16 @@
         }
 
         .guide-section h3 {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: #10b981;
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            font-family: system-ui, -apple-system, sans-serif;
-        }
-
-        /* Property Sections */
-        .property-section {
-            margin-bottom: 4rem;
-        }
-
-        .property-header {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .property-icon {
-            width: 4rem;
-            height: 4rem;
-            background: linear-gradient(135deg, #10b981, #059669);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-            font-weight: 700;
-            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.3);
-        }
-
-        .property-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #2d3748;
-            font-family: system-ui, -apple-system, sans-serif;
-        }
-
-        /* Mathematical Content */
-        .formula-section {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            border: 1px solid rgba(16, 185, 129, 0.15);
-            border-radius: 16px;
-            padding: 2rem;
-            margin: 2rem 0;
-            position: relative;
-        }
-
-        .formula-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #0891b2, #0e7490);
-            border-radius: 16px 16px 0 0;
-        }
-
-        .formula-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #0f766e;
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-family: system-ui, -apple-system, sans-serif;
         }
 
-        .formula-title::before {
-            content: '📐';
-            font-size: 1.1rem;
-        }
-
-        .formula-content {
-            font-size: 1.05rem;
-            line-height: 1.9;
-            color: #0f766e;
-        }
-
-        .formula-content p {
-            margin: 1rem 0;
-        }
-
-        .formula-content ul {
-            margin-left: 2rem;
-            margin-top: 1rem;
-        }
-
-        .formula-content li {
-            margin-bottom: 0.5rem;
-        }
-
-        /* Derivation Sections */
-        .derivation-section {
-            background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 100%);
-            border: 1px solid rgba(168, 85, 247, 0.15);
-            border-radius: 16px;
-            padding: 2rem;
-            margin: 2rem 0;
-            position: relative;
-        }
-
-        .derivation-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #8b5cf6, #7c3aed);
-            border-radius: 16px 16px 0 0;
-        }
-
-        .derivation-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #7c3aed;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: system-ui, -apple-system, sans-serif;
-        }
-
-        .derivation-title::before {
-            content: '🧮';
-            font-size: 1.1rem;
-        }
-
-        .derivation-content {
-            color: #7c3aed;
-            line-height: 1.8;
-            font-size: 1.05rem;
-        }
-
-        /* Research Sections */
-        .research-section {
-            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
-            border: 1px solid rgba(239, 68, 68, 0.15);
-            border-radius: 16px;
-            padding: 2rem;
-            margin: 2rem 0;
-            position: relative;
-        }
-
-        .research-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #ef4444, #dc2626);
-            border-radius: 16px 16px 0 0;
-        }
-
-        .research-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #dc2626;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: system-ui, -apple-system, sans-serif;
-        }
-
-        .research-title::before {
-            content: '🔬';
-            font-size: 1.1rem;
-        }
-
-        .research-content {
-            color: #dc2626;
-            line-height: 1.8;
-            font-size: 1.05rem;
-        }
-
-        /* Guide Lists */
+        /* Guide Lists - Exact k-epsilon style */
         .guide-list {
             list-style: none;
             margin: 0;
@@ -429,8 +251,8 @@
         }
 
         .guide-item {
-            margin-bottom: 1.2rem;
-            padding-left: 2rem;
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
             position: relative;
         }
 
@@ -439,15 +261,16 @@
             position: absolute;
             left: 0;
             color: #10b981;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             top: 0.1rem;
         }
 
         .guide-text {
             display: block;
-            font-size: 1.05rem;
-            line-height: 1.7;
+            font-size: 1rem;
+            line-height: 1.6;
             color: #4b5563;
+            padding-left: 0;
         }
 
         .guide-emphasis {
@@ -459,65 +282,97 @@
             color: #1f2937;
         }
 
-        /* Important Notes */
-        .important-note {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            border: 1px solid rgba(245, 158, 11, 0.2);
-            border-left: 4px solid #f59e0b;
+        /* Use Case Items - Exact k-epsilon style */
+        .use-case-item, .avoid-item {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+            border-left: 4px solid #10b981;
+        }
+
+        .avoid-item {
+            border-left-color: #ef4444;
+        }
+
+        /* Mathematical Expressions */
+        .formula-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid rgba(16, 185, 129, 0.1);
             border-radius: 8px;
             padding: 1.5rem;
-            margin: 1.5rem 0;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            text-align: center;
         }
 
-        .important-note::before {
-            content: '💡 ';
-            font-size: 1.2rem;
-            margin-right: 0.5rem;
-        }
-
-        .important-note-title {
-            font-weight: 700;
-            color: #d97706;
+        .formula-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #0f766e;
             margin-bottom: 0.5rem;
             font-family: system-ui, -apple-system, sans-serif;
         }
 
-        .important-note-content {
-            color: #92400e;
-            line-height: 1.6;
+        .math-inline {
+            font-family: 'Times New Roman', serif;
         }
 
-        /* Reference Sections */
-        .reference-section {
-            background: rgba(243, 244, 246, 0.8);
-            border: 1px solid rgba(156, 163, 175, 0.2);
+        /* Level Indicators */
+        .level-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
             border-radius: 12px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .reference-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #374151;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             margin-bottom: 1rem;
-            font-family: system-ui, -apple-system, sans-serif;
         }
 
-        .reference-title::before {
-            content: '📚 ';
-            margin-right: 0.5rem;
+        .undergraduate {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
         }
 
-        .reference-list {
-            list-style: decimal;
-            margin-left: 2rem;
+        .graduate {
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+            color: white;
         }
 
-        .reference-list li {
-            margin-bottom: 0.5rem;
-            color: #4b5563;
-            font-size: 0.95rem;
+        .research {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: white;
+        }
+
+        /* Property Headers */
+        .property-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(16, 185, 129, 0.05);
+            border-radius: 12px;
+        }
+
+        .property-symbol {
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .property-name {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #2d3748;
         }
 
         /* Responsive Design */
@@ -530,78 +385,36 @@
                 padding: 1rem 0;
             }
 
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-                align-items: stretch;
-            }
-
             .nav-tabs {
-                justify-content: center;
+                gap: 1rem;
                 flex-wrap: wrap;
-                gap: 0.5rem;
             }
 
-            .nav-tab,
-            .home-hub-button {
+            .nav-tab, .home-hub-button {
                 padding: 0.5rem 1rem;
                 font-size: 0.85rem;
             }
 
             .page-header h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
 
             .model-subtitle {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
 
             .academy-guide {
-                padding: 2rem;
+                padding: 1.5rem;
             }
 
             .guide-section {
-                padding: 2rem;
+                padding: 1.5rem;
             }
 
             .property-header {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 1rem;
-            }
-
-            .property-icon {
-                width: 3rem;
-                height: 3rem;
-                font-size: 1.2rem;
-            }
-
-            .property-title {
-                font-size: 1.8rem;
-            }
-
-            .formula-section,
-            .derivation-section,
-            .research-section {
-                padding: 1.5rem;
-            }
-        }
-
-        /* Print Styles */
-        @media print {
-            .header,
-            .nav-tabs {
-                display: none;
-            }
-            
-            .academy-guide {
-                box-shadow: none;
-                border: 1px solid #ccc;
-            }
-            
-            .guide-section {
-                break-inside: avoid;
-                page-break-inside: avoid;
+                gap: 0.5rem;
             }
         }
     </style>
@@ -611,7 +424,7 @@
         <!-- Navigation Header -->
         <div class="header">
             <div class="header-content">
-                <a href="../../fluid-fundamentals.html" class="logo">Fluid Dynamics → Fundamentals</a>
+                <a href="../../fluid-fundamentals.html" class="logo">Fluid Dynamics Fundamentals</a>
                 <div class="nav-tabs">
                     <a href="../../home.html" class="home-hub-button">
                         <span class="home-hub-icon">🏠</span>
@@ -626,630 +439,377 @@
             <!-- Page Header -->
             <div class="page-header">
                 <h1>Fluid Properties</h1>
-                <p class="model-subtitle">A comprehensive academic treatment from molecular foundations to advanced transport phenomena</p>
+                <p class="model-subtitle">Comprehensive academic treatment from molecular foundations to advanced transport phenomena</p>
             </div>
 
-            <!-- Academy Guide Content -->
+            <!-- Academy Guide Tab Content -->
             <div class="academy-guide">
                 
                 <!-- Introduction -->
                 <div class="guide-section">
-                    <span class="level-indicator undergraduate">Undergraduate Foundation</span>
-                    <h3>🎓 Introduction to Fluid Properties</h3>
+                    <span class="level-badge undergraduate">Undergraduate Foundation</span>
+                    <h3>1. Fundamental Concepts</h3>
                     <ul class="guide-list">
                         <li class="guide-item">
-                            <span class="guide-text">Fluid properties are <span class="guide-emphasis">intensive thermodynamic variables</span> that characterize the state and behavior of fluids independent of system size.</span>
+                            <span class="guide-text">Fluid properties are <span class="guide-emphasis">intensive thermodynamic variables</span> that characterize fluid state independent of system size.</span>
                         </li>
                         <li class="guide-item">
-                            <span class="guide-text">These properties emerge from <span class="guide-emphasis">molecular-scale interactions</span> and determine macroscopic transport phenomena.</span>
+                            <span class="guide-text">Properties emerge from <span class="guide-emphasis">molecular-scale interactions</span> and determine macroscopic transport behavior.</span>
                         </li>
                         <li class="guide-item">
-                            <span class="guide-text">Understanding fluid properties is fundamental to <span class="guide-emphasis">constitutive relations</span> in continuum mechanics.</span>
+                            <span class="guide-text">Classification: <span class="guide-emphasis">Thermodynamic properties</span> (density, temperature, pressure) vs <span class="guide-emphasis">transport properties</span> (viscosity, thermal conductivity).</span>
                         </li>
                         <li class="guide-item">
-                            <span class="guide-text">Properties can be classified as <span class="guide-emphasis">thermodynamic</span> (ρ, T, p) or <span class="guide-emphasis">transport</span> (μ, k, D) properties.</span>
+                            <span class="guide-text">The <span class="guide-emphasis">continuum hypothesis</span> enables continuous field descriptions despite molecular discreteness.</span>
                         </li>
                     </ul>
-
-                    <div class="important-note">
-                        <div class="important-note-title">Fundamental Concept</div>
-                        <div class="important-note-content">
-                            The continuum hypothesis allows us to define fluid properties as continuous functions of space and time, enabling the mathematical framework of fluid mechanics despite the discrete molecular nature of matter.
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Density Section -->
-                <div class="property-section">
-                    <div class="property-header">
-                        <div class="property-icon">ρ</div>
-                        <h2 class="property-title">Density</h2>
+                <div class="property-header">
+                    <div class="property-symbol">ρ</div>
+                    <div class="property-name">Density</div>
+                </div>
+
+                <!-- Density - Undergraduate -->
+                <div class="guide-section">
+                    <span class="level-badge undergraduate">Undergraduate Level</span>
+                    <h3>2. Density: Mass per Unit Volume</h3>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Basic definition:</span> Mass contained in a unit volume of fluid.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Mathematical form:</span> $\rho = \lim_{\Delta V \to \Delta V'} \frac{\Delta m}{\Delta V}$ where $\Delta V'$ maintains continuum validity.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Specific volume relation:</span> $v = \frac{1}{\rho}$ represents volume per unit mass.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Temperature dependence:</span> $\rho(T) = \rho_0[1 - \beta(T - T_0)]$ with thermal expansion coefficient $\beta$.</span>
+                        </li>
+                    </ul>
+
+                    <div class="formula-box">
+                        <div class="formula-title">Thermal Expansion Coefficient</div>
+                        $$\beta = -\frac{1}{\rho} \left(\frac{\partial \rho}{\partial T}\right)_p$$
                     </div>
 
-                    <!-- Undergraduate Level -->
-                    <div class="guide-section">
-                        <span class="level-indicator undergraduate">Undergraduate Level</span>
-                        <h3>📐 Fundamental Definition and Relations</h3>
-                        
-                        <div class="formula-section">
-                            <div class="formula-title">Basic Definition</div>
-                            <div class="formula-content">
-                                $$\rho = \lim_{\Delta V \to \Delta V'} \frac{\Delta m}{\Delta V}$$
-                                <p>where $\Delta V'$ is the smallest volume for which the continuum assumption remains valid (typically $10^{-9}$ m³ for liquids).</p>
-                            </div>
-                        </div>
-
-                        <div class="formula-section">
-                            <div class="formula-title">Specific Volume Relationship</div>
-                            <div class="formula-content">
-                                $$v = \frac{1}{\rho} = \frac{V}{m}$$
-                                <p>Specific volume $v$ is the reciprocal of density and represents volume per unit mass.</p>
-                            </div>
-                        </div>
-
-                        <div class="formula-section">
-                            <div class="formula-title">Temperature Dependence (Thermal Expansion)</div>
-                            <div class="formula-content">
-                                $$\rho(T) = \rho_0 [1 - \beta(T - T_0)]$$
-                                $$\beta = -\frac{1}{\rho} \left(\pdiff{\rho}{T}\right)_p$$
-                                <p>where:</p>
-                                <ul>
-                                    <li>$\beta$ = coefficient of thermal expansion (K⁻¹)</li>
-                                    <li>$\rho_0$ = reference density at temperature $T_0$</li>
-                                    <li>Valid for small temperature variations</li>
-                                </ul>
-                            </div>
-                        </div>
+                    <div class="use-case-item">
+                        <span class="guide-text"><span class="guide-emphasis">Typical values:</span> Water at 20°C: ρ = 998 kg/m³, Air at STP: ρ = 1.225 kg/m³</span>
                     </div>
+                </div>
 
-                    <!-- Graduate Level -->
-                    <div class="guide-section">
-                        <span class="level-indicator graduate">Graduate Level</span>
-                        <h3>🧬 Molecular and Statistical Foundations</h3>
-                        
-                        <div class="derivation-section">
-                            <div class="derivation-title">Statistical Mechanical Definition</div>
-                            <div class="derivation-content">
-                                $$\rho = \frac{N \langle m \rangle}{V} = n \langle m \rangle$$
-                                <p>where $n = N/V$ is the number density and $\langle m \rangle$ is the average molecular mass.</p>
-                                
-                                <p>For a mixture of species $i$:</p>
-                                $$\rho = \sum_i n_i m_i = \sum_i \rho_i$$
-                                
-                                <p>The density fluctuations in equilibrium are governed by:</p>
-                                $$\langle (\delta \rho)^2 \rangle = \rho k_B T \kappa_T$$
-                                <p>where $\kappa_T$ is the isothermal compressibility.</p>
-                            </div>
-                        </div>
+                <!-- Density - Graduate -->
+                <div class="guide-section">
+                    <span class="level-badge graduate">Graduate Level</span>
+                    <h3>3. Molecular and Statistical Foundations of Density</h3>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Statistical definition:</span> $\rho = n \langle m \rangle$ where $n$ is number density and $\langle m \rangle$ is average molecular mass.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Ideal gas relation:</span> $\rho = \frac{pM}{RT}$ connects density to thermodynamic state variables.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Van der Waals equation:</span> $(p + \frac{a}{\bar{v}^2})(\bar{v} - b) = RT$ accounts for molecular size and interactions.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Density fluctuations:</span> $\langle (\delta \rho)^2 \rangle = \rho k_B T \kappa_T$ relate to compressibility.</span>
+                        </li>
+                    </ul>
 
-                        <div class="formula-section">
-                            <div class="formula-title">Equation of State Relations</div>
-                            <div class="formula-content">
-                                <p><strong>Ideal Gas:</strong></p>
-                                $$\rho = \frac{pM}{RT} = \frac{pm}{k_B T}$$
-                                
-                                <p><strong>Van der Waals Gas:</strong></p>
-                                $$\left(p + \frac{a}{\bar{v}^2}\right)(\bar{v} - b) = RT$$
-                                $$\rho = \frac{1}{\bar{v}} = \frac{M}{RT} \left(p + \frac{a\rho^2}{M^2}\right) \frac{1}{1 - \frac{b\rho}{M}}$$
-                                
-                                <p><strong>Redlich-Kwong Equation:</strong></p>
-                                $$p = \frac{RT}{\bar{v} - b} - \frac{a}{\sqrt{T}\bar{v}(\bar{v} + b)}$$
-                            </div>
-                        </div>
-
-                        <div class="important-note">
-                            <div class="important-note-title">Critical Insight</div>
-                            <div class="important-note-content">
-                                Near the critical point, density exhibits critical opalescence due to large density fluctuations, described by scaling laws: $\rho_l - \rho_g \sim |T - T_c|^{\beta}$ where $\beta \approx 0.325$ is a critical exponent.
-                            </div>
-                        </div>
+                    <div class="formula-box">
+                        <div class="formula-title">Van der Waals Density Expression</div>
+                        $$\rho = \frac{M}{RT} \left(p + \frac{a\rho^2}{M^2}\right) \frac{1}{1 - \frac{b\rho}{M}}$$
                     </div>
+                </div>
 
-                    <!-- Research Level -->
-                    <div class="guide-section">
-                        <span class="level-indicator research">Research Frontiers</span>
-                        <h3>🔬 Advanced Topics and Current Research</h3>
-                        
-                        <div class="research-section">
-                            <div class="research-title">Density Functional Theory Applications</div>
-                            <div class="research-content">
-                                <p>Modern DFT approaches for inhomogeneous fluids:</p>
-                                $$\Omega[\rho(\vec{r})] = F[\rho(\vec{r})] + \int \rho(\vec{r}) V_{ext}(\vec{r}) d\vec{r}$$
-                                
-                                <p>where $F[\rho]$ is the intrinsic Helmholtz free energy functional. The equilibrium density profile minimizes $\Omega$:</p>
-                                $$\frac{\delta \Omega}{\delta \rho} = \mu_{ext}(\vec{r}) = \text{constant}$$
-                                
-                                <p>Applications include:</p>
-                                <ul>
-                                    <li>Fluid-solid interfaces and wetting phenomena</li>
-                                    <li>Confined fluids in nanopores</li>
-                                    <li>Phase separation kinetics</li>
-                                </ul>
-                            </div>
-                        </div>
+                <!-- Density - Research -->
+                <div class="guide-section">
+                    <span class="level-badge research">Research Frontiers</span>
+                    <h3>4. Advanced Density Research</h3>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Critical phenomena:</span> Near critical point, density difference follows $\rho_l - \rho_g \sim |T - T_c|^{\beta}$ where $\beta \approx 0.325$.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Density functional theory:</span> $\Omega[\rho(\vec{r})] = F[\rho(\vec{r})] + \int \rho(\vec{r}) V_{ext}(\vec{r}) d\vec{r}$ for inhomogeneous systems.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Machine learning:</span> Neural networks predict density from molecular structure with quantum accuracy.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Quantum effects:</span> Significant in dense hydrogen and ultracold atomic gases.</span>
+                        </li>
+                    </ul>
 
-                        <div class="research-section">
-                            <div class="research-title">Machine Learning Approaches</div>
-                            <div class="research-content">
-                                <p>Recent developments in ML-based density prediction:</p>
-                                <ul>
-                                    <li><strong>Neural network potentials:</strong> Direct prediction from molecular structure</li>
-                                    <li><strong>Graph neural networks:</strong> For complex molecular systems</li>
-                                    <li><strong>Physics-informed neural networks:</strong> Incorporating thermodynamic constraints</li>
-                                    <li><strong>Gaussian process regression:</strong> For uncertainty quantification</li>
-                                </ul>
-                            </div>
-                        </div>
+                    <div class="formula-box">
+                        <div class="formula-title">Critical Scaling Law</div>
+                        $$\rho_l - \rho_g = B |T - T_c|^{\beta} + B_1 |T - T_c|^{\beta + \Delta_1} + ...$$
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">where $\beta = 0.325$ and $\Delta_1 = 0.5$ are universal critical exponents</p>
                     </div>
                 </div>
 
                 <!-- Viscosity Section -->
-                <div class="property-section">
-                    <div class="property-header">
-                        <div class="property-icon">μ</div>
-                        <h2 class="property-title">Viscosity</h2>
+                <div class="property-header">
+                    <div class="property-symbol">μ</div>
+                    <div class="property-name">Viscosity</div>
+                </div>
+
+                <!-- Viscosity - Undergraduate -->
+                <div class="guide-section">
+                    <span class="level-badge undergraduate">Undergraduate Level</span>
+                    <h3>5. Viscosity: Resistance to Flow</h3>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Newton's law:</span> $\tau = \mu \frac{du}{dy}$ relates shear stress to velocity gradient.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Dynamic viscosity:</span> μ has units Pa·s, measures internal friction in fluid.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Kinematic viscosity:</span> $\nu = \frac{\mu}{\rho}$ represents momentum diffusivity (m²/s).</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Temperature effects:</span> Liquids: viscosity decreases with T, Gases: viscosity increases with T.</span>
+                        </li>
+                    </ul>
+
+                    <div class="formula-box">
+                        <div class="formula-title">Sutherland's Formula (Gases)</div>
+                        $$\mu = \mu_0 \frac{T_0 + S}{T + S} \left(\frac{T}{T_0}\right)^{3/2}$$
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">where S is Sutherland's constant (for air: S = 110.4 K)</p>
                     </div>
+                </div>
 
-                    <!-- Undergraduate Level -->
-                    <div class="guide-section">
-                        <span class="level-indicator undergraduate">Undergraduate Level</span>
-                        <h3>⚙️ Newton's Law of Viscosity</h3>
-                        
-                        <div class="formula-section">
-                            <div class="formula-title">Fundamental Definition</div>
-                            <div class="formula-content">
-                                $$\tau = \mu \frac{du}{dy}$$
-                                <p>Newton's law of viscosity for simple shear flow, where:</p>
-                                <ul>
-                                    <li>$\tau$ = shear stress (Pa)</li>
-                                    <li>$\mu$ = dynamic viscosity (Pa·s)</li>
-                                    <li>$\frac{du}{dy}$ = velocity gradient (s⁻¹)</li>
-                                </ul>
-                            </div>
-                        </div>
+                <!-- Viscosity - Graduate -->
+                <div class="guide-section">
+                    <span class="level-badge graduate">Graduate Level</span>
+                    <h3>6. Kinetic Theory and Molecular Origins</h3>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Chapman-Enskog theory:</span> Rigorous kinetic theory derivation for gas viscosity.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Molecular expression:</span> $\mu = \frac{5}{16} \frac{\sqrt{mk_BT/\pi}}{\sigma^2 \Omega^{(2,2)*}}$ depends on collision integrals.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Generalized Newton's law:</span> $\tau_{ij} = 2\mu S_{ij}$ for three-dimensional flow fields.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Non-Newtonian fluids:</span> $\eta = \eta_\infty + (\eta_0 - \eta_\infty)[1 + (\lambda\dot{\gamma})^2]^{(n-1)/2}$ (Carreau model).</span>
+                        </li>
+                    </ul>
 
-                        <div class="formula-section">
-                            <div class="formula-title">Kinematic Viscosity</div>
-                            <div class="formula-content">
-                                $$\nu = \frac{\mu}{\rho}$$
-                                <p>Kinematic viscosity represents the ratio of momentum diffusivity to mass density.</p>
-                                
-                                <p><strong>Physical interpretation:</strong> $\nu$ has dimensions of diffusivity (m²/s) and represents the rate of momentum diffusion in the fluid.</p>
-                            </div>
-                        </div>
-
-                        <div class="formula-section">
-                            <div class="formula-title">Temperature Dependence</div>
-                            <div class="formula-content">
-                                <p><strong>Liquids (Arrhenius-type):</strong></p>
-                                $$\mu = A e^{E_a/RT}$$
-                                
-                                <p><strong>Gases (Power law):</strong></p>
-                                $$\mu \propto T^n \quad \text{where } n \approx 0.5 \text{ to } 1.0$$
-                                
-                                <p><strong>Sutherland's formula for gases:</strong></p>
-                                $$\mu = \mu_0 \frac{T_0 + S}{T + S} \left(\frac{T}{T_0}\right)^{3/2}$$
-                                <p>where $S$ is Sutherland's constant.</p>
-                            </div>
-                        </div>
+                    <div class="formula-box">
+                        <div class="formula-title">Rate of Strain Tensor</div>
+                        $$S_{ij} = \frac{1}{2}\left(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}\right) - \frac{1}{3}\delta_{ij}\frac{\partial u_k}{\partial x_k}$$
                     </div>
+                </div>
 
-                    <!-- Graduate Level -->
-                    <div class="guide-section">
-                        <span class="level-indicator graduate">Graduate Level</span>
-                        <h3>🧮 Kinetic Theory and Molecular Origins</h3>
-                        
-                        <div class="derivation-section">
-                            <div class="derivation-title">Chapman-Enskog Theory</div>
-                            <div class="derivation-content">
-                                <p>Rigorous kinetic theory derivation for gases:</p>
-                                $$\mu = \frac{5}{16} \frac{\sqrt{mk_BT/\pi}}{\sigma^2 \Omega^{(2,2)*}(T^*)}$$
-                                
-                                <p>where:</p>
-                                <ul>
-                                    <li>$m$ = molecular mass</li>
-                                    <li>$\sigma$ = collision diameter</li>
-                                    <li>$\Omega^{(2,2)*}$ = collision integral</li>
-                                    <li>$T^* = k_BT/\epsilon$ = reduced temperature</li>
-                                </ul>
-                                
-                                <p>The collision integral depends on the intermolecular potential:</p>
-                                $$\Omega^{(2,2)*} = \int_0^\infty e^{-\gamma^2} \gamma^5 Q^{(2)}(\gamma) d\gamma$$
-                                
-                                <p>For Lennard-Jones potential: $\phi(r) = 4\epsilon[(\sigma/r)^{12} - (\sigma/r)^6]$</p>
-                            </div>
-                        </div>
+                <!-- Viscosity - Research -->
+                <div class="guide-section">
+                    <span class="level-badge research">Research Frontiers</span>
+                    <h3>7. Advanced Viscosity Research</h3>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Green-Kubo relations:</span> $\mu = \frac{V}{k_BT} \int_0^\infty \langle P_{xy}(0)P_{xy}(t) \rangle dt$ from molecular dynamics.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Complex fluids:</span> Active matter, liquid crystals, and granular flows exhibit exotic rheology.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Nanoconfinement:</span> Viscosity changes dramatically in channels smaller than 10 nm.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Quantum viscosity:</span> Superfluid helium exhibits zero viscosity below λ-point.</span>
+                        </li>
+                    </ul>
 
-                        <div class="formula-section">
-                            <div class="formula-title">Generalized Newton's Law</div>
-                            <div class="formula-content">
-                                <p>For general three-dimensional flow:</p>
-                                $$\tau_{ij} = \mu \left(\pdiff{u_i}{x_j} + \pdiff{u_j}{x_i}\right) + \lambda \delta_{ij} \pdiff{u_k}{x_k}$$
-                                
-                                <p>where $\lambda$ is the second viscosity coefficient. For the deviatoric stress tensor:</p>
-                                $$\tau_{ij}^{dev} = 2\mu S_{ij}$$
-                                $$S_{ij} = \frac{1}{2}\left(\pdiff{u_i}{x_j} + \pdiff{u_j}{x_i}\right) - \frac{1}{3}\delta_{ij}\pdiff{u_k}{x_k}$$
-                            </div>
-                        </div>
-
-                        <div class="derivation-section">
-                            <div class="derivation-title">Non-Newtonian Constitutive Relations</div>
-                            <div class="derivation-content">
-                                <p><strong>Generalized Newtonian fluids:</strong></p>
-                                $$\vec{\tau} = \eta(\dot{\gamma}) \vec{\dot{\gamma}}$$
-                                
-                                <p>where $\dot{\gamma} = \sqrt{2S_{ij}S_{ij}}$ is the second invariant of the rate of strain tensor.</p>
-                                
-                                <p><strong>Power-law model:</strong></p>
-                                $$\eta = K\dot{\gamma}^{n-1}$$
-                                
-                                <p><strong>Carreau model:</strong></p>
-                                $$\eta = \eta_\infty + (\eta_0 - \eta_\infty)[1 + (\lambda\dot{\gamma})^2]^{(n-1)/2}$$
-                                
-                                <p><strong>Viscoelastic fluids (Maxwell model):</strong></p>
-                                $$\vec{\tau} + \lambda_1 \frac{D\vec{\tau}}{Dt} = \eta_0 \vec{\dot{\gamma}}$$
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Research Level -->
-                    <div class="guide-section">
-                        <span class="level-indicator research">Research Frontiers</span>
-                        <h3>🔬 Advanced Viscosity Research</h3>
-                        
-                        <div class="research-section">
-                            <div class="research-title">Molecular Dynamics Simulations</div>
-                            <div class="research-content">
-                                <p>Green-Kubo relations for transport properties:</p>
-                                $$\mu = \frac{V}{k_BT} \int_0^\infty \langle P_{xy}(0)P_{xy}(t) \rangle dt$$
-                                
-                                <p>where $P_{xy}$ is the off-diagonal component of the pressure tensor.</p>
-                                
-                                <p><strong>Non-equilibrium MD (NEMD):</strong></p>
-                                $$\mu = \lim_{\dot{\gamma} \to 0} \frac{\langle P_{xy} \rangle}{\dot{\gamma}}$$
-                                
-                                <p>Recent advances include:</p>
-                                <ul>
-                                    <li>Machine learning potentials for complex fluids</li>
-                                    <li>Quantum effects in dense hydrogen</li>
-                                    <li>Nanoconfined fluid viscosity</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="research-section">
-                            <div class="research-title">Complex Fluid Rheology</div>
-                            <div class="research-content">
-                                <p>Current research areas:</p>
-                                <ul>
-                                    <li><strong>Active matter:</strong> Viscosity of bacterial suspensions and active colloids</li>
-                                    <li><strong>Polymer solutions:</strong> Reptation theory and tube models</li>
-                                    <li><strong>Liquid crystals:</strong> Leslie-Ericksen theory for nematic phases</li>
-                                    <li><strong>Granular fluids:</strong> Kinetic theory extensions</li>
-                                    <li><strong>Quantum fluids:</strong> Superfluid helium and ultracold gases</li>
-                                </ul>
-                            </div>
-                        </div>
+                    <div class="use-case-item">
+                        <span class="guide-text"><span class="guide-emphasis">Emerging applications:</span> Microfluidics, biological flows, smart materials, and quantum fluids</span>
                     </div>
                 </div>
 
                 <!-- Compressibility Section -->
-                <div class="property-section">
-                    <div class="property-header">
-                        <div class="property-icon">β</div>
-                        <h2 class="property-title">Compressibility</h2>
+                <div class="property-header">
+                    <div class="property-symbol">β</div>
+                    <div class="property-name">Compressibility</div>
+                </div>
+
+                <!-- Compressibility - Undergraduate -->
+                <div class="guide-section">
+                    <span class="level-badge undergraduate">Undergraduate Level</span>
+                    <h3>8. Compressibility: Volume Response to Pressure</h3>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Isothermal compressibility:</span> $\kappa_T = -\frac{1}{V}\left(\frac{\partial V}{\partial p}\right)_T$ measures volume change at constant temperature.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Adiabatic compressibility:</span> $\kappa_S = -\frac{1}{V}\left(\frac{\partial V}{\partial p}\right)_S$ for isentropic processes.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Bulk modulus:</span> $K = \frac{1}{\kappa}$ represents resistance to compression.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Speed of sound:</span> $c = \sqrt{\frac{K_S}{\rho}} = \sqrt{\frac{1}{\rho\kappa_S}}$ connects to wave propagation.</span>
+                        </li>
+                    </ul>
+
+                    <div class="formula-box">
+                        <div class="formula-title">Ideal Gas Sound Speed</div>
+                        $$c = \sqrt{\gamma \frac{p}{\rho}} = \sqrt{\gamma RT}$$
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">where $\gamma = c_p/c_v$ is the heat capacity ratio</p>
                     </div>
+                </div>
 
-                    <!-- Undergraduate Level -->
-                    <div class="guide-section">
-                        <span class="level-indicator undergraduate">Undergraduate Level</span>
-                        <h3>📊 Bulk Modulus and Compressibility</h3>
-                        
-                        <div class="formula-section">
-                            <div class="formula-title">Definitions</div>
-                            <div class="formula-content">
-                                <p><strong>Isothermal compressibility:</strong></p>
-                                $$\kappa_T = -\frac{1}{V}\left(\pdiff{V}{p}\right)_T = \frac{1}{\rho}\left(\pdiff{\rho}{p}\right)_T$$
-                                
-                                <p><strong>Adiabatic compressibility:</strong></p>
-                                $$\kappa_S = -\frac{1}{V}\left(\pdiff{V}{p}\right)_S = \frac{1}{\rho}\left(\pdiff{\rho}{p}\right)_S$$
-                                
-                                <p><strong>Bulk modulus:</strong></p>
-                                $$K = \frac{1}{\kappa} = -V\left(\pdiff{p}{V}\right) = \rho\left(\pdiff{p}{\rho}\right)$$
-                            </div>
-                        </div>
+                <!-- Compressibility - Graduate -->
+                <div class="guide-section">
+                    <span class="level-badge graduate">Graduate Level</span>
+                    <h3>9. Thermodynamic Relations and Wave Theory</h3>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Maxwell relation:</span> $\frac{\kappa_T}{\kappa_S} = \gamma$ connects isothermal and adiabatic compressibilities.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Grüneisen parameter:</span> $\Gamma = \frac{\alpha V}{c_v \kappa_T}$ relates thermal and mechanical properties.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Acoustic wave equation:</span> $\frac{\partial^2 p'}{\partial t^2} = c^2 \nabla^2 p'$ governs small-amplitude waves.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Nonlinear acoustics:</span> Finite amplitude effects introduce harmonic generation and shock formation.</span>
+                        </li>
+                    </ul>
 
-                        <div class="formula-section">
-                            <div class="formula-title">Speed of Sound</div>
-                            <div class="formula-content">
-                                $$c = \sqrt{\frac{1}{\rho\kappa_S}} = \sqrt{\frac{K_S}{\rho}}$$
-                                
-                                <p>For ideal gas:</p>
-                                $$c = \sqrt{\gamma \frac{p}{\rho}} = \sqrt{\gamma RT}$$
-                                
-                                <p>where $\gamma = c_p/c_v$ is the heat capacity ratio.</p>
-                            </div>
-                        </div>
+                    <div class="formula-box">
+                        <div class="formula-title">Nonlinear Wave Equation</div>
+                        $$\frac{\partial^2 p'}{\partial t^2} = c^2 \nabla^2 p' + \frac{\beta}{2\rho_0 c^2} \frac{\partial^2 (p')^2}{\partial t^2}$$
                     </div>
+                </div>
 
-                    <!-- Graduate Level -->
-                    <div class="guide-section">
-                        <span class="level-indicator graduate">Graduate Level</span>
-                        <h3>🌊 Thermodynamic Relations and Wave Propagation</h3>
-                        
-                        <div class="derivation-section">
-                            <div class="derivation-title">Thermodynamic Relations</div>
-                            <div class="derivation-content">
-                                <p>Maxwell relations connect compressibilities:</p>
-                                $$\frac{\kappa_T}{\kappa_S} = \frac{c_p}{c_v} = \gamma$$
-                                
-                                <p>From the fundamental relation $dU = TdS - pdV$:</p>
-                                $$\left(\pdiff{T}{V}\right)_S = -\left(\pdiff{p}{S}\right)_V$$
-                                
-                                <p>Grüneisen parameter relates thermal and mechanical properties:</p>
-                                $$\Gamma = \frac{\alpha V}{c_v \kappa_T} = \frac{\alpha}{\rho c_v \kappa_T}$$
-                                
-                                <p>where $\alpha$ is the thermal expansion coefficient.</p>
-                            </div>
-                        </div>
-
-                        <div class="formula-section">
-                            <div class="formula-title">Acoustic Wave Equations</div>
-                            <div class="formula-content">
-                                <p>Linear acoustics from compressible flow equations:</p>
-                                $$\frac{\partial^2 p'}{\partial t^2} = c^2 \nabla^2 p'$$
-                                
-                                <p>For nonlinear acoustics (finite amplitude):</p>
-                                $$\frac{\partial^2 p'}{\partial t^2} = c^2 \nabla^2 p' + \frac{\beta}{2\rho_0 c^2} \frac{\partial^2 (p')^2}{\partial t^2}$$
-                                
-                                <p>where $\beta = 1 + \frac{\gamma-1}{2} + \frac{\gamma(\gamma-1)M^2}{2}$ is the nonlinearity parameter.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Research Level -->
-                    <div class="guide-section">
-                        <span class="level-indicator research">Research Frontiers</span>
-                        <h3>🔬 Advanced Compressibility Research</h3>
-                        
-                        <div class="research-section">
-                            <div class="research-title">Extreme Conditions</div>
-                            <div class="research-content">
-                                <p>High-pressure equations of state:</p>
-                                
-                                <p><strong>Birch-Murnaghan EOS:</strong></p>
-                                $$p = \frac{3K_0}{2}\left[\left(\frac{V_0}{V}\right)^{7/3} - \left(\frac{V_0}{V}\right)^{5/3}\right]\left[1 + \frac{3}{4}(K_0' - 4)\left(\left(\frac{V_0}{V}\right)^{2/3} - 1\right)\right]$$
-                                
-                                <p>Research applications:</p>
-                                <ul>
-                                    <li>Earth's interior structure and composition</li>
-                                    <li>Planetary science and exoplanet atmospheres</li>
-                                    <li>Shock wave physics and detonation</li>
-                                    <li>Dense plasma physics</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="research-section">
-                            <div class="research-title">Quantum and Relativistic Effects</div>
-                            <div class="research-content">
-                                <p>Quantum corrections to classical compressibility:</p>
-                                $$\kappa_T^{quantum} = \kappa_T^{classical} \left[1 + \frac{\hbar^2}{24mk_BT^2}\nabla^2 n\right]$$
-                                
-                                <p>Relativistic equation of state for ultrarelativistic matter:</p>
-                                $$p = \frac{1}{3}\epsilon \quad \text{(ultrarelativistic limit)}$$
-                                
-                                <p>where $\epsilon$ is the energy density.</p>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Compressibility - Research -->
+                <div class="guide-section">
+                    <span class="level-badge research">Research Frontiers</span>
+                    <h3>10. Extreme Conditions and Quantum Effects</h3>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">High-pressure EOS:</span> Birch-Murnaghan equation describes compression to TPa pressures.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Quantum corrections:</span> $\kappa_T^{quantum} = \kappa_T^{classical} \left[1 + \frac{\hbar^2}{24mk_BT^2}\nabla^2 n\right]$ for dense systems.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Relativistic matter:</span> $p = \frac{1}{3}\epsilon$ for ultrarelativistic fluids.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Applications:</span> Planetary interiors, neutron stars, inertial confinement fusion.</span>
+                        </li>
+                    </ul>
                 </div>
 
                 <!-- Surface Tension Section -->
-                <div class="property-section">
-                    <div class="property-header">
-                        <div class="property-icon">σ</div>
-                        <h2 class="property-title">Surface Tension</h2>
-                    </div>
-
-                    <!-- Undergraduate Level -->
-                    <div class="guide-section">
-                        <span class="level-indicator undergraduate">Undergraduate Level</span>
-                        <h3>💧 Surface Energy and Capillary Effects</h3>
-                        
-                        <div class="formula-section">
-                            <div class="formula-title">Basic Definition</div>
-                            <div class="formula-content">
-                                $$\sigma = \frac{F}{L} = \frac{\partial E}{\partial A}$$
-                                
-                                <p>Surface tension can be viewed as:</p>
-                                <ul>
-                                    <li>Force per unit length (N/m)</li>
-                                    <li>Energy per unit area (J/m²)</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="formula-section">
-                            <div class="formula-title">Young-Laplace Equation</div>
-                            <div class="formula-content">
-                                $$\Delta p = \sigma \left(\frac{1}{R_1} + \frac{1}{R_2}\right) = \sigma \kappa$$
-                                
-                                <p>where $\kappa$ is the mean curvature and $R_1, R_2$ are principal radii of curvature.</p>
-                                
-                                <p><strong>Special cases:</strong></p>
-                                <ul>
-                                    <li>Spherical droplet: $\Delta p = \frac{2\sigma}{R}$</li>
-                                    <li>Cylindrical interface: $\Delta p = \frac{\sigma}{R}$</li>
-                                    <li>Soap bubble: $\Delta p = \frac{4\sigma}{R}$ (two surfaces)</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="formula-section">
-                            <div class="formula-title">Capillary Rise</div>
-                            <div class="formula-content">
-                                $$h = \frac{2\sigma \cos\theta}{\rho g r}$$
-                                
-                                <p>where:</p>
-                                <ul>
-                                    <li>$h$ = height of liquid rise/depression</li>
-                                    <li>$\theta$ = contact angle</li>
-                                    <li>$r$ = capillary tube radius</li>
-                                </ul>
-                                
-                                <p>Contact angle relates to wetting: $\theta < 90°$ (wetting), $\theta > 90°$ (non-wetting)</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Graduate Level -->
-                    <div class="guide-section">
-                        <span class="level-indicator graduate">Graduate Level</span>
-                        <h3>🧪 Molecular Theory and Interface Thermodynamics</h3>
-                        
-                        <div class="derivation-section">
-                            <div class="derivation-title">Statistical Mechanical Origin</div>
-                            <div class="derivation-content">
-                                <p>Surface tension arises from asymmetric molecular interactions at interfaces:</p>
-                                $$\sigma = \frac{1}{2} \int_{-\infty}^{\infty} \left[p_N(z) - p_T(z)\right] dz$$
-                                
-                                <p>where $p_N$ and $p_T$ are normal and tangential pressure components.</p>
-                                
-                                <p><strong>Van der Waals square gradient theory:</strong></p>
-                                $$\sigma = \int_{-\infty}^{\infty} \kappa \left(\frac{d\rho}{dz}\right)^2 dz$$
-                                
-                                <p>where $\kappa$ is the gradient energy parameter.</p>
-                            </div>
-                        </div>
-
-                        <div class="formula-section">
-                            <div class="formula-title">Kelvin Equation</div>
-                            <div class="formula-content">
-                                $$\ln\left(\frac{p}{p_0}\right) = \frac{2\sigma V_m}{rRT}$$
-                                
-                                <p>Describes vapor pressure over curved interfaces, where:</p>
-                                <ul>
-                                    <li>$p$ = vapor pressure over curved surface</li>
-                                    <li>$p_0$ = vapor pressure over flat surface</li>
-                                    <li>$V_m$ = molar volume of liquid</li>
-                                </ul>
-                                
-                                <p>Critical for nucleation theory and droplet growth.</p>
-                            </div>
-                        </div>
-
-                        <div class="derivation-section">
-                            <div class="derivation-title">Gibbs Adsorption Isotherm</div>
-                            <div class="derivation-content">
-                                $$d\sigma = -\sum_i \Gamma_i d\mu_i$$
-                                
-                                <p>where $\Gamma_i$ is the surface excess of species $i$.</p>
-                                
-                                <p>For binary systems:</p>
-                                $$\Gamma_2 = -\frac{1}{RT}\left(\frac{\partial\sigma}{\partial \ln c_2}\right)_{T,p}$$
-                                
-                                <p>Fundamental relation connecting surface tension to adsorption.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Research Level -->
-                    <div class="guide-section">
-                        <span class="level-indicator research">Research Frontiers</span>
-                        <h3>🔬 Advanced Interface Science</h3>
-                        
-                        <div class="research-section">
-                            <div class="research-title">Dynamic Surface Tension</div>
-                            <div class="research-content">
-                                <p>Time-dependent surface tension during adsorption:</p>
-                                $$\sigma(t) = \sigma_0 - RT\Gamma_\infty \ln\left(1 + \frac{c}{K_d}e^{-t/\tau}\right)$$
-                                
-                                <p>Current research areas:</p>
-                                <ul>
-                                    <li>Marangoni flows and surface tension gradients</li>
-                                    <li>Surfactant dynamics and micelle formation</li>
-                                    <li>Biological membranes and lipid bilayers</li>
-                                    <li>Nanoparticle-stabilized interfaces (Pickering emulsions)</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="research-section">
-                            <div class="research-title">Quantum and Nanoscale Effects</div>
-                            <div class="research-content">
-                                <p>Size-dependent surface tension for nanoparticles:</p>
-                                $$\sigma(R) = \sigma_\infty \left(1 - \frac{\delta}{R}\right)$$
-                                
-                                <p>where $\delta$ is the Tolman length.</p>
-                                
-                                <p>Emerging research:</p>
-                                <ul>
-                                    <li>Quantum droplets in ultracold atomic gases</li>
-                                    <li>Surface tension of liquid metals at nanoscale</li>
-                                    <li>Interfacial properties of ionic liquids</li>
-                                    <li>Machine learning prediction of surface properties</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                <div class="property-header">
+                    <div class="property-symbol">σ</div>
+                    <div class="property-name">Surface Tension</div>
                 </div>
 
-                <!-- Advanced Topics -->
+                <!-- Surface Tension - Undergraduate -->
                 <div class="guide-section">
-                    <span class="level-indicator research">Research Level</span>
-                    <h3>🚀 Interdisciplinary Connections and Future Directions</h3>
-                    
-                    <div class="research-section">
-                        <div class="research-title">Multiphase Flow Properties</div>
-                        <div class="research-content">
-                            <p>Effective properties in multiphase systems:</p>
-                            
-                            <p><strong>Mixture density:</strong></p>
-                            $$\rho_m = \sum_i \alpha_i \rho_i$$
-                            
-                            <p><strong>Effective viscosity (Einstein relation for dilute suspensions):</strong></p>
-                            $$\mu_{eff} = \mu_0(1 + 2.5\phi + 6.2\phi^2 + ...)$$
-                            
-                            <p>where $\phi$ is the volume fraction of suspended particles.</p>
-                        </div>
-                    </div>
+                    <span class="level-badge undergraduate">Undergraduate Level</span>
+                    <h3>11. Surface Tension: Interface Energy</h3>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Definition:</span> $\sigma = \frac{F}{L} = \frac{\partial E}{\partial A}$ represents force per length or energy per area.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Young-Laplace equation:</span> $\Delta p = \sigma \left(\frac{1}{R_1} + \frac{1}{R_2}\right)$ for curved interfaces.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Capillary rise:</span> $h = \frac{2\sigma \cos\theta}{\rho g r}$ in circular tubes.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Contact angle:</span> θ < 90° indicates wetting, θ > 90° indicates non-wetting behavior.</span>
+                        </li>
+                    </ul>
 
-                    <div class="research-section">
-                        <div class="research-title">Machine Learning and AI Applications</div>
-                        <div class="research-content">
-                            <p>Current ML approaches in fluid property prediction:</p>
-                            <ul>
-                                <li><strong>Graph neural networks:</strong> Molecular property prediction from structure</li>
-                                <li><strong>Physics-informed neural networks:</strong> Incorporating conservation laws</li>
-                                <li><strong>Gaussian process regression:</strong> Uncertainty quantification in property models</li>
-                                <li><strong>Deep learning potentials:</strong> Ab initio accuracy with classical speed</li>
-                                <li><strong>Reinforcement learning:</strong> Optimal experimental design for property measurement</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="important-note">
-                        <div class="important-note-title">Future Research Directions</div>
-                        <div class="important-note-content">
-                            Emerging areas include quantum fluids, active matter, machine learning-accelerated molecular dynamics, and the development of universal scaling laws for transport properties across different phases of matter.
-                        </div>
+                    <div class="use-case-item">
+                        <span class="guide-text"><span class="guide-emphasis">Special cases:</span> Spherical droplet: Δp = 2σ/R, Soap bubble: Δp = 4σ/R</span>
                     </div>
                 </div>
 
-                <!-- References -->
-                <div class="reference-section">
-                    <div class="reference-title">Recommended References</div>
-                    <ol class="reference-list">
-                        <li>Bird, R. B., Stewart, W. E., & Lightfoot, E. N. (2007). <em>Transport Phenomena</em> (2nd ed.). John Wiley & Sons.</li>
-                        <li>Hansen, J. P., & McDonald, I. R. (2013). <em>Theory of Simple Liquids</em> (4th ed.). Academic Press.</li>
-                        <li>Frenkel, D., & Smit, B. (2001). <em>Understanding Molecular Simulation</em> (2nd ed.). Academic Press.</li>
-                        <li>Rowlinson, J. S., & Widom, B. (2002). <em>Molecular Theory of Capillarity</em>. Dover Publications.</li>
-                        <li>Chapman, S., & Cowling, T. G. (1970). <em>The Mathematical Theory of Non-uniform Gases</em> (3rd ed.). Cambridge University Press.</li>
-                        <li>Evans, D. J., & Morriss, G. P. (2008). <em>Statistical Mechanics of Nonequilibrium Liquids</em> (2nd ed.). Cambridge University Press.</li>
-                        <li>Israelachvili, J. N. (2011). <em>Intermolecular and Surface Forces</em> (3rd ed.). Academic Press.</li>
-                        <li>Dill, K. A., & Bromberg, S. (2010). <em>Molecular Driving Forces</em> (2nd ed.). Garland Science.</li>
-                    </ol>
+                <!-- Surface Tension - Graduate -->
+                <div class="guide-section">
+                    <span class="level-badge graduate">Graduate Level</span>
+                    <h3>12. Molecular Theory and Interface Thermodynamics</h3>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Statistical origin:</span> $\sigma = \frac{1}{2} \int_{-\infty}^{\infty} [p_N(z) - p_T(z)] dz$ from pressure tensor anisotropy.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Square gradient theory:</span> $\sigma = \int_{-\infty}^{\infty} \kappa \left(\frac{d\rho}{dz}\right)^2 dz$ relates to density gradients.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Kelvin equation:</span> $\ln\left(\frac{p}{p_0}\right) = \frac{2\sigma V_m}{rRT}$ for vapor pressure over curved surfaces.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Gibbs adsorption:</span> $d\sigma = -\sum_i \Gamma_i d\mu_i$ connects surface tension to adsorption.</span>
+                        </li>
+                    </ul>
+
+                    <div class="formula-box">
+                        <div class="formula-title">Gibbs Adsorption Isotherm</div>
+                        $$\Gamma_2 = -\frac{1}{RT}\left(\frac{\partial\sigma}{\partial \ln c_2}\right)_{T,p}$$
+                    </div>
+                </div>
+
+                <!-- Surface Tension - Research -->
+                <div class="guide-section">
+                    <span class="level-badge research">Research Frontiers</span>
+                    <h3>13. Advanced Interface Science</h3>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Dynamic interfaces:</span> Time-dependent surface tension during adsorption and desorption processes.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Nanoscale effects:</span> $\sigma(R) = \sigma_\infty \left(1 - \frac{\delta}{R}\right)$ with Tolman length δ for small droplets.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Quantum droplets:</span> Balance between kinetic energy and mean-field interactions in ultracold gases.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Machine learning:</span> AI prediction of surface properties from molecular structure and composition.</span>
+                        </li>
+                    </ul>
+
+                    <div class="avoid-item">
+                        <span class="guide-text"><span class="guide-emphasis">Research challenges:</span> Multiscale modeling, dynamic wetting, biological interfaces, active matter surfaces</span>
+                    </div>
+                </div>
+
+                <!-- Future Directions -->
+                <div class="guide-section">
+                    <span class="level-badge research">Future Directions</span>
+                    <h3>14. Emerging Research Areas</h3>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Multiphase properties:</span> Effective properties in complex mixtures and suspensions.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Active matter:</span> Properties of self-propelled particles and biological fluids.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Machine learning:</span> AI-driven property prediction and materials discovery.</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text"><span class="guide-emphasis">Quantum fluids:</span> Superfluid properties and quantum phase transitions.</span>
+                        </li>
+                    </ul>
+
+                    <div class="use-case-item">
+                        <span class="guide-text"><span class="guide-emphasis">Interdisciplinary impact:</span> Biophysics, materials science, planetary science, and energy applications</span>
+                    </div>
                 </div>
 
             </div>
@@ -1279,32 +839,7 @@
             smoothTransition(this.href);
         });
 
-        // Smooth scrolling for internal links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Enhanced MathJax rendering callback
-        window.MathJax = {
-            startup: {
-                ready: () => {
-                    console.log('MathJax is loaded, but not yet initialized');
-                    MathJax.startup.defaultReady();
-                    console.log('MathJax is initialized, and the initial typeset is queued');
-                }
-            }
-        };
-
-        console.log('Fluid Properties - Comprehensive Academic Guide loaded');
+        console.log('Fluid Properties - K-epsilon style Academy Guide loaded');
     </script>
 </body>
 </html>
