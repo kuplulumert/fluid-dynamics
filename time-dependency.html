@@ -24,7 +24,7 @@
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
             color: #2d3748;
-            background-color: #f7fafc;
+            background-color: #ffffff;
             min-height: 100vh;
             opacity: 0;
             animation: fadeInPage 1.2s ease-out forwards;
@@ -52,20 +52,19 @@
 
         /* Premium Header */
         .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
+            background: #ffffff;
             border-bottom: 1px solid rgba(102, 126, 234, 0.1);
             padding: 1.5rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.08);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
 
         .header.scrolled {
             background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .header-content {
@@ -80,7 +79,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #667eea;
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -96,7 +95,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #667eea;
             transition: width 0.3s ease;
         }
 
@@ -116,7 +115,7 @@
             color: #4a5568;
             font-size: 0.9rem;
             font-weight: 500;
-            border-radius: 12px;
+            border-radius: 4px;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
@@ -143,7 +142,7 @@
         .nav-tab.active {
             color: #667eea;
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         /* Home Hub Button */
         .home-hub-button {
@@ -152,12 +151,12 @@
             color: white;
             font-size: 0.9rem;
             font-weight: 600;
-            border-radius: 12px;
+            border-radius: 4px;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, #10b981, #059669);
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            background: #10b981;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             border: 2px solid rgba(16, 185, 129, 0.2);
             display: flex;
             align-items: center;
@@ -182,7 +181,7 @@
 
         .home-hub-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             border-color: rgba(16, 185, 129, 0.4);
         }
 
@@ -205,10 +204,9 @@
             top: 100%;
             left: 0;
             background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
             border: 1px solid rgba(16, 185, 129, 0.1);
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.15);
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             padding: 0.5rem 0;
             min-width: 250px;
             opacity: 0;
@@ -274,7 +272,7 @@
 
         /* Premium Page Header */
         .page-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #667eea;
             color: white;
             padding: 6rem 2rem 4rem 2rem;
             text-align: center;
@@ -313,7 +311,7 @@
         .featured-section {
             margin-bottom: 4rem;
             background: linear-gradient(135deg, #f8faff 0%, #f0f4f8 100%);
-            border-radius: 16px;
+            border-radius: 4px;
             padding: 3rem;
             box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15), 0 2px 8px rgba(0, 0, 0, 0.05);
             border: 1px solid rgba(102, 126, 234, 0.1);
@@ -332,14 +330,14 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            background: #667eea;
         }
 
         .guide-section {
             margin-bottom: 2.5rem;
             padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             background: white;
         }
 
@@ -352,7 +350,7 @@
 
         .time-section {
             background: linear-gradient(135deg, #ffffff 0%, #fdfdff 100%);
-            border-radius: 12px;
+            border-radius: 4px;
             padding: 2rem;
             box-shadow: 0 4px 16px rgba(118, 75, 162, 0.08), 0 2px 4px rgba(0, 0, 0, 0.03);
             margin-bottom: 2rem;
@@ -394,13 +392,13 @@
         .featured-card {
             background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
             border: 1px solid rgba(102, 126, 234, 0.08);
-            border-radius: 12px;
+            border-radius: 4px;
             padding: 2rem;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.08);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .featured-card::before {
@@ -410,7 +408,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            background: #667eea;
             transform: translateX(-100%);
             transition: transform 0.4s ease;
         }
@@ -430,7 +428,7 @@
             font-size: 1.75rem;
             font-weight: 700;
             margin: 0 0 1rem 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #667eea;
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -486,7 +484,7 @@
             background: #667eea;
             margin: 2px 0;
             transition: all 0.3s ease;
-            border-radius: 2px;
+            border-radius: 4px;
         }
 
         .mobile-menu-toggle.active span:nth-child(1) {
@@ -532,9 +530,8 @@
                 left: 0;
                 right: 0;
                 background: rgba(255, 255, 255, 0.98);
-                backdrop-filter: blur(20px);
                 border-top: 1px solid rgba(102, 126, 234, 0.1);
-                box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
                 flex-direction: column;
                 gap: 0;
                 padding: 1rem 0;
@@ -570,7 +567,7 @@
 
             .home-hub-button:hover {
                 transform: none;
-                box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             }
         /* Home Hub Button */
         .home-hub-button {
@@ -579,12 +576,12 @@
             color: white;
             font-size: 0.9rem;
             font-weight: 600;
-            border-radius: 12px;
+            border-radius: 4px;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, #10b981, #059669);
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            background: #10b981;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             border: 2px solid rgba(16, 185, 129, 0.2);
             display: flex;
             align-items: center;
@@ -609,7 +606,7 @@
 
         .home-hub-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             border-color: rgba(16, 185, 129, 0.4);
         }
 
@@ -632,10 +629,9 @@
             top: 100%;
             left: 0;
             background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
             border: 1px solid rgba(16, 185, 129, 0.1);
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.15);
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             padding: 0.5rem 0;
             min-width: 250px;
             opacity: 0;
