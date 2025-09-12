@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head>    <!-- Premium Academic Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test CFD Models</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 20px;
             background: white;
@@ -22,6 +26,107 @@
             background: #f5f5f5;
             margin-bottom: 5px;
         }
+    
+        /* Premium Academic Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', 'Georgia', 'Times New Roman', serif;
+            font-weight: 400;
+            line-height: 1.3;
+            color: #1a202c;
+            margin-bottom: 1rem;
+        }
+        
+        h1 { font-size: 2.5rem; font-weight: 300; letter-spacing: -0.02em; }
+        h2 { font-size: 1.875rem; font-weight: 400; letter-spacing: -0.01em; }
+        h3 { font-size: 1.5rem; font-weight: 500; }
+        h4 { font-size: 1.25rem; font-weight: 500; }
+        
+        p, .guide-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #374151;
+            margin-bottom: 1.2rem;
+        }
+        
+        /* Premium Academic Spacing */
+        .guide-section {
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+        }
+        
+        .equation-block {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+        }
+        
+        .term-definitions {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+        }
+        
+        /* Premium Tables */
+        .constants-table table {
+            border-collapse: separate;
+            border-spacing: 0;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .constants-table th {
+            background: #f8fafc;
+            color: #374151;
+            font-weight: 600;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .constants-table td {
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .constants-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* Premium Interactive Elements */
+        .nav-tab, .course-dropdown-item {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+        
+        .topic-title, .property-title {
+            font-family: 'Crimson Text', serif;
+            font-weight: 500;
+            color: #1a202c;
+        }
+        
+        /* Academic Focus Styles */
+        .academic-focus {
+            border-left: 4px solid #10b981;
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .academic-note {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .academic-note h4 {
+            color: #0369a1;
+            margin-bottom: 0.5rem;
+        }
+        
     </style>
 </head>
 <body>

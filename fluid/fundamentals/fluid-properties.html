@@ -13,6 +13,11 @@
     
     <link rel="canonical" href="https://cfdhandbook.com/fluid/fundamentals/fluid-properties.html">
     
+    <!-- Premium Academic Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
     <!-- MathJax Configuration -->
     <script>
     window.MathJax = {
@@ -38,11 +43,13 @@
         }
 
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #2d3748;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            color: #1a202c;
             background-color: #ffffff;
             min-height: 100vh;
+            font-size: 16px;
+            font-weight: 400;
         }
 
         .container {
@@ -473,6 +480,128 @@
             .guide-section {
                 padding: 1.5rem;
             }
+        }
+
+        /* Premium Academic Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', 'Georgia', 'Times New Roman', serif;
+            font-weight: 400;
+            line-height: 1.3;
+            color: #1a202c;
+            margin-bottom: 1rem;
+        }
+        
+        h1 { 
+            font-size: 2.75rem; 
+            font-weight: 300; 
+            letter-spacing: -0.02em; 
+        }
+        
+        h2 { 
+            font-size: 2rem; 
+            font-weight: 400; 
+            letter-spacing: -0.01em; 
+        }
+        
+        h3 { 
+            font-size: 1.5rem; 
+            font-weight: 500; 
+        }
+        
+        h4 { 
+            font-size: 1.25rem; 
+            font-weight: 500; 
+        }
+        
+        p, .guide-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #374151;
+            margin-bottom: 1.2rem;
+        }
+        
+        /* Premium Academic Elements */
+        .guide-section h3 {
+            font-family: 'Crimson Text', serif;
+            font-weight: 500;
+            color: #10b981;
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .guide-section h4 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: #1a202c;
+            font-size: 1.1rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+        
+        .page-header h1 {
+            font-family: 'Crimson Text', serif;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+        }
+        
+        .model-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Enhanced Academic Spacing */
+        .guide-section {
+            padding: 3rem;
+            margin-bottom: 2rem;
+        }
+        
+        .academy-guide {
+            padding: 3rem;
+        }
+        
+        /* Premium Mathematical Content */
+        .equation-block {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            font-family: 'Crimson Text', serif;
+        }
+        
+        .term-definitions {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .term-definitions h4 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: #10b981;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .term-item {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: #374151;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .term-item:last-child {
+            border-bottom: none;
+        }
+        
+        .term-item strong {
+            color: #10b981;
+            font-weight: 600;
         }
     </style>
 </head>
