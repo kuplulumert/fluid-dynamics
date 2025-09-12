@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluid Properties - Fluid Dynamics</title>
+    <meta name="description" content="Comprehensive academic guide to fundamental fluid properties including density, viscosity, compressibility, and surface tension.">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="version" content="2.0">
+    <meta name="last-modified" content="2025-12-19">
+    
+    <link rel="canonical" href="https://cfdhandbook.com/fluid/fundamentals/fluid-properties.html">
+    
+    <!-- Premium Academic Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            color: #1a202c;
+            background-color: #ffffff;
+            min-height: 100vh;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 2rem;
+            max-width: 1400px;
+        }
+
+        /* Header - Exact k-epsilon style */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: #10b981;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-tab {
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            color: #4a5568;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 4px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-tab:hover::before,
+        .nav-tab.active::before {
+            opacity: 1;
+        }
+
+        .nav-tab:hover,
+        .nav-tab.active {
+            color: #10b981;
+            transform: translateY(-2px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Home Hub Button */
+        .home-hub-button {
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            background: #10b981;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(16, 185, 129, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .home-hub-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .home-hub-button:hover::before {
+            opacity: 1;
+        }
+
+        .home-hub-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .home-hub-icon {
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .home-hub-button:hover .home-hub-icon {
+            transform: scale(1.1);
+        }
+
+        /* Course Hub Dropdown */
+        .home-hub-button {
+            position: relative;
+        }
+
+        .course-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+            min-width: 250px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .home-hub-button:hover .course-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .course-dropdown-item {
+            display: block;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: #4a5568;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.05);
+        }
+
+        .course-dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .course-dropdown-item:hover {
+            background: rgba(16, 185, 129, 0.05);
+            color: #10b981;
+        }
+
+        .course-dropdown-item.active {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+
+        .dropdown-course-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .dropdown-course-desc {
+            font-size: 0.75rem;
+            color: #6b7280;
+            line-height: 1.3;
+        }
+
+        .course-dropdown-item.active .dropdown-course-desc {
+            color: #059669;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 3rem;
+        }
+
+        /* Page Header - Exact k-epsilon style */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: #10b981;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .model-subtitle {
+            font-size: 1.3rem;
+            color: #4a5568;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Academy Guide - Exact k-epsilon style */
+        .academy-guide {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.08);
+            border-radius: 4px;
+            padding: 2.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Guide Sections - Exact k-epsilon style */
+        .guide-section {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            border-radius: 4px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .guide-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .guide-section h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .guide-section h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .guide-text {
+            display: block;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #4b5563;
+            margin-bottom: 1rem;
+        }
+
+        /* Equation Blocks - Exact k-epsilon style */
+        .equation-block {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Term Definitions - Exact k-epsilon style */
+        .term-definitions {
+            background: rgba(248, 250, 252, 0.8);
+            border: 1px solid rgba(16, 185, 129, 0.08);
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .term-definitions h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+
+        .term-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.05);
+            font-size: 0.95rem;
+            color: #4b5563;
+        }
+
+        .term-item:last-child {
+            border-bottom: none;
+        }
+
+        .term-item strong {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        /* Constants Table - Exact k-epsilon style */
+        .constants-table {
+            margin: 1.5rem 0;
+        }
+
+        .constants-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .constants-table th,
+        .constants-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .constants-table th {
+            background: #10b981;
+            color: white;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .constants-table td {
+            font-size: 0.9rem;
+            color: #4b5563;
+        }
+
+        .constants-table tr:hover {
+            background: rgba(16, 185, 129, 0.02);
+        }
+
+        /* Guide Lists - Exact k-epsilon style */
+        .guide-list {
+            list-style: none;
+            margin: 1rem 0;
+            padding: 0;
+        }
+
+        .guide-item {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .guide-item::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-size: 0.8rem;
+            top: 0.1rem;
+        }
+
+        .guide-item .guide-text {
+            margin-bottom: 0;
+        }
+
+        .guide-emphasis {
+            font-weight: 700;
+            background: #10b981;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #1f2937;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .header {
+                padding: 1rem 0;
+            }
+
+            .nav-tabs {
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .nav-tab, .home-hub-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .model-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .academy-guide {
+                padding: 1.5rem;
+            }
+
+            .guide-section {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Premium Academic Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', 'Georgia', 'Times New Roman', serif;
+            font-weight: 400;
+            line-height: 1.3;
+            color: #1a202c;
+            margin-bottom: 1rem;
+        }
+        
+        h1 { 
+            font-size: 2.75rem; 
+            font-weight: 300; 
+            letter-spacing: -0.02em; 
+        }
+        
+        h2 { 
+            font-size: 2rem; 
+            font-weight: 400; 
+            letter-spacing: -0.01em; 
+        }
+        
+        h3 { 
+            font-size: 1.5rem; 
+            font-weight: 500; 
+        }
+        
+        h4 { 
+            font-size: 1.25rem; 
+            font-weight: 500; 
+        }
+        
+        p, .guide-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #374151;
+            margin-bottom: 1.2rem;
+        }
+        
+        /* Premium Academic Elements */
+        .guide-section h3 {
+            font-family: 'Crimson Text', serif;
+            font-weight: 500;
+            color: #10b981;
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .guide-section h4 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: #1a202c;
+            font-size: 1.1rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+        
+        .page-header h1 {
+            font-family: 'Crimson Text', serif;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+        }
+        
+        .model-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Enhanced Academic Spacing */
+        .guide-section {
+            padding: 3rem;
+            margin-bottom: 2rem;
+        }
+        
+        .academy-guide {
+            padding: 3rem;
+        }
+        
+        /* Premium Mathematical Content */
+        .equation-block {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            font-family: 'Crimson Text', serif;
+        }
+        
+        .term-definitions {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .term-definitions h4 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: #10b981;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .term-item {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: #374151;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .term-item:last-child {
+            border-bottom: none;
+        }
+        
+        .term-item strong {
+            color: #10b981;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Header -->
+        <div class="header">
+            <div class="header-content">
+                <a href="../../fluid-fundamentals.html" class="logo">Fluid Dynamics Fundamentals</a>
+                <div class="nav-tabs">
+                    <a href="../../home.html" class="home-hub-button">
+                        <span class="home-hub-icon">🏠</span>
+                        <span>Course Hub</span>
+                    </a>
+                    <a href="../../fluid-fundamentals.html" class="nav-tab">← Back to Fundamentals</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>Fluid Properties</h1>
+                <p class="model-subtitle">Essential physical properties for understanding fluid behavior in engineering applications</p>
+            </div>
+
+            <!-- Academy Guide Content -->
+            <div class="academy-guide">
+                
+                <!-- Introduction -->
+                <div class="guide-section">
+                    <h3>Introduction to Fluid Properties</h3>
+                    <p class="guide-text">Fluid properties are physical characteristics that describe how fluids behave under different conditions. Understanding these properties is essential for solving engineering problems involving fluid flow, heat transfer, and mass transport in practical applications.</p>
+                    
+                    <h4>Why Fluid Properties Matter</h4>
+                    <p class="guide-text">In engineering design, fluid properties determine how fluids will behave in pipes, pumps, heat exchangers, and other equipment. Knowing these properties allows engineers to predict pressure drops, calculate required pump power, design efficient heat transfer systems, and ensure safe operation of fluid handling equipment.</p>
+                    
+                    <h4>Types of Fluid Properties</h4>
+                    <p class="guide-text">We classify fluid properties into two main categories: thermodynamic properties (like density and temperature) that describe the fluid's state, and transport properties (like viscosity) that describe how the fluid moves and transfers momentum, heat, and mass.</p>
+                    
+                    <h4>The Continuum Approach</h4>
+                    <p class="guide-text">In engineering applications, we treat fluids as continuous materials rather than collections of individual molecules. This continuum approach is valid for most practical engineering problems and allows us to use calculus and differential equations to analyze fluid behavior.</p>
+                </div>
+
+                <!-- Density Section -->
+                <div class="guide-section">
+                    <h3>Density: Mass per Unit Volume</h3>
+                    <p class="guide-text">Density is one of the most fundamental properties of a fluid, representing how much mass is contained in a given volume. It affects buoyancy forces, pressure variations in static fluids, and is essential for mass conservation calculations in fluid flow problems.</p>
+                    
+                    <h4>Basic Definition</h4>
+                    <div class="equation-block">
+                        $$\rho = \frac{m}{V}$$
+                    </div>
+                    
+                    <p class="guide-text">This simple ratio tells us how tightly packed the fluid molecules are. Denser fluids like mercury have more mass in the same volume compared to lighter fluids like air.</p>
+                    
+                    <div class="term-definitions">
+                        <h4>Variable Definitions:</h4>
+                        <div class="term-item"><strong>ρ:</strong> Density (kg/m³)</div>
+                        <div class="term-item"><strong>m:</strong> Mass of fluid (kg)</div>
+                        <div class="term-item"><strong>V:</strong> Volume of fluid (m³)</div>
+                    </div>
+                    
+                    <h4>Specific Volume</h4>
+                    <div class="equation-block">
+                        $$v = \frac{1}{\rho} = \frac{V}{m}$$
+                    </div>
+                    
+                    <p class="guide-text">Specific volume tells us how much space one kilogram of fluid occupies. It's simply the inverse of density and is useful in thermodynamic calculations.</p>
+                    
+                    <h4>How Density Changes with Temperature</h4>
+                    <p class="guide-text">Most fluids become less dense when heated because thermal expansion increases their volume while mass stays constant:</p>
+                    
+                    <div class="equation-block">
+                        $$\rho(T) = \rho_0 [1 - \beta(T - T_0)]$$
+                    </div>
+                    
+                    <p class="guide-text">where $\beta$ is the thermal expansion coefficient that tells us how much the density changes per degree of temperature change:</p>
+                    
+                    <div class="equation-block">
+                        $$\beta = -\frac{1}{\rho} \left(\frac{\partial \rho}{\partial T}\right)_p$$
+                    </div>
+                    
+                    <div class="constants-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Common Fluids</th>
+                                    <th>Density (kg/m³)</th>
+                                    <th>Typical Uses</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Water (20°C)</td>
+                                    <td>998</td>
+                                    <td>Cooling systems, hydraulics</td>
+                                </tr>
+                                <tr>
+                                    <td>Air (15°C)</td>
+                                    <td>1.225</td>
+                                    <td>HVAC, pneumatics</td>
+                                </tr>
+                                <tr>
+                                    <td>Gasoline</td>
+                                    <td>720</td>
+                                    <td>Automotive fuel systems</td>
+                                </tr>
+                                <tr>
+                                    <td>Engine Oil</td>
+                                    <td>880</td>
+                                    <td>Lubrication systems</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Gas Density -->
+                <div class="guide-section">
+                    <h3>Gas Density and the Ideal Gas Law</h3>
+                    <p class="guide-text">For gases, density is strongly dependent on both pressure and temperature. Understanding this relationship is crucial for analyzing gas flow in pipes, compressors, and atmospheric applications.</p>
+                    
+                    <h4>Ideal Gas Density</h4>
+                    <div class="equation-block">
+                        $$\rho = \frac{pM}{RT}$$
+                    </div>
+                    
+                    <p class="guide-text">This fundamental relationship shows that gas density increases with pressure and decreases with temperature. The molecular weight M determines how heavy the gas molecules are.</p>
+                    
+                    <div class="term-definitions">
+                        <h4>Ideal Gas Variables:</h4>
+                        <div class="term-item"><strong>p:</strong> Absolute pressure (Pa)</div>
+                        <div class="term-item"><strong>M:</strong> Molecular weight (kg/mol)</div>
+                        <div class="term-item"><strong>R:</strong> Universal gas constant (8314 J/mol·K)</div>
+                        <div class="term-item"><strong>T:</strong> Absolute temperature (K)</div>
+                    </div>
+                    
+                    <h4>Practical Applications</h4>
+                    <p class="guide-text">The ideal gas law is remarkably accurate for most engineering calculations involving gases at moderate pressures and temperatures. It's used to calculate air density in HVAC systems, gas flow rates in pipelines, and fuel-air mixing ratios in combustion engines.</p>
+                    
+                    <div class="constants-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Gas</th>
+                                    <th>Molecular Weight (kg/mol)</th>
+                                    <th>Density at STP (kg/m³)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Air</td>
+                                    <td>0.02897</td>
+                                    <td>1.225</td>
+                                </tr>
+                                <tr>
+                                    <td>Oxygen</td>
+                                    <td>0.03200</td>
+                                    <td>1.429</td>
+                                </tr>
+                                <tr>
+                                    <td>Nitrogen</td>
+                                    <td>0.02801</td>
+                                    <td>1.251</td>
+                                </tr>
+                                <tr>
+                                    <td>Carbon Dioxide</td>
+                                    <td>0.04401</td>
+                                    <td>1.977</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Viscosity Section -->
+                <div class="guide-section">
+                    <h3>Viscosity: Resistance to Flow</h3>
+                    <p class="guide-text">Viscosity measures how much a fluid resists flowing. Think of honey versus water - honey has high viscosity (flows slowly) while water has low viscosity (flows easily). This property is crucial for calculating pressure drops in pipes and determining pump power requirements.</p>
+                    
+                    <h4>Newton's Law of Viscosity</h4>
+                    <div class="equation-block">
+                        $$\tau = \mu \frac{du}{dy}$$
+                    </div>
+                    
+                    <p class="guide-text">This equation tells us that the shear stress (force per area) in a fluid is proportional to how fast the velocity changes across the fluid layers. The proportionality constant μ is the dynamic viscosity.</p>
+                    
+                    <div class="term-definitions">
+                        <h4>Viscosity Variables:</h4>
+                        <div class="term-item"><strong>τ:</strong> Shear stress - force per unit area (Pa)</div>
+                        <div class="term-item"><strong>μ:</strong> Dynamic viscosity (Pa·s or kg/m·s)</div>
+                        <div class="term-item"><strong>du/dy:</strong> Velocity gradient - how fast velocity changes (s⁻¹)</div>
+                    </div>
+                    
+                    <h4>Kinematic Viscosity</h4>
+                    <div class="equation-block">
+                        $$\nu = \frac{\mu}{\rho}$$
+                    </div>
+                    
+                    <p class="guide-text">Kinematic viscosity combines viscosity and density into a single property. It appears frequently in fluid mechanics equations and has units of m²/s. It represents how fast momentum spreads through the fluid.</p>
+                    
+                    <h4>Temperature Effects on Viscosity</h4>
+                    <p class="guide-text">Viscosity changes dramatically with temperature, but differently for liquids and gases:</p>
+                    
+                    <p class="guide-text"><strong>Liquids:</strong> Viscosity decreases as temperature increases (easier to pour hot syrup than cold)</p>
+                    <p class="guide-text"><strong>Gases:</strong> Viscosity increases as temperature increases (hotter gases are "stickier")</p>
+                    
+                    <div class="constants-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fluid</th>
+                                    <th>Dynamic Viscosity μ (Pa·s)</th>
+                                    <th>Kinematic Viscosity ν (m²/s)</th>
+                                    <th>Temperature (°C)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Water</td>
+                                    <td>1.00 × 10⁻³</td>
+                                    <td>1.00 × 10⁻⁶</td>
+                                    <td>20</td>
+                                </tr>
+                                <tr>
+                                    <td>Air</td>
+                                    <td>1.81 × 10⁻⁵</td>
+                                    <td>1.48 × 10⁻⁵</td>
+                                    <td>15</td>
+                                </tr>
+                                <tr>
+                                    <td>Engine Oil</td>
+                                    <td>0.10 - 0.50</td>
+                                    <td>1.1 × 10⁻⁴ - 5.7 × 10⁻⁴</td>
+                                    <td>20</td>
+                                </tr>
+                                <tr>
+                                    <td>Glycerin</td>
+                                    <td>1.49</td>
+                                    <td>1.18 × 10⁻³</td>
+                                    <td>20</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Viscosity Applications -->
+                <div class="guide-section">
+                    <h3>Viscosity in Engineering Applications</h3>
+                    <p class="guide-text">Viscosity is essential for many engineering calculations. It determines pressure losses in pipes, power requirements for pumps, and heat transfer rates in heat exchangers.</p>
+                    
+                    <h4>Pressure Drop in Pipes</h4>
+                    <p class="guide-text">For laminar flow in circular pipes, the pressure drop depends directly on viscosity:</p>
+                    
+                    <div class="equation-block">
+                        $$\Delta p = \frac{32 \mu V L}{D^2}$$
+                    </div>
+                    
+                    <div class="term-definitions">
+                        <h4>Pipeline Variables:</h4>
+                        <div class="term-item"><strong>Δp:</strong> Pressure drop along pipe (Pa)</div>
+                        <div class="term-item"><strong>V:</strong> Average velocity (m/s)</div>
+                        <div class="term-item"><strong>L:</strong> Pipe length (m)</div>
+                        <div class="term-item"><strong>D:</strong> Pipe diameter (m)</div>
+                    </div>
+                    
+                    <h4>Reynolds Number</h4>
+                    <p class="guide-text">The Reynolds number uses kinematic viscosity to predict flow behavior:</p>
+                    
+                    <div class="equation-block">
+                        $$Re = \frac{VD}{\nu} = \frac{\rho VD}{\mu}$$
+                    </div>
+                    
+                    <p class="guide-text">This dimensionless number tells us whether flow will be laminar (Re < 2300) or turbulent (Re > 4000) in pipes.</p>
+                    
+                    <h4>Common Viscosity Values</h4>
+                    <p class="guide-text">Understanding typical viscosity ranges helps in engineering design:</p>
+                    
+                    <div class="constants-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fluid Type</th>
+                                    <th>Viscosity Range (Pa·s)</th>
+                                    <th>Examples</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Gases</td>
+                                    <td>10⁻⁶ to 10⁻⁴</td>
+                                    <td>Air, steam, natural gas</td>
+                                </tr>
+                                <tr>
+                                    <td>Water-like liquids</td>
+                                    <td>10⁻³ to 10⁻²</td>
+                                    <td>Water, alcohol, gasoline</td>
+                                </tr>
+                                <tr>
+                                    <td>Oils</td>
+                                    <td>10⁻² to 1</td>
+                                    <td>Engine oil, hydraulic fluid</td>
+                                </tr>
+                                <tr>
+                                    <td>Thick liquids</td>
+                                    <td>1 to 100</td>
+                                    <td>Honey, glycerin, molasses</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Compressibility Section -->
+                <div class="guide-section">
+                    <h3>Compressibility: How Much Fluids Squeeze</h3>
+                    <p class="guide-text">Compressibility tells us how much a fluid's volume changes when pressure is applied. This property is important for understanding gas behavior, hydraulic systems, and high-speed flows where pressure changes are significant.</p>
+                    
+                    <h4>What is Compressibility?</h4>
+                    <p class="guide-text">Compressibility measures how "squishy" a fluid is. Gases are highly compressible (easy to squeeze), while liquids are nearly incompressible (very hard to squeeze).</p>
+                    
+                    <div class="equation-block">
+                        $$\beta = -\frac{1}{V}\frac{\Delta V}{\Delta p}$$
+                    </div>
+                    
+                    <p class="guide-text">The negative sign ensures that compressibility is positive since volume decreases when pressure increases.</p>
+                    
+                    <div class="term-definitions">
+                        <h4>Compressibility Variables:</h4>
+                        <div class="term-item"><strong>β:</strong> Compressibility (Pa⁻¹)</div>
+                        <div class="term-item"><strong>ΔV:</strong> Volume change (m³)</div>
+                        <div class="term-item"><strong>Δp:</strong> Pressure change (Pa)</div>
+                        <div class="term-item"><strong>K:</strong> Bulk modulus = 1/β (Pa)</div>
+                    </div>
+                    
+                    <h4>Speed of Sound Connection</h4>
+                    <p class="guide-text">Compressibility is directly related to how fast sound travels through the fluid:</p>
+                    
+                    <div class="equation-block">
+                        $$c = \sqrt{\frac{K}{\rho}}$$
+                    </div>
+                    
+                    <p class="guide-text">Stiffer fluids (low compressibility, high K) conduct sound faster. This is why sound travels much faster in water than in air.</p>
+                    
+                    <h4>Practical Implications</h4>
+                    <p class="guide-text">In hydraulic systems, low compressibility of oil provides quick response. In gas systems, high compressibility allows for energy storage but requires careful pressure calculations.</p>
+                    
+                    <div class="constants-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fluid</th>
+                                    <th>Compressibility β (Pa⁻¹)</th>
+                                    <th>Sound Speed (m/s)</th>
+                                    <th>Behavior</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Water</td>
+                                    <td>4.6 × 10⁻¹⁰</td>
+                                    <td>1482</td>
+                                    <td>Nearly incompressible</td>
+                                </tr>
+                                <tr>
+                                    <td>Air</td>
+                                    <td>7.0 × 10⁻⁶</td>
+                                    <td>340</td>
+                                    <td>Highly compressible</td>
+                                </tr>
+                                <tr>
+                                    <td>Hydraulic Oil</td>
+                                    <td>6.9 × 10⁻¹⁰</td>
+                                    <td>1200</td>
+                                    <td>Nearly incompressible</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Surface Tension Section -->
+                <div class="guide-section">
+                    <h3>Surface Tension: Forces at Fluid Interfaces</h3>
+                    <p class="guide-text">Surface tension is the force that acts along the surface of a liquid, trying to minimize the surface area. It's what allows insects to walk on water and causes water to form droplets rather than spreading out completely.</p>
+                    
+                    <h4>Basic Definition</h4>
+                    <div class="equation-block">
+                        $$\sigma = \frac{F}{L}$$
+                    </div>
+                    
+                    <p class="guide-text">Surface tension is the force per unit length acting along a liquid surface. Think of it as an invisible "skin" on the liquid surface that resists being stretched.</p>
+                    
+                    <div class="term-definitions">
+                        <h4>Surface Tension Variables:</h4>
+                        <div class="term-item"><strong>σ:</strong> Surface tension (N/m)</div>
+                        <div class="term-item"><strong>F:</strong> Force acting along surface (N)</div>
+                        <div class="term-item"><strong>L:</strong> Length over which force acts (m)</div>
+                    </div>
+                    
+                    <h4>Pressure Inside Droplets and Bubbles</h4>
+                    <p class="guide-text">Surface tension creates higher pressure inside curved interfaces:</p>
+                    
+                    <div class="equation-block">
+                        $$\Delta p = \frac{2\sigma}{R}$$
+                    </div>
+                    
+                    <p class="guide-text">For a spherical droplet or bubble with radius R. Smaller droplets have higher internal pressure.</p>
+                    
+                    <h4>Capillary Rise in Tubes</h4>
+                    <div class="equation-block">
+                        $$h = \frac{2\sigma \cos\theta}{\rho g r}$$
+                    </div>
+                    
+                    <p class="guide-text">This equation predicts how high a liquid will rise in a thin tube due to surface tension effects.</p>
+                    
+                    <div class="term-definitions">
+                        <h4>Capillary Variables:</h4>
+                        <div class="term-item"><strong>h:</strong> Height of liquid rise (m)</div>
+                        <div class="term-item"><strong>θ:</strong> Contact angle (degrees)</div>
+                        <div class="term-item"><strong>r:</strong> Tube radius (m)</div>
+                        <div class="term-item"><strong>g:</strong> Gravitational acceleration (9.81 m/s²)</div>
+                    </div>
+                    
+                    <div class="constants-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Liquid</th>
+                                    <th>Surface Tension (N/m)</th>
+                                    <th>Contact Angle with Glass</th>
+                                    <th>Wetting Behavior</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Water</td>
+                                    <td>0.0728</td>
+                                    <td>0° (clean glass)</td>
+                                    <td>Wets glass</td>
+                                </tr>
+                                <tr>
+                                    <td>Mercury</td>
+                                    <td>0.486</td>
+                                    <td>140°</td>
+                                    <td>Does not wet glass</td>
+                                </tr>
+                                <tr>
+                                    <td>Ethanol</td>
+                                    <td>0.0223</td>
+                                    <td>0°</td>
+                                    <td>Wets glass</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Property Relationships -->
+                <div class="guide-section">
+                    <h3>How Properties Work Together</h3>
+                    <p class="guide-text">Fluid properties don't work in isolation - they're interconnected and affect each other. Understanding these relationships helps engineers predict fluid behavior in complex systems.</p>
+                    
+                    <h4>Density and Buoyancy</h4>
+                    <p class="guide-text">When fluids of different densities are present, buoyancy forces develop:</p>
+                    
+                    <div class="equation-block">
+                        $$F_b = \rho_{fluid} g V_{object}$$
+                    </div>
+                    
+                    <p class="guide-text">Objects float when their density is less than the fluid density. This principle is used in ship design, hot air balloons, and oil-water separation systems.</p>
+                    
+                    <h4>Viscosity and Flow Patterns</h4>
+                    <p class="guide-text">The Reynolds number combines density, viscosity, and flow conditions to predict flow behavior:</p>
+                    
+                    <div class="equation-block">
+                        $$Re = \frac{\rho V D}{\mu}$$
+                    </div>
+                    
+                    <p class="guide-text">Low Reynolds numbers (Re < 2300) indicate laminar flow, while high Reynolds numbers (Re > 4000) indicate turbulent flow.</p>
+                    
+                    <h4>Property Measurement in Practice</h4>
+                    <p class="guide-text">Engineers use various instruments to measure fluid properties:</p>
+                    
+                    <div class="constants-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>Common Instruments</th>
+                                    <th>Typical Accuracy</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Density</td>
+                                    <td>Hydrometers, digital densitometers</td>
+                                    <td>±0.1%</td>
+                                </tr>
+                                <tr>
+                                    <td>Viscosity</td>
+                                    <td>Viscometers, rheometers</td>
+                                    <td>±1-5%</td>
+                                </tr>
+                                <tr>
+                                    <td>Surface Tension</td>
+                                    <td>Tensiometers, drop weight method</td>
+                                    <td>±2%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Engineering Applications -->
+                <div class="guide-section">
+                    <h3>Engineering Applications and Problem Solving</h3>
+                    <p class="guide-text">Understanding fluid properties allows engineers to solve real-world problems involving fluid systems. Here are some common applications where these properties are essential.</p>
+                    
+                    <h4>Pump and Pipeline Design</h4>
+                    <p class="guide-text">Engineers use fluid properties to calculate pump power requirements and predict pressure losses in piping systems. Higher viscosity fluids require more powerful pumps, while density affects the hydrostatic pressure in vertical pipes.</p>
+                    
+                    <h4>Heat Exchanger Design</h4>
+                    <p class="guide-text">Fluid properties determine heat transfer rates and pressure drops in heat exchangers. The Prandtl number, which combines viscosity and thermal properties, is crucial for heat transfer calculations.</p>
+                    
+                    <h4>HVAC Systems</h4>
+                    <p class="guide-text">Air density variations with temperature drive natural convection in buildings. Understanding these property changes helps engineers design efficient ventilation and heating systems.</p>
+                    
+                    <h4>Automotive Applications</h4>
+                    <p class="guide-text">Engine oil viscosity must be carefully selected based on operating temperature to provide proper lubrication. Fuel density affects injection timing and combustion efficiency in modern engines.</p>
+                </div>
+
+                <!-- Problem-Solving Approach -->
+                <div class="guide-section">
+                    <h3>Solving Problems with Fluid Properties</h3>
+                    <p class="guide-text">When solving fluid mechanics problems, follow this systematic approach to use fluid properties effectively.</p>
+                    
+                    <h4>Step 1: Identify Required Properties</h4>
+                    <p class="guide-text">Determine which fluid properties are needed for your specific problem. Pressure drop calculations require viscosity, buoyancy problems need density differences, and capillary effects involve surface tension.</p>
+                    
+                    <h4>Step 2: Account for Temperature Effects</h4>
+                    <p class="guide-text">Most fluid properties change significantly with temperature. Always check if temperature variations in your system are large enough to affect the properties.</p>
+                    
+                    <h4>Step 3: Choose Appropriate Models</h4>
+                    <p class="guide-text">For most undergraduate problems, constant properties or simple temperature correlations are sufficient. The ideal gas law works well for gases at moderate conditions.</p>
+                    
+                    <h4>Common Engineering Assumptions</h4>
+                    <p class="guide-text">In many undergraduate problems, we make simplifying assumptions:</p>
+                    <ul class="guide-list">
+                        <li class="guide-item">
+                            <span class="guide-text">Liquids are often treated as <span class="guide-emphasis">incompressible</span> (constant density)</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text">Properties are assumed <span class="guide-emphasis">constant</span> if temperature changes are small</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text">Gases at low speeds can be treated as <span class="guide-emphasis">incompressible</span> (Mach number < 0.3)</span>
+                        </li>
+                        <li class="guide-item">
+                            <span class="guide-text">Surface tension effects are negligible for <span class="guide-emphasis">large-scale flows</span></span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth transitions for navigation
+        function smoothTransition(url) {
+            document.body.style.opacity = '0';
+            document.body.style.transform = 'translateY(-30px)';
+            setTimeout(() => {
+                window.location.href = url;
+            }, 400);
+        }
+
+        // Navigation click handlers
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                smoothTransition(this.href);
+            });
+        });
+
+        document.querySelector('.home-hub-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            smoothTransition(this.href);
+        });
+
+        console.log('Fluid Properties - Academy Guide loaded with k-epsilon structure');
+    </script>
+</body>
+</html>

@@ -6,8 +6,8 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Home - CFD Handbook</title>
-    <meta name="description" content="CFD Handbook - Comprehensive CFD analysis guide for home appliances and white goods.">
+    <title>Engineering Course Hub - CFD, Fluid Dynamics & Transport Phenomena</title>
+    <meta name="description" content="Comprehensive engineering course platform covering CFD, Fluid Dynamics, and Transport Phenomena with expert guidance and interactive learning.">
     <link rel="canonical" href="https://cfdhandbook.com/home.html">
     
     <style>
@@ -21,7 +21,7 @@
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
             color: #2d3748;
-            background-color: #f7fafc;
+            background: #ffffff;
             min-height: 100vh;
             opacity: 0;
             animation: fadeInPage 1.2s ease-out forwards;
@@ -42,31 +42,30 @@
 
         /* Premium Header */
         .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
+            background: #ffffff;
             border-bottom: 1px solid rgba(102, 126, 234, 0.1);
             padding: 1.5rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.08);
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.08);
             transition: all 0.3s ease;
         }
 
         .header.scrolled {
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.12);
         }
 
         .header-content {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 1.8rem;
+            font-weight: 800;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             background-clip: text;
             -webkit-background-clip: text;
@@ -74,7 +73,7 @@
             text-decoration: none;
             transition: all 0.3s ease;
             position: relative;
-            z-index: 2;
+            letter-spacing: -0.01em;
         }
 
         .logo::after {
@@ -86,228 +85,25 @@
             height: 2px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             transition: width 0.3s ease;
-            z-index: 1;
         }
 
         .logo:hover::after {
             width: 100%;
         }
 
-        /* Premium Logo Container */
-        .logo-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            position: relative;
-            padding: 0.25rem;
-            border-radius: 8px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .logo-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.03), rgba(168, 85, 247, 0.02));
-            border-radius: 8px;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .logo-container:hover::before {
-            opacity: 1;
-        }
-
-        /* Academic Signature Styling */
-        .signature {
-            background: linear-gradient(135deg, 
-                #6366f1 0%, 
-                #8b5cf6 30%, 
-                #a855f7 70%, 
-                #c084fc 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-top: 2px;
-            margin-left: 8px;
-            opacity: 0.85;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-shadow: 0 1px 6px rgba(139, 92, 246, 0.15);
-            position: relative;
-            transform-origin: left center;
-            z-index: 3;
-        }
-
-        .signature::before {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 1.5px;
-            background: linear-gradient(90deg, 
-                #8b5cf6 0%, 
-                #a855f7 50%, 
-                #c084fc 100%);
-            border-radius: 1px;
-            transition: width 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 1px 6px rgba(139, 92, 246, 0.3);
-        }
-
-        .signature::after {
-            content: '✦';
-            position: absolute;
-            right: -12px;
-            top: -2px;
-            font-size: 0.6rem;
-            color: #a855f7;
-            opacity: 0;
-            transition: all 0.4s ease;
-            animation: sparkle 2s ease-in-out infinite;
-        }
-
-        @keyframes sparkle {
-            0%, 100% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
-            50% { opacity: 0.8; transform: scale(1.1) rotate(180deg); }
-        }
-
-        .logo-container:hover .signature {
-            opacity: 1;
-            transform: translateY(-2px) scale(1.05);
-            text-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
-            background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a855f7 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .logo-container:hover .signature::before {
-            width: 100%;
-            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
-        }
-
-        .logo-container:hover .signature::after {
-            opacity: 0.9;
-            transform: scale(1.2);
-        }
-
-
-
-        /* Subtle Premium Enhancements */
-        .signature {
-            background-size: 150% 150%;
-        }
-
-        /* Premium Container Background */
-        .logo-container {
-            background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.1) 0%, 
-                rgba(139, 92, 246, 0.02) 50%, 
-                rgba(255, 255, 255, 0.05) 100%);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(139, 92, 246, 0.08);
-        }
-
-        .logo-container:hover {
-            background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.15) 0%, 
-                rgba(139, 92, 246, 0.05) 50%, 
-                rgba(255, 255, 255, 0.1) 100%);
-            border-color: rgba(139, 92, 246, 0.15);
-            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.1);
-        }
-
-        /* Academic Typography Enhancement */
-        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap');
-        
-        .signature {
-            font-family: 'EB Garamond', 'Crimson Text', 'Times New Roman', serif;
-            font-weight: 400;
-            font-style: normal;
-            font-size: 0.8rem;
-            letter-spacing: 0.5px;
-            word-spacing: 1px;
-            text-transform: none;
-        }
-
-        /* Academic Accent Elements */
-        .signature::after {
-            content: '•';
-            font-size: 0.4rem;
-            color: #8b5cf6;
-            right: -8px;
-            top: 50%;
-            transform: translateY(-50%);
-            opacity: 0.7;
-            transition: all 0.3s ease;
-        }
-
-        /* Academic Hover State */
-        .logo-container:hover .signature::after {
-            opacity: 0.9;
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        /* Academic Hover Effects */
-        .logo-container:hover .signature {
-            opacity: 1;
-            transform: translateY(0) scale(1.02);
-            text-shadow: 0 1px 8px rgba(139, 92, 246, 0.3);
-        }
-
-        .nav-tabs {
-            display: flex;
-            gap: 2.5rem;
-            align-items: center;
-        }
-
-        .nav-tab {
-            padding: 0.75rem 1.5rem;
-            text-decoration: none;
-            color: #4a5568;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border-radius: 12px;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-tab::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .nav-tab:hover::before,
-        .nav-tab.active::before {
-            opacity: 1;
-        }
-
-        .nav-tab:hover,
-        .nav-tab.active {
-            color: #667eea;
+        .logo:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+            text-shadow: 0 4px 20px rgba(102, 126, 234, 0.2);
         }
 
-        /* Premium Hero Section */
+        /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
             padding: 8rem 0 6rem 0;
             text-align: center;
             position: relative;
             overflow: hidden;
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
         .hero::before {
@@ -332,8 +128,8 @@
         }
 
         .hero h1 {
-            font-size: 4rem;
-            font-weight: 800;
+            font-size: 4.5rem;
+            font-weight: 900;
             margin-bottom: 1.5rem;
             line-height: 1.1;
             background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.9) 100%);
@@ -345,92 +141,33 @@
         }
 
         .hero .subtitle {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 300;
             margin-bottom: 2rem;
+            color: white;
             opacity: 0.95;
             letter-spacing: 0.01em;
         }
 
         .hero p {
-            font-size: 1.25rem;
-            margin-bottom: 3rem;
+            font-size: 1.3rem;
+            margin-bottom: 4rem;
             line-height: 1.7;
+            color: white;
             opacity: 0.9;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 2rem;
-        }
-
-        .cta-button {
-            padding: 1rem 2.5rem;
-            border-radius: 16px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            border: 2px solid transparent;
-            backdrop-filter: blur(10px);
-        }
-
-        .cta-primary {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .cta-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .cta-primary:hover::before {
-            opacity: 1;
-        }
-
-        .cta-primary:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            border-color: rgba(255, 255, 255, 0.4);
-        }
-
-        .cta-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border-color: rgba(255, 255, 255, 0.15);
-        }
-
-        .cta-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-
-        /* Premium Features Section */
-        .features {
+        /* Course Grid */
+        .courses {
             padding: 8rem 0;
-            background: linear-gradient(135deg, #f8faff 0%, #f0f4f8 100%);
+            background: #ffffff;
             position: relative;
         }
 
-        .features::before {
+        .courses::before {
             content: '';
             position: absolute;
             top: 0;
@@ -440,13 +177,13 @@
             background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #667eea 100%);
         }
 
-        .features-header {
+        .courses-header {
             text-align: center;
             margin-bottom: 5rem;
         }
 
-        .features-header h2 {
-            font-size: 3rem;
+        .courses-header h2 {
+            font-size: 3.5rem;
             font-weight: 800;
             margin-bottom: 1.5rem;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -456,359 +193,251 @@
             letter-spacing: -0.01em;
         }
 
-        .features-header p {
-            font-size: 1.3rem;
+        .courses-header p {
+            font-size: 1.4rem;
             color: #4a5568;
             max-width: 600px;
             margin: 0 auto;
             line-height: 1.6;
         }
 
-        .features-grid {
+        .courses-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
             margin-top: 4rem;
         }
 
-        .feature-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%);
+        .course-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.9) 100%);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(102, 126, 234, 0.08);
+            border: 1px solid rgba(102, 126, 234, 0.1);
             border-radius: 24px;
-            padding: 3rem 2.5rem;
+            padding: 3.5rem 3rem;
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
             text-align: center;
-            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.08);
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.1);
+            cursor: pointer;
         }
 
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-        }
-
-        .feature-card::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.05) 0%, transparent 70%);
-            transform: translate(-50%, -50%);
-            transition: all 0.6s ease;
-            border-radius: 50%;
-        }
-
-        .feature-card:hover::before {
-            transform: translateX(0);
-        }
-
-        .feature-card:hover::after {
-            width: 300px;
-            height: 300px;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.2);
-            border-color: rgba(102, 126, 234, 0.15);
-        }
-
-        .feature-icon {
-            width: 5rem;
-            height: 5rem;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: white;
-            margin: 0 auto 2rem;
-            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
-            position: relative;
-            z-index: 2;
-            transition: all 0.4s ease;
-            letter-spacing: 0.05em;
-        }
-
-        .feature-card:hover .feature-icon {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
-        }
-
-        .feature-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .feature-description {
-            font-size: 1.1rem;
-            color: #4a5568;
-            line-height: 1.7;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Premium Navigation Guide */
-        .navigation-guide {
-            padding: 8rem 0;
-            background: linear-gradient(135deg, #fdfeff 0%, #f7fafc 100%);
-            position: relative;
-        }
-
-        .navigation-guide::before {
+        .course-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             height: 6px;
-            background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
+            background: linear-gradient(90deg, var(--course-color-start) 0%, var(--course-color-end) 100%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
         }
 
-        .navigation-header {
-            text-align: center;
-            margin-bottom: 5rem;
-        }
-
-        .navigation-header h2 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.01em;
-        }
-
-        .navigation-header p {
-            font-size: 1.3rem;
-            color: #4a5568;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .navigation-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .navigation-card {
-            background: linear-gradient(135deg, #ffffff 0%, #fafbff 100%);
-            border: 1px solid rgba(118, 75, 162, 0.08);
-            border-radius: 20px;
-            padding: 2.5rem 2rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            box-shadow: 0 8px 32px rgba(118, 75, 162, 0.06);
-        }
-
-        .navigation-card::before {
+        .course-card::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, var(--course-color-bg) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: all 0.6s ease;
+            border-radius: 50%;
+        }
+
+        .course-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .course-card:hover::after {
+            width: 400px;
+            height: 400px;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 30px 60px rgba(102, 126, 234, 0.2);
+            border-color: rgba(102, 126, 234, 0.2);
+        }
+
+        .course-card.cfd {
+            --course-color-start: #667eea;
+            --course-color-end: #764ba2;
+            --course-color-bg: rgba(102, 126, 234, 0.05);
+        }
+
+        .course-card.fluid {
+            --course-color-start: #10b981;
+            --course-color-end: #059669;
+            --course-color-bg: rgba(16, 185, 129, 0.05);
+        }
+
+        .course-card.transport {
+            --course-color-start: #f59e0b;
+            --course-color-end: #d97706;
+            --course-color-bg: rgba(245, 158, 11, 0.05);
+        }
+
+        .course-icon {
+            width: 6rem;
+            height: 6rem;
+            background: linear-gradient(135deg, var(--course-color-start), var(--course-color-end));
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            margin: 0 auto 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 2;
             transition: all 0.4s ease;
         }
 
-        .navigation-card.green::before {
-            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+        .course-card:hover .course-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
         }
 
-        .navigation-card.purple::before {
-            background: linear-gradient(90deg, #8b5cf6 0%, #7c3aed 100%);
-        }
-
-        .navigation-card.orange::before {
-            background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
-        }
-
-        .navigation-card.blue::before {
-            background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
-        }
-
-        .navigation-card:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(118, 75, 162, 0.15);
-        }
-
-        .navigation-card h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .navigation-card.green h3 { color: #059669; }
-        .navigation-card.purple h3 { color: #7c3aed; }
-        .navigation-card.orange h3 { color: #d97706; }
-        .navigation-card.blue h3 { color: #2563eb; }
-
-        .navigation-card p {
-            color: #4a5568;
-            line-height: 1.6;
-            font-size: 1rem;
-        }
-
-        /* Premium About Section */
-        .about {
-            padding: 8rem 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+        .course-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #2d3748;
+            margin-bottom: 1rem;
             position: relative;
-            overflow: hidden;
+            z-index: 2;
+            letter-spacing: -0.01em;
         }
 
-        .about::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 30% 20%, rgba(255,255,255,0.08) 0%, transparent 50%),
-                radial-gradient(circle at 70% 80%, rgba(255,255,255,0.06) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
+        .course-description {
+            font-size: 1.2rem;
+            color: #4a5568;
+            line-height: 1.7;
+            margin-bottom: 2rem;
             position: relative;
             z-index: 2;
         }
 
-        .about h2 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 2rem;
-            letter-spacing: -0.01em;
+        .course-status {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .about p {
-            font-size: 1.3rem;
-            line-height: 1.7;
-            margin-bottom: 4rem;
-            opacity: 0.95;
+        .course-status.available {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
         }
 
-        .developer-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 24px;
-            padding: 3rem 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-            transition: all 0.4s ease;
-            max-width: 400px;
-            margin: 0 auto;
+        .course-status.coming-soon {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
         }
 
-        .developer-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            background: rgba(255, 255, 255, 0.15);
+        .course-features {
+            list-style: none;
+            margin-top: 2rem;
+            text-align: left;
+            position: relative;
+            z-index: 2;
         }
 
-        .developer-avatar {
-            font-size: 4rem;
-            margin-bottom: 1rem;
+        .course-features li {
+            padding: 0.5rem 0;
+            color: #4a5568;
+            position: relative;
+            padding-left: 1.5rem;
         }
 
-        .developer-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
+        .course-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--course-color-start);
+            font-weight: bold;
         }
 
-        .developer-title {
-            font-size: 1.1rem;
+        /* Previously Visited Cards */
+        .course-card.previously-visited {
+            border: 2px solid var(--course-color-start);
+            box-shadow: 0 15px 50px rgba(102, 126, 234, 0.15);
+        }
+
+        .course-card.previously-visited::after {
+            content: '✓ Visited';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--course-color-start);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 3;
             opacity: 0.9;
-            margin-bottom: 1rem;
         }
 
-        .developer-description {
-            font-size: 1rem;
-            line-height: 1.6;
-            opacity: 0.85;
-            text-align: center;
+        .course-card.previously-visited .course-icon {
+            box-shadow: 0 12px 40px var(--course-color-start);
         }
 
-        /* Premium Footer */
+        /* Return Indicator Animation */
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .return-indicator {
+            animation: slideInFromRight 0.3s ease-out;
+        }
+
+        /* Footer */
         .footer {
             background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
             color: white;
-            padding: 3rem 0;
+            padding: 4rem 0;
             text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
         }
 
         .footer p {
             margin-bottom: 0.5rem;
             opacity: 0.9;
+            line-height: 1.6;
         }
 
         .footer strong {
             color: #667eea;
-        }
-
-        /* Mobile Navigation Improvements */
-        .mobile-menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: #667eea;
-            margin: 2px 0;
-            transition: all 0.3s ease;
-            border-radius: 2px;
-        }
-
-        .mobile-menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .mobile-menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .mobile-menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
         }
 
         /* Responsive Design */
@@ -817,84 +446,18 @@
                 padding: 0 1rem;
             }
 
-            .header {
-                padding: 1rem 0;
-            }
-
-            .header-content {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-
-            .logo-container {
-                flex-shrink: 0;
-            }
-
-            .logo {
-                font-size: 1.3rem;
-            }
-
-            .signature {
-                font-size: 0.7rem;
-                margin-left: 4px;
-            }
-
-            .mobile-menu-toggle {
-                display: flex;
-            }
-
-            .nav-tabs {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(255, 255, 255, 0.98);
-                backdrop-filter: blur(20px);
-                border-top: 1px solid rgba(102, 126, 234, 0.1);
-                box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
-                flex-direction: column;
-                gap: 0;
-                padding: 1rem 0;
-                z-index: 1000;
-            }
-
-            .nav-tabs.active {
-                display: flex;
-            }
-
-            .nav-tab {
-                padding: 0.75rem 2rem;
-                font-size: 0.9rem;
-                border-radius: 0;
-                text-align: center;
-                border-bottom: 1px solid rgba(102, 126, 234, 0.05);
-            }
-
-            .nav-tab:last-child {
-                border-bottom: none;
-            }
-
-            .nav-tab:hover,
-            .nav-tab.active {
-                transform: none;
-                box-shadow: none;
-                background: rgba(102, 126, 234, 0.08);
-            }
-
             .hero {
                 padding: 4rem 0 3rem 0;
             }
 
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
                 line-height: 1.2;
                 margin-bottom: 1rem;
             }
 
             .hero .subtitle {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
                 margin-bottom: 1.5rem;
             }
 
@@ -904,103 +467,61 @@
                 margin-bottom: 2rem;
             }
 
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .cta-button {
-                padding: 0.875rem 2rem;
-                font-size: 1rem;
-            }
-
-            .features {
+            .courses {
                 padding: 4rem 0;
             }
 
-            .features-header h2 {
-                font-size: 2rem;
+            .courses-header h2 {
+                font-size: 2.5rem;
                 line-height: 1.2;
                 margin-bottom: 1rem;
             }
 
-            .features-header p {
-                font-size: 1rem;
+            .courses-header p {
+                font-size: 1.1rem;
                 line-height: 1.6;
             }
 
-            .features-grid {
+            .courses-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: 2rem;
                 margin-top: 2.5rem;
             }
 
-            .feature-card {
-                padding: 1.5rem;
+            .course-card {
+                padding: 2.5rem 2rem;
             }
 
-            .feature-icon {
-                width: 4rem;
-                height: 4rem;
-                font-size: 1rem;
+            .course-icon {
+                width: 5rem;
+                height: 5rem;
+                font-size: 1.5rem;
                 margin: 0 auto 1.5rem;
             }
 
-            .feature-title {
-                font-size: 1.3rem;
+            .course-title {
+                font-size: 1.6rem;
                 margin-bottom: 0.75rem;
             }
 
-            .feature-description {
-                font-size: 0.95rem;
+            .course-description {
+                font-size: 1rem;
                 line-height: 1.6;
+                margin-bottom: 1.5rem;
             }
 
-            .navigation-guide {
-                padding: 6rem 0;
+            .footer {
+                padding: 3rem 0;
             }
-
-            .navigation-header h2 {
-                font-size: 2.2rem;
-            }
-
-            .navigation-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .about {
-                padding: 6rem 0;
-            }
-
-            .about h2 {
-                font-size: 2.2rem;
-            }
-
-            .about p {
-                font-size: 1.1rem;
-            }
-
-            .developer-card {
-                padding: 2rem 1.5rem;
-            }
-
-
         }
 
-        /* Extra Small Mobile Devices */
         @media (max-width: 480px) {
             .container {
                 padding: 0 0.75rem;
             }
 
             .logo {
-                font-size: 1.2rem;
-            }
-
-            .signature {
-                font-size: 0.65rem;
-                margin-left: 2px;
+                font-size: 1.5rem;
             }
 
             .hero {
@@ -1008,7 +529,7 @@
             }
 
             .hero h1 {
-                font-size: 1.8rem;
+                font-size: 2rem;
                 margin-bottom: 0.75rem;
             }
 
@@ -1022,73 +543,34 @@
                 margin-bottom: 1.5rem;
             }
 
-            .cta-button {
-                padding: 0.75rem 1.5rem;
-                font-size: 0.9rem;
-            }
-
-            .features {
+            .courses {
                 padding: 3rem 0;
             }
 
-            .features-header h2 {
-                font-size: 1.75rem;
+            .courses-header h2 {
+                font-size: 2rem;
             }
 
-            .features-header p {
-                font-size: 0.95rem;
-            }
-
-            .feature-card {
-                padding: 1.25rem;
-            }
-
-            .feature-icon {
-                width: 3.5rem;
-                height: 3.5rem;
-                font-size: 0.9rem;
-                margin: 0 auto 1.25rem;
-            }
-
-            .feature-title {
-                font-size: 1.2rem;
-            }
-
-            .feature-description {
-                font-size: 0.9rem;
-            }
-
-            .navigation-guide {
-                padding: 3rem 0;
-            }
-
-            .navigation-header h2 {
-                font-size: 1.75rem;
-            }
-
-            .navigation-grid {
-                gap: 1.25rem;
-            }
-
-            .navigation-card {
-                padding: 1.5rem;
-            }
-
-            .about {
-                padding: 3rem 0;
-            }
-
-            .about h2 {
-                font-size: 1.75rem;
-            }
-
-            .about p {
+            .courses-header p {
                 font-size: 1rem;
             }
 
-            .developer-card {
-                padding: 1.5rem;
-                max-width: 350px;
+            .course-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .course-icon {
+                width: 4rem;
+                height: 4rem;
+                font-size: 1.2rem;
+            }
+
+            .course-title {
+                font-size: 1.4rem;
+            }
+
+            .course-description {
+                font-size: 0.95rem;
             }
         }
 
@@ -1101,11 +583,6 @@
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.7; }
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
         }
 
         .floating {
@@ -1130,158 +607,296 @@
     </style>
 </head>
 <body>
-    <!-- Premium Header -->
+    <!-- Header -->
     <header class="header" id="header">
         <div class="container">
             <div class="header-content">
-                <div class="logo-container">
-                    <a href="home.html" class="logo">CFD Handbook</a>
-                    <div class="signature">by Mert Kuplulu</div>
-                </div>
-                
-                <!-- Mobile Menu Toggle -->
-                <div class="mobile-menu-toggle" id="mobileMenuToggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                
-                <!-- Navigation Tabs -->
-                <div class="nav-tabs" id="navTabs">
-                    <a href="home.html" class="nav-tab active">Home</a>
-                    <a href="time-dependency.html" class="nav-tab">Time Dependency</a>
-                    <a href="turbulence-models.html" class="nav-tab">Turbulence Models</a>
-                    <a href="methods.html" class="nav-tab">Methods</a>
-                    <a href="product-guide.html" class="nav-tab">Product Guide</a>
-                </div>
+                <a href="home.html" class="logo">Engineering Course Hub</a>
             </div>
         </div>
     </header>
 
-    <!-- Premium Hero Section -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1 class="floating">CFD Handbook</h1>
-                <p class="subtitle">Premium CFD Analysis Guide for Engineering Excellence</p>
-                <p>Your comprehensive companion for computational fluid dynamics analysis of industrial applications. Experience advanced turbulence models, solver methods, and analysis setup with professional-grade guidance and precision.</p>
-                
-                <div class="cta-buttons">
-                    <a href="turbulence-models.html" class="cta-button cta-primary">
-                        Explore Models
-                    </a>
-                </div>
+                <h1 class="floating">Engineering Excellence</h1>
+                <p class="subtitle">Master Advanced Engineering Concepts</p>
+                <p>Comprehensive learning platform for computational fluid dynamics, fluid mechanics, and transport phenomena. Choose your path to engineering mastery with expert-guided courses and interactive learning experiences.</p>
             </div>
         </div>
     </section>
 
-    <!-- Premium Features Section -->
-    <section class="features reveal">
+    <!-- Courses Section -->
+    <section class="courses reveal">
         <div class="container">
-            <div class="features-header">
-                <h2>Premium Features</h2>
-                <p>Everything you need for professional-grade CFD analysis with unmatched precision and reliability</p>
+            <div class="courses-header">
+                <h2>Choose Your Course</h2>
+                <p>Select from our comprehensive collection of engineering courses designed for professionals and students</p>
             </div>
             
-            <div class="features-grid">
-                <div class="feature-card reveal">
-                    <div class="feature-icon">IG</div>
-                    <h3 class="feature-title">Industrial-Grade Guidance</h3>
-                    <p class="feature-description">Advanced CFD settings optimized for complex industrial applications. Get professional recommendations based on cutting-edge flow physics and validated industry standards.</p>
+            <div class="courses-grid">
+                <!-- CFD Handbook -->
+                <div class="course-card cfd reveal" onclick="navigateToCourse('cfd-handbook.html')">
+                    <div class="course-icon">🌊</div>
+                    <h3 class="course-title">CFD Handbook</h3>
+                    <p class="course-description">Comprehensive computational fluid dynamics analysis guide with advanced turbulence models, solver methods, and industrial applications.</p>
+                    <div class="course-status available">Available Now</div>
+                    <ul class="course-features">
+                        <li>15+ Turbulence Models</li>
+                        <li>12+ Numerical Methods</li>
+                        <li>Industrial Applications</li>
+                        <li>AI-Powered Guidance</li>
+                        <li>Real-time Optimization</li>
+                    </ul>
                 </div>
-                
-                <div class="feature-card reveal">
-                    <div class="feature-icon">AI</div>
-                    <h3 class="feature-title">AI-Powered Intelligence</h3>
-                    <p class="feature-description">Smart turbulence model selection and solver optimization powered by machine learning algorithms and decades of engineering expertise.</p>
+
+                <!-- Fluid Dynamics -->
+                <div class="course-card fluid reveal" onclick="navigateToCourse('fluid-dynamics.html')">
+                    <div class="course-icon">💧</div>
+                    <h3 class="course-title">Fluid Dynamics</h3>
+                    <p class="course-description">Fundamental and advanced fluid mechanics covering viscous flows, boundary layers, and complex fluid phenomena with practical applications.</p>
+                    <div class="course-status available">Available Now</div>
+                    <ul class="course-features">
+                        <li>Navier-Stokes Equations</li>
+                        <li>Boundary Layer Theory</li>
+                        <li>Viscous Flow Analysis</li>
+                        <li>Flow Visualization</li>
+                        <li>Experimental Methods</li>
+                    </ul>
                 </div>
-                
-                <div class="feature-card reveal">
-                    <div class="feature-icon">DB</div>
-                    <h3 class="feature-title">Comprehensive Database</h3>
-                    <p class="feature-description">Extensive library of 15+ turbulence models and 12+ solver methods with detailed mathematical formulations and practical applications.</p>
-                </div>
-                
-                <div class="feature-card reveal">
-                    <div class="feature-icon">RC</div>
-                    <h3 class="feature-title">Rapid Configuration</h3>
-                    <p class="feature-description">Accelerate your CFD setup from days to minutes with pre-validated configurations and automated parameter optimization.</p>
-                </div>
-                
-                <div class="feature-card reveal">
-                    <div class="feature-icon">PE</div>
-                    <h3 class="feature-title">Precision Engineering</h3>
-                    <p class="feature-description">Designed specifically for engineering applications with real-world validation data and industry-tested methodologies.</p>
-                </div>
-                
-                <div class="feature-card reveal">
-                    <div class="feature-icon">SE</div>
-                    <h3 class="feature-title">Scientific Excellence</h3>
-                    <p class="feature-description">Built on rigorous CFD principles with peer-reviewed mathematical foundations and advanced numerical methods.</p>
+
+                <!-- Transport Phenomena -->
+                <div class="course-card transport reveal">
+                    <div class="course-icon">⚡</div>
+                    <h3 class="course-title">Transport Phenomena</h3>
+                    <p class="course-description">Unified treatment of momentum, heat, and mass transfer with applications in chemical, mechanical, and aerospace engineering.</p>
+                    <div class="course-status coming-soon">Coming Soon</div>
+                    <ul class="course-features">
+                        <li>Heat Transfer</li>
+                        <li>Mass Transfer</li>
+                        <li>Momentum Transfer</li>
+                        <li>Analogies & Similarities</li>
+                        <li>Industrial Processes</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Premium Navigation Guide -->
-    <section class="navigation-guide reveal">
-        <div class="container">
-            <div class="navigation-header">
-                <h2>Expert Navigation</h2>
-                <p>Your guided path to CFD mastery with structured learning and professional methodologies</p>
-            </div>
-            
-            <div class="navigation-grid">
-                <div class="navigation-card green reveal">
-                    <h3>1. Time Dependency Analysis</h3>
-                    <p>Master steady-state vs. transient analysis with advanced time-stepping methodologies and convergence strategies for optimal simulation efficiency.</p>
-                </div>
-                
-                <div class="navigation-card purple reveal">
-                    <h3>2. Turbulence Model Selection</h3>
-                    <p>Navigate through 15+ turbulence models with expert guidance, mathematical insights, and application-specific recommendations for superior accuracy.</p>
-                </div>
-                
-                <div class="navigation-card orange reveal">
-                    <h3>3. Numerical Methods</h3>
-                    <p>Advanced discretization schemes, gradient calculations, and pressure-velocity coupling methods for robust and accurate solutions.</p>
-                </div>
-                
-                <div class="navigation-card blue reveal">
-                    <h3>4. Application Guide</h3>
-                    <p>Industry-specific CFD configurations with validated settings for diverse engineering applications and complex flow phenomena.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Premium About Section -->
-    <section class="about reveal">
-        <div class="container">
-            <div class="about-content">
-                <h2>About This Platform</h2>
-                <p>The CFD Handbook represents the pinnacle of computational fluid dynamics guidance, designed to elevate engineering analysis to new heights. Combining advanced mathematical principles with practical engineering wisdom, it serves as your comprehensive guide to mastering CFD analysis with professional precision and reliability.</p>
-                
-                <div class="developer-card">
-                    <div class="developer-avatar">👨‍💻</div>
-                    <h3 class="developer-name">Mert Küplülü</h3>
-                    <p class="developer-title">Lead Fluid Dynamics R&D Engineer and Platform Architect</p>
-                    <p class="developer-description">Specialized in advanced computational fluid dynamics with extensive expertise in turbulence modeling, numerical methods, and industrial CFD applications. Dedicated to advancing engineering excellence through innovative computational solutions.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Premium Footer -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p><strong>CFD Handbook</strong> - Professional CFD Analysis Platform</p>
-            <p>Engineered By <strong>Mert Küplülü</strong> | © 2025 CFD Handbook</p>
+            <div class="footer-content">
+                <h3>Engineering Course Hub</h3>
+                <p>Advancing engineering education through comprehensive, expert-designed courses that bridge theory and practice.</p>
+                <p>Created by <strong>Mert Küplülü</strong> | Lead Fluid Dynamics R&D Engineer</p>
+                <p>© 2025 Engineering Course Hub. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Premium Header Scroll Effect
+        // Navigation History and State Management
+        class NavigationHistory {
+            constructor() {
+                this.storageKey = 'engineeringHub_navigationState';
+                this.init();
+            }
+
+            init() {
+                // Restore state on page load
+                this.restoreState();
+                
+                // Save state when navigating away
+                window.addEventListener('beforeunload', () => {
+                    this.saveState();
+                });
+
+                // Handle browser back/forward navigation
+                window.addEventListener('popstate', (e) => {
+                    if (e.state && e.state.hubState) {
+                        this.restoreFromState(e.state.hubState);
+                    }
+                });
+
+                // Track user interactions
+                this.trackInteractions();
+            }
+
+            saveState() {
+                const state = {
+                    scrollPosition: window.pageYOffset,
+                    timestamp: Date.now(),
+                    focusedElement: document.activeElement ? document.activeElement.className : null,
+                    hoveredCard: this.getHoveredCard(),
+                    visitedCards: this.getVisitedCards(),
+                    userAgent: navigator.userAgent,
+                    viewportWidth: window.innerWidth,
+                    viewportHeight: window.innerHeight
+                };
+
+                try {
+                    sessionStorage.setItem(this.storageKey, JSON.stringify(state));
+                    // Also push to history state
+                    history.replaceState({ hubState: state }, '', window.location.href);
+                } catch (e) {
+                    console.warn('Could not save navigation state:', e);
+                }
+            }
+
+            restoreState() {
+                try {
+                    const savedState = sessionStorage.getItem(this.storageKey);
+                    if (savedState) {
+                        const state = JSON.parse(savedState);
+                        this.restoreFromState(state);
+                    }
+                } catch (e) {
+                    console.warn('Could not restore navigation state:', e);
+                }
+            }
+
+            restoreFromState(state) {
+                if (!state) return;
+
+                // Restore scroll position with smooth scrolling
+                if (state.scrollPosition) {
+                    // Wait for page to load completely
+                    setTimeout(() => {
+                        window.scrollTo({
+                            top: state.scrollPosition,
+                            behavior: 'smooth'
+                        });
+                    }, 100);
+                }
+
+                // Restore focus state
+                if (state.focusedElement) {
+                    setTimeout(() => {
+                        const element = document.querySelector(`.${state.focusedElement}`);
+                        if (element && element.focus) {
+                            element.focus();
+                        }
+                    }, 200);
+                }
+
+                // Restore visited cards visual state
+                if (state.visitedCards) {
+                    setTimeout(() => {
+                        state.visitedCards.forEach(cardClass => {
+                            const card = document.querySelector(`.${cardClass}`);
+                            if (card) {
+                                card.classList.add('previously-visited');
+                            }
+                        });
+                    }, 300);
+                }
+
+                // Add visual indicator for returning user
+                this.showReturnIndicator();
+            }
+
+            getHoveredCard() {
+                const hoveredCards = document.querySelectorAll('.course-card:hover');
+                return hoveredCards.length > 0 ? hoveredCards[0].className : null;
+            }
+
+            getVisitedCards() {
+                const visitedCards = [];
+                document.querySelectorAll('.course-card.previously-visited').forEach(card => {
+                    visitedCards.push(card.className.replace(' previously-visited', ''));
+                });
+                return visitedCards;
+            }
+
+            trackInteractions() {
+                // Track course card interactions
+                document.querySelectorAll('.course-card').forEach(card => {
+                    card.addEventListener('mouseenter', () => {
+                        card.setAttribute('data-last-hover', Date.now());
+                    });
+
+                    card.addEventListener('focus', () => {
+                        card.setAttribute('data-last-focus', Date.now());
+                    });
+
+                    card.addEventListener('click', () => {
+                        card.classList.add('previously-visited');
+                        this.saveState();
+                    });
+                });
+
+                // Save state on scroll (throttled)
+                let scrollTimeout;
+                window.addEventListener('scroll', () => {
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(() => {
+                        this.saveState();
+                    }, 250);
+                });
+            }
+
+            showReturnIndicator() {
+                // Create a subtle indicator that the user has returned
+                const indicator = document.createElement('div');
+                indicator.className = 'return-indicator';
+                indicator.innerHTML = '↩️ Welcome back';
+                indicator.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: linear-gradient(135deg, #10b981, #059669);
+                    color: white;
+                    padding: 0.5rem 1rem;
+                    border-radius: 20px;
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+                    z-index: 10000;
+                    opacity: 0;
+                    transform: translateX(100px);
+                    transition: all 0.3s ease;
+                    pointer-events: none;
+                `;
+
+                document.body.appendChild(indicator);
+
+                // Animate in
+                setTimeout(() => {
+                    indicator.style.opacity = '1';
+                    indicator.style.transform = 'translateX(0)';
+                }, 100);
+
+                // Animate out
+                setTimeout(() => {
+                    indicator.style.opacity = '0';
+                    indicator.style.transform = 'translateX(100px)';
+                    setTimeout(() => {
+                        if (indicator.parentNode) {
+                            indicator.parentNode.removeChild(indicator);
+                        }
+                    }, 300);
+                }, 3000);
+            }
+
+            // Clear history (useful for testing or reset)
+            clearHistory() {
+                try {
+                    sessionStorage.removeItem(this.storageKey);
+                    document.querySelectorAll('.course-card').forEach(card => {
+                        card.classList.remove('previously-visited');
+                    });
+                } catch (e) {
+                    console.warn('Could not clear navigation history:', e);
+                }
+            }
+        }
+
+        // Initialize navigation history
+        const navHistory = new NavigationHistory();
+
+        // Header scroll effect
         window.addEventListener('scroll', function() {
             const header = document.getElementById('header');
             if (window.scrollY > 100) {
@@ -1291,7 +906,7 @@
             }
         });
 
-        // Scroll Reveal Animation
+        // Scroll reveal animation
         function reveal() {
             const reveals = document.querySelectorAll('.reveal');
             
@@ -1309,8 +924,18 @@
         window.addEventListener('scroll', reveal);
         reveal(); // Check on load
 
-        // Smooth Page Transitions
-        function smoothTransition(url) {
+        // Enhanced course navigation with history tracking
+        function navigateToCourse(url) {
+            // Save current state before navigating
+            navHistory.saveState();
+            
+            // Mark the clicked card as visited
+            const clickedCard = event.currentTarget;
+            if (clickedCard) {
+                clickedCard.classList.add('previously-visited');
+            }
+
+            // Smooth transition effect
             document.body.style.opacity = '0';
             document.body.style.transform = 'translateY(-30px)';
             setTimeout(() => {
@@ -1318,53 +943,12 @@
             }, 400);
         }
 
-        // Add smooth transitions to navigation
-        document.querySelectorAll('.nav-tab').forEach(tab => {
-            tab.addEventListener('click', function(e) {
-                if (!this.classList.contains('active')) {
-                    e.preventDefault();
-                    smoothTransition(this.href);
-                }
-            });
-        });
-
-        // Add smooth transitions to CTA buttons
-        document.querySelectorAll('.cta-button').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                smoothTransition(this.href);
-            });
-        });
-
-        // Navigation card click handlers
-        document.querySelectorAll('.navigation-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const links = {
-                    'green': 'time-dependency.html',
-                    'purple': 'turbulence-models.html',
-                    'orange': 'methods.html',
-                    'blue': 'product-guide.html'
-                };
-                
-                const cardClass = Array.from(this.classList).find(cls => links[cls]);
-                if (cardClass && links[cardClass]) {
-                    smoothTransition(links[cardClass]);
-                }
-            });
-        });
-
         // Enhanced staggered animations
         document.addEventListener('DOMContentLoaded', function() {
-            // Feature cards animation
-            const featureCards = document.querySelectorAll('.feature-card');
-            featureCards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.1}s`;
-            });
-
-            // Navigation cards animation
-            const navCards = document.querySelectorAll('.navigation-card');
-            navCards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.15}s`;
+            // Course cards animation
+            const courseCards = document.querySelectorAll('.course-card');
+            courseCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.2}s`;
             });
 
             // Add parallax effect to hero background
@@ -1375,36 +959,34 @@
                     hero.style.transform = `translateY(${scrolled * 0.5}px)`;
                 }
             });
-        });
 
-        // Mobile Menu Toggle Functionality
-        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-        const navTabs = document.getElementById('navTabs');
-
-        if (mobileMenuToggle && navTabs) {
-            mobileMenuToggle.addEventListener('click', function() {
-                this.classList.toggle('active');
-                navTabs.classList.toggle('active');
-            });
-
-            // Close mobile menu when clicking on a nav link
-            document.querySelectorAll('.nav-tab').forEach(tab => {
-                tab.addEventListener('click', function() {
-                    mobileMenuToggle.classList.remove('active');
-                    navTabs.classList.remove('active');
+            // Add hover sound effect simulation (visual feedback)
+            courseCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
                 });
             });
+        });
 
-            // Close mobile menu when clicking outside
-            document.addEventListener('click', function(event) {
-                if (!event.target.closest('.header-content')) {
-                    mobileMenuToggle.classList.remove('active');
-                    navTabs.classList.remove('active');
-                }
-            });
-        }
-
-        console.log('CFD Handbook - Premium Homepage loaded with mobile-optimized interactions');
+        console.log('Engineering Course Hub loaded with Navigation History');
+        
+        // Debug functions (accessible via browser console)
+        window.debugNavHistory = {
+            showState: () => {
+                const state = sessionStorage.getItem('engineeringHub_navigationState');
+                console.log('Current Navigation State:', state ? JSON.parse(state) : 'No saved state');
+            },
+            clearHistory: () => {
+                navHistory.clearHistory();
+                console.log('Navigation history cleared');
+            },
+            testReturn: () => {
+                navHistory.showReturnIndicator();
+                console.log('Return indicator shown');
+            }
+        };
+        
+        console.log('Debug functions available: window.debugNavHistory.showState(), .clearHistory(), .testReturn()');
     </script>
 </body>
 </html>

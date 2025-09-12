@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>CFD Handbook - Computational Fluid Dynamics</title>
+    <meta name="description" content="CFD Handbook - Comprehensive CFD analysis guide for home appliances and white goods.">
+    <link rel="canonical" href="https://cfdhandbook.com/cfd-handbook.html">
+    
+    <!-- Premium Academic Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            color: #1a202c;
+            background-color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 2rem;
+            max-width: 1400px;
+        }
+
+        /* Premium Header */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: #667eea;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #667eea;
+            transition: width 0.3s ease;
+            z-index: 1;
+        }
+
+        .logo:hover::after {
+            width: 100%;
+        }
+
+        /* Premium Logo Container */
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            position: relative;
+            padding: 0.25rem;
+            border-radius: 4px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .logo-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.03), rgba(168, 85, 247, 0.02));
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .logo-container:hover::before {
+            opacity: 1;
+        }
+
+        /* Academic Signature Styling */
+        .signature {
+            background: linear-gradient(135deg, 
+                #6366f1 0%, 
+                #8b5cf6 30%, 
+                #a855f7 70%, 
+                #c084fc 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 2px;
+            margin-left: 8px;
+            opacity: 0.85;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-shadow: 0 1px 6px rgba(139, 92, 246, 0.15);
+            position: relative;
+            transform-origin: left center;
+            z-index: 3;
+        }
+
+        .signature::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: linear-gradient(90deg, 
+                #8b5cf6 0%, 
+                #a855f7 50%, 
+                #c084fc 100%);
+            border-radius: 4px;
+            transition: width 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .signature::after {
+            content: '✦';
+            position: absolute;
+            right: -12px;
+            top: -2px;
+            font-size: 0.6rem;
+            color: #a855f7;
+            opacity: 0;
+            transition: all 0.4s ease;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
+            50% { opacity: 0.8; transform: scale(1.1) rotate(180deg); }
+        }
+
+        .logo-container:hover .signature {
+            opacity: 1;
+            transform: translateY(-2px) scale(1.05);
+            text-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
+            background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a855f7 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-container:hover .signature::before {
+            width: 100%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-container:hover .signature::after {
+            opacity: 0.9;
+            transform: scale(1.2);
+        }
+
+
+
+        /* Subtle Premium Enhancements */
+        .signature {
+            background-size: 150% 150%;
+        }
+
+        /* Premium Container Background */
+        .logo-container {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.1) 0%, 
+                rgba(139, 92, 246, 0.02) 50%, 
+                rgba(255, 255, 255, 0.05) 100%);
+            border: 1px solid rgba(139, 92, 246, 0.08);
+        }
+
+        .logo-container:hover {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.15) 0%, 
+                rgba(139, 92, 246, 0.05) 50%, 
+                rgba(255, 255, 255, 0.1) 100%);
+            border-color: rgba(139, 92, 246, 0.15);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Academic Typography Enhancement */
+        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+        
+        .signature {
+            font-family: 'EB Garamond', 'Crimson Text', 'Times New Roman', serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            word-spacing: 1px;
+            text-transform: none;
+        }
+
+        /* Academic Accent Elements */
+        .signature::after {
+            content: '•';
+            font-size: 0.4rem;
+            color: #8b5cf6;
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        /* Academic Hover State */
+        .logo-container:hover .signature::after {
+            opacity: 0.9;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        /* Academic Hover Effects */
+        .logo-container:hover .signature {
+            opacity: 1;
+            transform: translateY(0) scale(1.02);
+            text-shadow: 0 1px 8px rgba(139, 92, 246, 0.3);
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-tab {
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            color: #4a5568;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 4px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-tab:hover::before,
+        .nav-tab.active::before {
+            opacity: 1;
+        }
+
+        .nav-tab:hover,
+        .nav-tab.active {
+            color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Home Hub Button */
+        .home-hub-button {
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            background: #10b981;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(16, 185, 129, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .home-hub-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .home-hub-button:hover::before {
+            opacity: 1;
+        }
+
+        .home-hub-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .home-hub-icon {
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .home-hub-button:hover .home-hub-icon {
+            transform: scale(1.1);
+        }
+
+        /* Course Hub Dropdown */
+        .home-hub-button {
+            position: relative;
+        }
+
+        .course-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+            min-width: 250px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .home-hub-button:hover .course-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .course-dropdown-item {
+            display: block;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: #4a5568;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.05);
+        }
+
+        .course-dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .course-dropdown-item:hover {
+            background: rgba(16, 185, 129, 0.05);
+            color: #10b981;
+        }
+
+        .course-dropdown-item.active {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+
+        .dropdown-course-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .dropdown-course-desc {
+            font-size: 0.75rem;
+            color: #6b7280;
+            line-height: 1.3;
+        }
+
+        .course-dropdown-item.active .dropdown-course-desc {
+            color: #059669;
+        }
+
+        /* Premium Hero Section */
+        .hero {
+            background: #667eea;
+            color: white;
+            padding: 8rem 0 6rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.9) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            letter-spacing: -0.02em;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            letter-spacing: 0.01em;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 3rem;
+            line-height: 1.7;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            }
+
+        .cta-primary {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .cta-primary:hover::before {
+            opacity: 1;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .cta-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Premium Features Section */
+        .features {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, #f8faff 0%, #f0f4f8 100%);
+            position: relative;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: #667eea;
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .features-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: #667eea;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.01em;
+        }
+
+        .features-header p {
+            font-size: 1.3rem;
+            color: #4a5568;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.08);
+            border-radius: 4px;
+            padding: 3rem 2.5rem;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #667eea;
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.05) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: all 0.6s ease;
+            border-radius: 50%;
+        }
+
+        .feature-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .feature-card:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-color: rgba(102, 126, 234, 0.15);
+        }
+
+        .feature-icon {
+            width: 5rem;
+            height: 5rem;
+            background: #667eea;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            margin: 0 auto 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+            transition: all 0.4s ease;
+            letter-spacing: 0.05em;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-description {
+            font-size: 1.1rem;
+            color: #4a5568;
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Premium Navigation Guide */
+        .navigation-guide {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, #fdfeff 0%, #f7fafc 100%);
+            position: relative;
+        }
+
+        .navigation-guide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: #667eea;
+        }
+
+        .navigation-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .navigation-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: #667eea;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.01em;
+        }
+
+        .navigation-header p {
+            font-size: 1.3rem;
+            color: #4a5568;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .navigation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .navigation-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fafbff 100%);
+            border: 1px solid rgba(118, 75, 162, 0.08);
+            border-radius: 4px;
+            padding: 2.5rem 2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .navigation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            transition: all 0.4s ease;
+        }
+
+        .navigation-card.green::before {
+            background: #10b981;
+        }
+
+        .navigation-card.purple::before {
+            background: linear-gradient(90deg, #8b5cf6 0%, #7c3aed 100%);
+        }
+
+        .navigation-card.orange::before {
+            background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .navigation-card.blue::before {
+            background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+        }
+
+        .navigation-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .navigation-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navigation-card.green h3 { color: #059669; }
+        .navigation-card.purple h3 { color: #7c3aed; }
+        .navigation-card.orange h3 { color: #d97706; }
+        .navigation-card.blue h3 { color: #2563eb; }
+
+        .navigation-card p {
+            color: #4a5568;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* Premium About Section */
+        .about {
+            padding: 8rem 0;
+            background: #667eea;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(255,255,255,0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            letter-spacing: -0.01em;
+        }
+
+        .about p {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            margin-bottom: 4rem;
+            opacity: 0.95;
+        }
+
+        .developer-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.4s ease;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .developer-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .developer-avatar {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .developer-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .developer-title {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .developer-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.85;
+            text-align: center;
+        }
+
+        /* Premium Footer */
+        .footer {
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer p {
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .footer strong {
+            color: #667eea;
+        }
+
+        /* Mobile Navigation Improvements */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #667eea;
+            margin: 2px 0;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .header {
+                padding: 1rem 0;
+            }
+
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .logo-container {
+                flex-shrink: 0;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .signature {
+                font-size: 0.7rem;
+                margin-left: 4px;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .nav-tabs {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                border-top: 1px solid rgba(102, 126, 234, 0.1);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                flex-direction: column;
+                gap: 0;
+                padding: 1rem 0;
+                z-index: 1000;
+            }
+
+            .nav-tabs.active {
+                display: flex;
+            }
+
+            .nav-tab {
+                padding: 0.75rem 2rem;
+                font-size: 0.9rem;
+                border-radius: 0;
+                text-align: center;
+                border-bottom: 1px solid rgba(102, 126, 234, 0.05);
+            }
+
+            .nav-tab:last-child {
+                border-bottom: none;
+            }
+
+            .nav-tab:hover,
+            .nav-tab.active {
+                transform: none;
+                box-shadow: none;
+                background: rgba(102, 126, 234, 0.08);
+            }
+
+            .home-hub-button {
+                margin-bottom: 0.5rem;
+                justify-content: center;
+            }
+
+            .home-hub-button:hover {
+                transform: none;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            }
+
+            .hero {
+                padding: 4rem 0 3rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+                line-height: 1.2;
+                margin-bottom: 1rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                line-height: 1.6;
+                margin-bottom: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-button {
+                padding: 0.875rem 2rem;
+                font-size: 1rem;
+            }
+
+            .features {
+                padding: 4rem 0;
+            }
+
+            .features-header h2 {
+                font-size: 2rem;
+                line-height: 1.2;
+                margin-bottom: 1rem;
+            }
+
+            .features-header p {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                margin-top: 2.5rem;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+
+            .feature-icon {
+                width: 4rem;
+                height: 4rem;
+                font-size: 1rem;
+                margin: 0 auto 1.5rem;
+            }
+
+            .feature-title {
+                font-size: 1.3rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .feature-description {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+
+            .navigation-guide {
+                padding: 6rem 0;
+            }
+
+            .navigation-header h2 {
+                font-size: 2.2rem;
+            }
+
+            .navigation-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .about {
+                padding: 6rem 0;
+            }
+
+            .about h2 {
+                font-size: 2.2rem;
+            }
+
+            .about p {
+                font-size: 1.1rem;
+            }
+
+            .developer-card {
+                padding: 2rem 1.5rem;
+            }
+
+
+        }
+
+        /* Extra Small Mobile Devices */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 0.75rem;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .signature {
+                font-size: 0.65rem;
+                margin-left: 2px;
+            }
+
+            .hero {
+                padding: 3rem 0 2.5rem 0;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1rem;
+                margin-bottom: 1.25rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .cta-button {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .features {
+                padding: 3rem 0;
+            }
+
+            .features-header h2 {
+                font-size: 1.75rem;
+            }
+
+            .features-header p {
+                font-size: 0.95rem;
+            }
+
+            .feature-card {
+                padding: 1.25rem;
+            }
+
+            .feature-icon {
+                width: 3.5rem;
+                height: 3.5rem;
+                font-size: 0.9rem;
+                margin: 0 auto 1.25rem;
+            }
+
+            .feature-title {
+                font-size: 1.2rem;
+            }
+
+            .feature-description {
+                font-size: 0.9rem;
+            }
+
+            .navigation-guide {
+                padding: 3rem 0;
+            }
+
+            .navigation-header h2 {
+                font-size: 1.75rem;
+            }
+
+            .navigation-grid {
+                gap: 1.25rem;
+            }
+
+            .navigation-card {
+                padding: 1.5rem;
+            }
+
+            .about {
+                padding: 3rem 0;
+            }
+
+            .about h2 {
+                font-size: 1.75rem;
+            }
+
+            .about p {
+                font-size: 1rem;
+            }
+
+            .developer-card {
+                padding: 1.5rem;
+                max-width: 350px;
+            }
+        }
+
+        /* Advanced Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .pulsing {
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Premium Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <a href="cfdhandbook.html" class="logo">CFD Handbook</a>
+                    <div class="signature">by Mert Kuplulu</div>
+                </div>
+                
+                <!-- Mobile Menu Toggle -->
+                <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                
+                <!-- Navigation Tabs -->
+                <div class="nav-tabs" id="navTabs">
+                    <a href="home.html" class="home-hub-button">
+                        <span class="home-hub-icon">🏠</span>
+                        <span>Course Hub</span>
+                        <div class="course-dropdown">
+                            <a href="cfdhandbook.html" class="course-dropdown-item active">
+                                <div class="dropdown-course-title">CFD Handbook</div>
+                                <div class="dropdown-course-desc">Computational fluid dynamics and turbulence modeling</div>
+                            </a>
+                            <a href="fluid-dynamics.html" class="course-dropdown-item">
+                                <div class="dropdown-course-title">Fluid Dynamics</div>
+                                <div class="dropdown-course-desc">Fundamental and advanced fluid mechanics</div>
+                            </a>
+                            <a href="#" class="course-dropdown-item">
+                                <div class="dropdown-course-title">Transport Phenomena</div>
+                                <div class="dropdown-course-desc">Heat, mass, and momentum transfer (Coming Soon)</div>
+                            </a>
+                        </div>
+                    </a>
+                    <a href="cfdhandbook.html" class="nav-tab active">Home</a>
+                    <a href="time-dependency.html" class="nav-tab">Time Dependency</a>
+                    <a href="turbulence-models.html" class="nav-tab">Turbulence Models</a>
+                    <a href="methods.html" class="nav-tab">Methods</a>
+                    <a href="product-guide.html" class="nav-tab">Product Guide</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Premium Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="floating">CFD Handbook</h1>
+                <p class="subtitle">Premium CFD Analysis Guide for Engineering Excellence</p>
+                <p>Your comprehensive companion for computational fluid dynamics analysis of industrial applications. Experience advanced turbulence models, solver methods, and analysis setup with professional-grade guidance and precision.</p>
+                
+                <div class="cta-buttons">
+                    <a href="turbulence-models.html" class="cta-button cta-primary">
+                        Explore Models
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Features Section -->
+    <section class="features reveal">
+        <div class="container">
+            <div class="features-header">
+                <h2>Premium Features</h2>
+                <p>Everything you need for professional-grade CFD analysis with unmatched precision and reliability</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon">IG</div>
+                    <h3 class="feature-title">Industrial-Grade Guidance</h3>
+                    <p class="feature-description">Advanced CFD settings optimized for complex industrial applications. Get professional recommendations based on cutting-edge flow physics and validated industry standards.</p>
+                </div>
+                
+                <div class="feature-card reveal">
+                    <div class="feature-icon">AI</div>
+                    <h3 class="feature-title">AI-Powered Intelligence</h3>
+                    <p class="feature-description">Smart turbulence model selection and solver optimization powered by machine learning algorithms and decades of engineering expertise.</p>
+                </div>
+                
+                <div class="feature-card reveal">
+                    <div class="feature-icon">DB</div>
+                    <h3 class="feature-title">Comprehensive Database</h3>
+                    <p class="feature-description">Extensive library of 15+ turbulence models and 12+ solver methods with detailed mathematical formulations and practical applications.</p>
+                </div>
+                
+                <div class="feature-card reveal">
+                    <div class="feature-icon">RC</div>
+                    <h3 class="feature-title">Rapid Configuration</h3>
+                    <p class="feature-description">Accelerate your CFD setup from days to minutes with pre-validated configurations and automated parameter optimization.</p>
+                </div>
+                
+                <div class="feature-card reveal">
+                    <div class="feature-icon">PE</div>
+                    <h3 class="feature-title">Precision Engineering</h3>
+                    <p class="feature-description">Designed specifically for engineering applications with real-world validation data and industry-tested methodologies.</p>
+                </div>
+                
+                <div class="feature-card reveal">
+                    <div class="feature-icon">SE</div>
+                    <h3 class="feature-title">Scientific Excellence</h3>
+                    <p class="feature-description">Built on rigorous CFD principles with peer-reviewed mathematical foundations and advanced numerical methods.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Navigation Guide -->
+    <section class="navigation-guide reveal">
+        <div class="container">
+            <div class="navigation-header">
+                <h2>Expert Navigation</h2>
+                <p>Your guided path to CFD mastery with structured learning and professional methodologies</p>
+            </div>
+            
+            <div class="navigation-grid">
+                <div class="navigation-card green reveal">
+                    <h3>1. Time Dependency Analysis</h3>
+                    <p>Master steady-state vs. transient analysis with advanced time-stepping methodologies and convergence strategies for optimal simulation efficiency.</p>
+                </div>
+                
+                <div class="navigation-card purple reveal">
+                    <h3>2. Turbulence Model Selection</h3>
+                    <p>Navigate through 15+ turbulence models with expert guidance, mathematical insights, and application-specific recommendations for superior accuracy.</p>
+                </div>
+                
+                <div class="navigation-card orange reveal">
+                    <h3>3. Numerical Methods</h3>
+                    <p>Advanced discretization schemes, gradient calculations, and pressure-velocity coupling methods for robust and accurate solutions.</p>
+                </div>
+                
+                <div class="navigation-card blue reveal">
+                    <h3>4. Application Guide</h3>
+                    <p>Industry-specific CFD configurations with validated settings for diverse engineering applications and complex flow phenomena.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium About Section -->
+    <section class="about reveal">
+        <div class="container">
+            <div class="about-content">
+                <h2>About This Platform</h2>
+                <p>The CFD Handbook represents the pinnacle of computational fluid dynamics guidance, designed to elevate engineering analysis to new heights. Combining advanced mathematical principles with practical engineering wisdom, it serves as your comprehensive guide to mastering CFD analysis with professional precision and reliability.</p>
+                
+                <div class="developer-card">
+                    <div class="developer-avatar">👨‍💻</div>
+                    <h3 class="developer-name">Mert Küplülü</h3>
+                    <p class="developer-title">Lead Fluid Dynamics R&D Engineer and Platform Architect</p>
+                    <p class="developer-description">Specialized in advanced computational fluid dynamics with extensive expertise in turbulence modeling, numerical methods, and industrial CFD applications. Dedicated to advancing engineering excellence through innovative computational solutions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p><strong>CFD Handbook</strong> - Professional CFD Analysis Platform</p>
+            <p>Engineered By <strong>Mert Küplülü</strong> | © 2025 CFD Handbook</p>
+        </div>
+    </footer>
+
+    <script>
+        // Premium Header Scroll Effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll Reveal Animation
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+
+        window.addEventListener('scroll', reveal);
+        reveal(); // Check on load
+
+        // Smooth Page Transitions
+        function smoothTransition(url) {
+            document.body.style.opacity = '0';
+            document.body.style.transform = 'translateY(-30px)';
+            setTimeout(() => {
+                window.location.href = url;
+            }, 400);
+        }
+
+        // Add smooth transitions to navigation
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                if (!this.classList.contains('active')) {
+                    e.preventDefault();
+                    smoothTransition(this.href);
+                }
+            });
+        });
+
+        // Add smooth transitions to CTA buttons
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                smoothTransition(this.href);
+            });
+        });
+
+        // Navigation card click handlers
+        document.querySelectorAll('.navigation-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const links = {
+                    'green': 'time-dependency.html',
+                    'purple': 'turbulence-models.html',
+                    'orange': 'methods.html',
+                    'blue': 'product-guide.html'
+                };
+                
+                const cardClass = Array.from(this.classList).find(cls => links[cls]);
+                if (cardClass && links[cardClass]) {
+                    smoothTransition(links[cardClass]);
+                }
+            });
+        });
+
+        // Enhanced staggered animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Feature cards animation
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+
+            // Navigation cards animation
+            const navCards = document.querySelectorAll('.navigation-card');
+            navCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.15}s`;
+            });
+
+            // Add parallax effect to hero background
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.hero');
+                if (hero) {
+                    hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                }
+            });
+        });
+
+        // Mobile Menu Toggle Functionality
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navTabs = document.getElementById('navTabs');
+
+        if (mobileMenuToggle && navTabs) {
+            mobileMenuToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navTabs.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking on a nav link
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    mobileMenuToggle.classList.remove('active');
+                    navTabs.classList.remove('active');
+                });
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.header-content')) {
+                    mobileMenuToggle.classList.remove('active');
+                    navTabs.classList.remove('active');
+                }
+            });
+        }
+
+        console.log('CFD Handbook - Premium Homepage loaded with mobile-optimized interactions');
+    </script>
+</body>
+</html>
